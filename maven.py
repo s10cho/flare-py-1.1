@@ -8,7 +8,7 @@ class Maven():
     def __init__(self):
         config = Config()
         self.maven = [
-            config.get('SVN', 'DIR')
+            config.get('DIR', 'WORKSPACE')
         ]
 
     def clean_install(self):
@@ -24,7 +24,7 @@ def main():
     args = sys.argv[1:]
 
     maven = Maven()
-    if args[0] == 'bulid':
+    if args[0] == 'install':
         maven.clean_install()
         del args[0]
 

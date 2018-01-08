@@ -10,7 +10,7 @@ class Svn():
             config.get('SVN', 'ID'),
             config.get('SVN', 'PASSWORD'),
             config.get('SVN', 'URL'),
-            config.get('SVN', 'DIR')
+            config.get('DIR', 'WORKSPACE')
         ]
 
     def checkout(self):
