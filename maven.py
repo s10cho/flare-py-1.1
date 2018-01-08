@@ -11,7 +11,7 @@ class Maven():
         ]
 
     def clean_install(self):
-        os.chdir(maven[0])
+        os.chdir(self.maven[0])
         command = 'mvn clean install'
         subprocess.call(command, shell=True)
 
