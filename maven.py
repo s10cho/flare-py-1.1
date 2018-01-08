@@ -10,7 +10,7 @@ class Maven():
         ]
 
     def clean_install(self):
-        command = 'mvn clean install'
+        command = 'mvn clean:{0} install:{0}'.format(self.maven[0])
         subprocess.call(command, shell=True)
 
         message.msg_print('mvn clean install complete !!!')
