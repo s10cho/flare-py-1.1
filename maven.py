@@ -1,3 +1,4 @@
+import os
 import subprocess
 from config import Config
 import message
@@ -10,7 +11,9 @@ class Maven():
         ]
 
     def clean_install(self):
-        command = 'mvn clean:{0} install:{0}'.format(self.maven[0])
+        os.chdir(maven[0])
+
+        command = 'mvn clean install'
         subprocess.call(command, shell=True)
 
         message.msg_print('mvn clean install complete !!!')
