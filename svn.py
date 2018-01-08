@@ -1,3 +1,4 @@
+import sys
 import subprocess
 from config import Config
 import message
@@ -19,6 +20,13 @@ class Svn():
         message.msg_print('svn checkout complete !!!')
 
 
-if __name__ == '__main__':
+def main():
+    args = sys.argv[1:]
+
     svn = Svn()
-    svn.checkout()
+    if args[0] == 'checkout':
+        svn.checkout()
+        del args[0]
+
+if __name__ == '__main__':
+    main()

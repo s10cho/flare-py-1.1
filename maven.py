@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 from config import Config
 import message
@@ -19,6 +20,13 @@ class Maven():
         message.msg_print('mvn clean install complete !!!')
 
 
-if __name__ == '__main__':
+def main():
+    args = sys.argv[1:]
+
     maven = Maven()
-    maven.clean_install()
+    if args[0] == 'bulid':
+        maven.clean_install()
+        del args[0]
+
+if __name__ == '__main__':
+    main()
