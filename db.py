@@ -1,21 +1,21 @@
 import sys
 import shutil
-from config import Config
+from props import Config
 
 class DB():
     def __init__(self):
-        config = Config()
+        config = Config().getConfig()
         self.db = [
-            config.get('DIR', 'TEMP')
+            config['DIR']['TEMP']
         ]
 
         self.oracle = [
-            config.get('T_ORACLE_DB', 'DRIVER'),
-            config.get('T_ORACLE_DB', 'URL'),
-            config.get('T_ORACLE_DB', 'USERNAME'),
-            config.get('T_ORACLE_DB', 'PASSWORD'),
-            config.get('T_ORACLE_DB', 'OWNERNAME'),
-            config.get('T_ORACLE_DB', 'VALIDATION'),
+            config['ORACLE_DB']['DRIVER'],
+            config['ORACLE_DB']['URL'],
+            config['ORACLE_DB']['T']['USERNAME'],
+            config['ORACLE_DB']['T']['PASSWORD'],
+            config['ORACLE_DB']['T']['OWNERNAME'],
+            config['ORACLE_DB']['VALIDATION']
         ]
 
         self.jdbc_file = [

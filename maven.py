@@ -1,23 +1,31 @@
 import os
 import sys
 import subprocess
-from config import Config
+from props import Config
+from props import Command
 import message
 
 class Maven():
     def __init__(self):
-        config = Config()
+        config = Config().getConfig()
         self.maven = [
-            config.get('DIR', 'WORKSPACE')
+            config['DIR']['WORKSPACE']
         ]
 
-    def clean_install(self):
+    def move_location(self):
         os.chdir(self.maven[0])
 
-        command = 'mvn clean install'
-        subprocess.call(command, shell=True)
+    def clean_install(self):
+        self.move_location()
 
+        subprocess.call(Command.MVN_CLEAN_INSTALL, shell=True)
         message.msg_print('mvn clean install complete !!!')
+
+    def db_clean(self):
+        self.move_location()
+
+        subprocess.call(Command.MVN_TEST_DB_CLEAN, shell=True)
+        message.msg_print('mvn test db clean complete !!!')
 
 
 def main():
@@ -26,6 +34,10 @@ def main():
     maven = Maven()
     if args[0] == 'install':
         maven.clean_install()
+        del args[0]
+
+    if args[0] == 'dbclean':
+        maven.db_clean()
         del args[0]
 
 if __name__ == '__main__':
