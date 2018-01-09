@@ -6,7 +6,7 @@ import message
 
 class Svn():
     def __init__(self):
-        config = Config.getConfig()
+        config = Config().getConfig()
         self.svn = [
             config['SVN']['ID'],
             config['SVN']['PASSWORD'],
