@@ -1,7 +1,6 @@
 import sys
 import subprocess
-from props import Config
-from props import Command
+from props import Config, Command
 import message
 
 class Svn():
