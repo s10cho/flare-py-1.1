@@ -20,9 +20,12 @@ class DB():
 
         self.jdbc_file = [
             "./temp/engine.properties",
-            "./workspace/home/conf/engine.properties",
             "./workspace/home/conf/engine.properties.oracle"
         ]
+
+    def database_init(self):
+        self.jdbc_convert()
+        self.jdbc_copy()
 
     def jdbc_convert(self):
         jdbc = [
@@ -43,7 +46,6 @@ class DB():
 
     def jdbc_copy(self):
         shutil.copy(self.jdbc_file[0], self.jdbc_file[1])
-        shutil.copy(self.jdbc_file[0], self.jdbc_file[2])
 
 
 
@@ -52,7 +54,7 @@ def main():
     args = sys.argv[1:]
 
     db = DB()
-    db.jdbc_convert()
+    db.database_init()
     #
     # if args[0] == 'init':
     #     del args[0]
