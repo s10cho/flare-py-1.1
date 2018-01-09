@@ -12,17 +12,17 @@ class Maven():
             config['DIR']['WORKSPACE']
         ]
 
-    def move_location(self):
+    def move_maven_root(self):
         os.chdir(self.maven[0])
 
     def clean_install(self):
-        self.move_location()
+        self.move_maven_root()
 
         subprocess.call(Command.MVN_CLEAN_INSTALL, shell=True)
         message.msg_print('mvn clean install complete !!!')
 
     def db_clean(self):
-        self.move_location()
+        self.move_maven_root()
 
         subprocess.call(Command.MVN_TEST_DB_CLEAN, shell=True)
         message.msg_print('mvn test db clean complete !!!')
