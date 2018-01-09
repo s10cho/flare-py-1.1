@@ -1,13 +1,10 @@
 import sys
 import shutil
-from props import Config
+from props import Config, Formmat
 
 class DB():
     def __init__(self):
         config = Config().getConfig()
-        self.db = [
-            config['DIR']['TEMP']
-        ]
 
         self.oracle = [
             config['ORACLE_DB']['DRIVER'],
@@ -19,30 +16,19 @@ class DB():
         ]
 
         self.jdbc_file = [
-            "./temp/engine.properties",
-            "./workspace/home/conf/engine.properties.oracle"
+            config['DIR']['JDBC']['TEMP_PATH'],
+            config['DIR']['JDBC']['COPY_PATH']
         ]
 
-    def database_init(self):
+    def jdbc_init(self):
         self.jdbc_convert()
         self.jdbc_copy()
 
     def jdbc_convert(self):
-        jdbc = [
-            "db.driverClassName={0}\n",
-            "db.url={0}\n",
-            "db.username={0}\n",
-            "db.password={0}\n",
-            "db.ownername={0}\n",
-            "db.validationQuery={0}\n",
-        ]
-
+        jdbc = Formmat.JDBC.format(self.oracle[0], self.oracle[1], self.oracle[2], self.oracle[3],self.oracle[4], self.oracle[5])
         f = open(self.jdbc_file[0], 'w')
-        for i in range(len(jdbc)):
-            f.write(jdbc[i].format(self.oracle[i]))
-
+        f.write(jdbc)
         f.close()
-        self.jdbc_copy()
 
     def jdbc_copy(self):
         shutil.copy(self.jdbc_file[0], self.jdbc_file[1])
@@ -54,10 +40,9 @@ def main():
     args = sys.argv[1:]
 
     db = DB()
-    db.database_init()
-    #
-    # if args[0] == 'init':
-    #     del args[0]
+    if args[0] == 'init':
+        db.jdbc_init()
+        del args[0]
 
 
 if __name__ == '__main__':

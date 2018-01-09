@@ -18,11 +18,9 @@ class Command():
 
 
 class Formmat():
-    JDBC = [
-        "db.driverClassName={0}\n",
-        "db.url={0}\n",
-        "db.username={0}\n",
-        "db.password={0}\n",
-        "db.ownername={0}\n",
-        "db.validationQuery={0}\n"
-    ]
+    JDBC = 'db.driverClassName={0}\n' \
+           'db.url={1}\n' \
+           'db.username={2}\n' \
+           'db.password={3}\n' \
+           'db.ownername={4}\n' \
+           'db.validationQuery={5}\n' \
