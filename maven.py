@@ -35,8 +35,7 @@ def main():
     if args[0] == 'install':
         maven.clean_install()
         del args[0]
-
-    if args[0] == 'dbclean':
+    elif args[0] == 'dbclean':
         maven.db_clean()
         del args[0]
 

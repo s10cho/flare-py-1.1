@@ -13,7 +13,7 @@ class Command():
     SVN_CHECKOUT = 'svn checkout --username {0} --password {1} {2} {3}'
 
     # maven command
-    MVN_CLEAN_INSTALL = 'mvn clean install'
+    MVN_CLEAN_INSTALL = 'mvn clean install -Drelease.skip=false -Drelease.oracle.skip=false -Drelease.mssql.skip=true -Drelease.postgresql.skip=false'
     MVN_TEST_DB_CLEAN = 'mvn test -DskipTests=false -Dtest=spectra.ee.test.webapps.DropTestData -DfailIfNoTests=false'
 
 
