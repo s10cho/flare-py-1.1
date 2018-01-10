@@ -1,13 +1,9 @@
 import sys
-from command.svn import Svn
+from service.build.command.svn import Svn
 
-def main():
-    args = sys.argv[1:]
+class Build():
+    def __init__(self):
+        self.svn = Svn()
 
-    svn = Svn()
-    if args[0] == 'checkout':
-        svn.checkout()
-        del args[0]
-
-if __name__ == '__main__':
-    main()
+    def execute(self):
+        self.svn.checkout()
