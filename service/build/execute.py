@@ -1,5 +1,5 @@
 import sys
-from service.build.command.svn import Svn
+from command.svn import Svn
 
 def main():
     args = sys.argv[1:]
