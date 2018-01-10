@@ -1,6 +1,6 @@
 import sys
 import shutil
-from props import Config, Formmat
+from props import Config, Template
 
 class DB():
     def __init__(self):
@@ -25,15 +25,14 @@ class DB():
         self.jdbc_copy()
 
     def jdbc_convert(self):
-        jdbc = Formmat.JDBC.format(self.oracle[0], self.oracle[1], self.oracle[2], self.oracle[3],self.oracle[4], self.oracle[5])
-        f = open(self.jdbc_file[0], 'w')
-        f.write(jdbc)
-        f.close()
+        jdbc = Template().get_template(Template.JDBC)
+        jdbc = jdbc.format(self.oracle[0], self.oracle[1], self.oracle[2], self.oracle[3],self.oracle[4], self.oracle[5])
+
+        with open(self.jdbc_file[0], 'w') as f:
+            f.write(jdbc)
 
     def jdbc_copy(self):
         shutil.copy(self.jdbc_file[0], self.jdbc_file[1])
-
-
 
 
 def main():

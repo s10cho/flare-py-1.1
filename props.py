@@ -16,11 +16,17 @@ class Command():
     MVN_CLEAN_INSTALL = 'mvn clean install -Drelease.skip=false -Drelease.oracle.skip=false -Drelease.mssql.skip=true -Drelease.postgresql.skip=false'
     MVN_TEST_DB_CLEAN = 'mvn test -DskipTests=false -Dtest=spectra.ee.test.webapps.DropTestData -DfailIfNoTests=false'
 
+    # ant command
+    ANT_COMMAND = ''
 
-class Formmat():
-    JDBC = 'db.driverClassName={0}\n' \
-           'db.url={1}\n' \
-           'db.username={2}\n' \
-           'db.password={3}\n' \
-           'db.ownername={4}\n' \
-           'db.validationQuery={5}\n' \
+class Template():
+
+    JDBC = 'engine.properties.oracle'
+    SETUP = 'setup.properties'
+
+    def get_template(self, template_name):
+        template_path = 'template/' + template_name
+        with open(template_path, 'r', encoding='UTF8') as f:
+            template = f.read()
+
+        return template
