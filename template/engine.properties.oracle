@@ -1,0 +1,6 @@
+db.driverClassName={0}
+db.url={1}
+db.username={2}
+db.password={3}
+db.ownername={4}
+db.validationQuery={5}

@@ -1,12 +1,14 @@
+import os
 import sys
-from service.build.execute import Build
+from flare_module.build.service import build
+
+FLARE_HOME = os.path.dirname(os.path.abspath(__file__))
 
 def main():
     args = sys.argv[1:]
 
     if args[0] == 'build':
-        build = Build()
-        build.execute()
+        build()
         del args[0]
 
 if __name__ == '__main__':

@@ -1,15 +1,15 @@
-import json
 import os
-import root
+import json
+import flare
 
-config_path = os.path.join(root.ROOT_PATH, 'conf/config.json')
-print(root.ROOT_PATH)
+config_path = os.path.join(flare.FLARE_HOME, 'conf/config.json')
+print('load conig = ' + config_path)
 with open(config_path, 'r') as f:
     Config = json.load(f)
 
 class FlarePath:
 
-    FLARE_ROOT = root.ROOT_PATH
+    FLARE_ROOT = flare.FLARE_HOME
 
     WORKSPACE = os.path.join(FLARE_ROOT, Config['DIR']['WORKSPACE'])
 
