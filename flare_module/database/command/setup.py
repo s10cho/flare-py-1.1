@@ -4,7 +4,8 @@ import wget
 from config import FlarePath, FlareEnv
 
 class Setup():
-    ORACLE_ENGINE_PROPERTIES = FlarePath.WORKSPACE_HOME_CONF + '/engine.properties.oracle'
+    ENGINE_PROPERTIES = FlarePath.WORKSPACE_HOME_CONF + '/engine.properties.oracle'
+    TEMP_ENGINE_PROPERTIES = FlarePath.TEMP_HOME + '/conf/engine.properties.oracle'
     SETUP_FILE = FlarePath.ORACLE_HOME + '/setup/setup.properties'
     TEMP_SETUP_FILE = FlarePath.TEMP_HOME + '/setup/setup.properties'
     SOLR_SETUP_PATH = FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app'
@@ -25,25 +26,20 @@ class Setup():
             os.makedirs(tempSetupPath)
         pass
 
-    def setupInfoSet(self):
-        # build 후 setup.properties 수정
-        setupFile = open(self.SETUP_FILE, 'r',  encoding='UTF8')
-        tempFile = open(self.TEMP_SETUP_FILE, 'w', encoding='UTF8')
-        for line in setupFile:
+    def modyfySetup(self):
+        self.modyfyFile(self.ENGINE_PROPERTIES, self.TEMP_ENGINE_PROPERTIES)
+        self.modyfyFile(self.SETUP_FILE, self.TEMP_SETUP_FILE)
+
+    def modyfyFile(self, source, temp):
+        sourceFile = open(source, 'r',  encoding='UTF8')
+        tempFile = open(temp, 'w', encoding='UTF8')
+        for line in sourceFile:
             newLine = self.changeSetInfo(line)
             tempFile.write(newLine)
 
-        setupFile.close()
+        sourceFile.close()
         tempFile.close()
-        shutil.copy(self.TEMP_SETUP_FILE, self.SETUP_FILE)
-
-        # mvn test로 db초기화 위해 수정
-        engineFile = open(self.ORACLE_ENGINE_PROPERTIES, 'w', encoding='UTF8')
-        for data in self.ORACLE_SETUP_DATA:
-            line = '='.join(data) + '\n'
-            engineFile.write(line)
-
-        engineFile.close()
+        shutil.copy(temp, source)
 
 
     def changeSetInfo(self, line):

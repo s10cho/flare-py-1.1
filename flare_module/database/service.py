@@ -9,7 +9,7 @@ class DatabaseService():
         self.ant = Ant()
 
     def run(self):
-        self.setup.setupInfoSet()
+        self.setup.modyfySetup()
         self.setup.setSolr()
         self.maven.database_clean()
         self.ant.build()
