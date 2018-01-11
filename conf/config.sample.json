@@ -1,0 +1,25 @@
+{
+    "DIR": {
+        "WORKSPACE": ""
+    },
+    "SVN": {
+        "URL": "",
+        "ID": "",
+        "PASSWORD": ""
+    },
+    "ORACLE_DB": {
+        "DRIVER": "oracle.jdbc.driver.OracleDriver",
+        "URL": "",
+        "VALIDATION": "select 1 from dual",
+        "T": {
+            "USERNAME": "",
+            "PASSWORD": "",
+            "OWNERNAME": ""
+        },
+        "P": {
+            "USERNAME": "",
+            "PASSWORD": "",
+            "OWNERNAME": ""
+        }
+    }
+}
