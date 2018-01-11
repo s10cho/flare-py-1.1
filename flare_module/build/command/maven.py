@@ -1,6 +1,6 @@
 import os
 import subprocess
-from flare_module.common.config import FlarePath
+from config import FlarePath
 
 class Maven():
 

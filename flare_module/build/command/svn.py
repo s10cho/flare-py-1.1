@@ -1,5 +1,5 @@
 import subprocess
-from flare_module.common.config import FlareEnv
+from config import FlareEnv
 
 class Svn():
 
