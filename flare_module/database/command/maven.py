@@ -12,6 +12,6 @@ class Maven():
     def move_maven_root(self):
         os.chdir(FlarePath.WORKSPACE)
 
-    def db_clean(self):
+    def database_clean(self):
         self.move_maven_root()
         subprocess.call(self.MVN_TEST_DB_CLEAN, shell=True)
