@@ -6,7 +6,7 @@ class Svn():
     SVN_CHECKOUT = 'svn checkout --username {0} --password {1} {2} {3}'
 
     def __init__(self):
-        self.svn = FlareEnv.svn
+        self.svn = FlareEnv.SVN
 
 
     def checkout(self):

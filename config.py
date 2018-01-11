@@ -13,7 +13,7 @@ class FlarePath:
     # WORKSPACE
     WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['WORKSPACE'])
     # TEMP HOME
-    TEMP_HOME = os.path.join(WORKSPACE, 'temp')
+    TEMP_HOME = os.path.join(FLARE_HOME, 'temp')
     # ORACLE HOME
     ORACLE_HOME = os.path.join(WORKSPACE, 'supertalk-99-release/target/enomix-oracle/enomix-oracle')
     # POSTGRESQL HOME
@@ -22,9 +22,27 @@ class FlarePath:
 
 
 class FlareEnv(FlarePath):
-    svn = [
+    SVN = [
         Config['SVN']['ID'],
         Config['SVN']['PASSWORD'],
         Config['SVN']['URL'],
         FlarePath.WORKSPACE
+    ]
+
+    DB_ORACLE = [
+        Config['DB']['ORACLE']['DRIVER'],
+        Config['DB']['ORACLE']['URL'],
+        Config['DB']['ORACLE']['USERNAME'],
+        Config['DB']['ORACLE']['PASSWORD'],
+        Config['DB']['ORACLE']['OWNERNAME'],
+        Config['DB']['ORACLE']['VALIDATION']
+    ]
+
+    DB_POSTGRESQL = [
+        Config['DB']['POSTGRESQL']['DRIVER'],
+        Config['DB']['POSTGRESQL']['URL'],
+        Config['DB']['POSTGRESQL']['USERNAME'],
+        Config['DB']['POSTGRESQL']['PASSWORD'],
+        Config['DB']['POSTGRESQL']['OWNERNAME'],
+        Config['DB']['POSTGRESQL']['VALIDATION']
     ]
