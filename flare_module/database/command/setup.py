@@ -1,7 +1,7 @@
 import os
 from config import FlarePath
 
-class setup():
+class Setup():
 
     TEMPLATE_JDBC_ORACLE = 'engine.properties.oracle'
     TEMPLATE_JDBC_POSTGRESQL = 'engine.properties.postgresql'
