@@ -1,4 +1,5 @@
 import os
+import shutil
 import wget
 from config import FlarePath, FlareEnv
 
@@ -34,6 +35,8 @@ class Setup():
         setupFile.close()
         tempFile.close()
 
+        self.deploySetupFile()
+
 
     def changeSetInfo(self, line):
         data = line.split('=')
@@ -42,14 +45,14 @@ class Setup():
                 if data[0] == setupData[0]:
                     data[1] = setupData[1] + '\n'
                     line = '='.join(data)
-
         return line
+
+    def deploySetupFile(self):
+        shutil.copy(self.TEMP_SETUP_FILE, self.SETUP_FILE)
 
     def setSolr(self):
         solrPath = self.SOLR_SETUP_PATH + '/solr.jar'
         if os.path.isfile(solrPath):
             wget.download(self.SOLR_DOWNLOAD_URL, self.SOLR_SETUP_PATH)
-
-        pass
 
 
