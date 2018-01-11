@@ -46,3 +46,6 @@ class FlareEnv(FlarePath):
         Config['DB']['POSTGRESQL']['OWNERNAME'],
         Config['DB']['POSTGRESQL']['VALIDATION']
     ]
+
+    SOLR_ORACLE_URL = Config['SOLR']['ORACLE']
+    SOLR_POSTGRESQL_URL = Config['SOLR']['POSTGRESQL']
