@@ -23,10 +23,13 @@ class Setup():
     ]
 
     def __init__(self):
-        tempSetupPath = FlarePath.TEMP_HOME + '/setup'
-        if not os.path.exists(tempSetupPath):
-            os.makedirs(tempSetupPath)
-        pass
+        tempPath = [
+            FlarePath.TEMP_HOME + '/setup',
+            FlarePath.TEMP_HOME + '/conf'
+        ]
+        for path in tempPath:
+            if not os.path.exists(path):
+                os.makedirs(path)
 
     def modyfySetup(self):
         self.modyfyFile(self.ENGINE_PROPERTIES, self.TEMP_ENGINE_PROPERTIES)
