@@ -5,4 +5,4 @@ class DatabaseService():
         self.setup = Setup()
 
     def run(self):
-        self.setup.jdbcInfoSet()
+        self.setup.setupInfoSet()
