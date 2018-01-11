@@ -1,10 +1,13 @@
 import os
+import wget
 from config import FlarePath, FlareEnv
 
 class Setup():
 
     SETUP_FILE = FlarePath.ORACLE_HOME + '/setup/setup.properties'
     TEMP_SETUP_FILE = FlarePath.TEMP_HOME + '/setup/setup.properties'
+    SOLR_SETUP_PATH = FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app'
+    SOLR_DOWNLOAD_URL = FlareEnv.SOLR_ORACLE_URL
 
     ORACLE_SETUP_DATA = [
         ['db.driverClassName',  FlareEnv.DB_ORACLE[0]],
@@ -42,5 +45,11 @@ class Setup():
 
         return line
 
+    def setSolr(self):
+        solrPath = self.SOLR_SETUP_PATH + '/solr.jar'
+        if os.path.isfile(solrPath):
+            wget.download(self.SOLR_DOWNLOAD_URL, self.SOLR_SETUP_PATH)
+
+        pass
 
 

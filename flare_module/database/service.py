@@ -6,3 +6,4 @@ class DatabaseService():
 
     def run(self):
         self.setup.setupInfoSet()
+        self.setup.setSolr()
