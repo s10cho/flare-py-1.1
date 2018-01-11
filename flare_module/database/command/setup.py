@@ -40,7 +40,7 @@ class Setup():
         # mvn test로 db초기화 위해 수정
         engineFile = open(self.ORACLE_ENGINE_PROPERTIES, 'w', encoding='UTF8')
         for data in self.ORACLE_SETUP_DATA:
-            line = line = '='.join(data) + '\n'
+            line = '='.join(data) + '\n'
             engineFile.write(line)
 
         engineFile.close()
