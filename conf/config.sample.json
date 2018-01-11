@@ -7,16 +7,19 @@
         "ID": "",
         "PASSWORD": ""
     },
-    "ORACLE_DB": {
-        "DRIVER": "oracle.jdbc.driver.OracleDriver",
-        "URL": "",
-        "VALIDATION": "select 1 from dual",
-        "T": {
+    "DB": {
+        "ORACLE": {
+            "DRIVER": "oracle.jdbc.driver.OracleDriver",
+            "URL": "",
+            "VALIDATION": "select 1 from dual",
             "USERNAME": "",
             "PASSWORD": "",
             "OWNERNAME": ""
         },
-        "P": {
+        "POSTGRESQL":{
+            "DRIVER": "org.postgresql.Driver",
+            "URL": "",
+            "VALIDATION": "",
             "USERNAME": "",
             "PASSWORD": "",
             "OWNERNAME": ""
