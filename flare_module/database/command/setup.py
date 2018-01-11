@@ -4,7 +4,7 @@ import wget
 from config import FlarePath, FlareEnv
 
 class Setup():
-    ORACLE_ENGINE_PROPERTIES = FlarePath.WORKSPACE_HOME_CONF + 'engine.properties.oracle'
+    ORACLE_ENGINE_PROPERTIES = FlarePath.WORKSPACE_HOME_CONF + '/engine.properties.oracle'
     SETUP_FILE = FlarePath.ORACLE_HOME + '/setup/setup.properties'
     TEMP_SETUP_FILE = FlarePath.TEMP_HOME + '/setup/setup.properties'
     SOLR_SETUP_PATH = FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app'
