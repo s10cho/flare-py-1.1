@@ -23,11 +23,12 @@ class Setup():
     ]
 
     def __init__(self):
-        tempPath = [
-            FlarePath.TEMP_HOME + '/setup',
-            FlarePath.TEMP_HOME + '/conf'
+        tempDir = [
+            '/setup',
+            '/conf'
         ]
-        for path in tempPath:
+        for dir in tempDir:
+            path = FlarePath.TEMP_HOME + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 
