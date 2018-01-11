@@ -13,7 +13,7 @@ class FlarePath:
     # WORKSPACE
     WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['WORKSPACE'])
     # WORKSPACE
-    WORKSPACE_HOME_CONF = os.path.join(WORKSPACE, 'home/conf')
+    WORKSPACE_HOME = os.path.join(WORKSPACE, 'home')
     # TEMP HOME
     TEMP_HOME = os.path.join(FLARE_HOME, 'temp')
     # ORACLE HOME
