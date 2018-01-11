@@ -12,6 +12,13 @@ class FlarePath:
     FLARE_HOME = FLARE_ROOT_PATH
     # WORKSPACE
     WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['WORKSPACE'])
+    # TEMP HOME
+    TEMP_HOME = os.path.join(WORKSPACE, 'temp')
+    # ORACLE HOME
+    ORACLE_HOME = os.path.join(WORKSPACE, 'supertalk-99-release/target/enomix-oracle/enomix-oracle')
+    # POSTGRESQL HOME
+    POSTGRESQL_HOME = os.path.join(WORKSPACE, 'supertalk-99-release/target/enomix-postgresql/enomix-postgresql')
+
 
 
 class FlareEnv(FlarePath):
