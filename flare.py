@@ -6,6 +6,7 @@ def main():
     args = sys.argv[1:]
     if args[0] == 'help':
         moduleList = os.listdir('flare_module')
+        print('')
         print('Usage:')
         print('    python3 flare.py [command]')
         print('Commands:')
