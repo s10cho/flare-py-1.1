@@ -85,4 +85,5 @@ class Setup():
     def setSolr(self):
         solrPath = self.SOLR_SETUP[0] + '/solr.jar'
         if not os.path.isfile(solrPath):
+            print('Download solr: {0}'.format(self.SOLR_SETUP[1]))
             wget.download(self.SOLR_SETUP[1], self.SOLR_SETUP[0])
