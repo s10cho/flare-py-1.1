@@ -6,10 +6,11 @@ def main():
     args = sys.argv[1:]
     if args[0] == 'help':
         moduleList = os.listdir('flare_module')
-        print('')
-        print('Usage:')
-        print('    python3 flare.py [command]')
-        print('Commands:')
+        helpMessage = '\n' \
+                      'Usage:\n' \
+                      '    python3 flare.py [command]\n\n' \
+                      'Commands:'
+        print(helpMessage)
         for moduleName in moduleList:
             if moduleName.isalpha():
                 print('    {0}'.format(moduleName))
