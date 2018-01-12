@@ -4,12 +4,13 @@ import wget
 from config import FlarePath, FlareEnv
 
 class Setup():
+    # engine.properties.oracle
     ENGINE_PROPERTIES = FlarePath.WORKSPACE_HOME + '/conf/engine.properties.oracle'
     TEMP_ENGINE_PROPERTIES = FlarePath.TEMP_HOME + '/conf/engine.properties.oracle'
-
+    # setup.properties
     SETUP_FILE = FlarePath.ORACLE_HOME + '/setup/setup.properties'
     TEMP_SETUP_FILE = FlarePath.TEMP_HOME + '/setup/setup.properties'
-
+    # search_engine
     SOLR_SETUP_PATH = FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app'
     SOLR_DOWNLOAD_URL = FlareEnv.SOLR_ORACLE_URL
 
@@ -32,7 +33,7 @@ class Setup():
             if not os.path.exists(path):
                 os.makedirs(path)
 
-    def modyfySetup(self):
+    def setProperty(self):
         self.modyfyFile(self.ENGINE_PROPERTIES, self.TEMP_ENGINE_PROPERTIES)
         self.modyfyFile(self.SETUP_FILE, self.TEMP_SETUP_FILE)
 
