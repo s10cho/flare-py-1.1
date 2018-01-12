@@ -24,8 +24,7 @@ def main():
             Class = getattr(module, ClassName)
             instance = Class()
             instance.run()
-        except Exception as e:
-            print(e)
+        except Exception:
             print(traceback.format_exc())
 
 
