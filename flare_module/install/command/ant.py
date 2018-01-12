@@ -4,7 +4,7 @@ from config import FlarePath
 
 class Ant():
 
-    ANT = 'ant; \n;'
+    ANT = 'ant'
     SETUP_PATH = FlarePath.ORACLE_HOME + '/setup'
 
     def __init__(self):
