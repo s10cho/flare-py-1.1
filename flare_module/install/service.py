@@ -1,6 +1,6 @@
-from flare_module.database.command.setup import Setup
-from flare_module.database.command.ant import Ant
-from flare_module.database.command.maven import Maven
+from flare_module.install.command.setup import Setup
+from flare_module.install.command.ant import Ant
+from flare_module.install.command.maven import Maven
 
 class DatabaseService():
     def __init__(self):

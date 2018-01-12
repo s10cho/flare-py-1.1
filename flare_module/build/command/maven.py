@@ -4,7 +4,7 @@ from config import FlarePath
 
 class Maven():
 
-    MVN_CLEAN = 'mvn clean '
+    MVN_CLEAN = 'mvn clean'
 
     MVN_INSTALL = 'mvn install -Drelease.skip=false -Drelease.oracle.skip=false -Drelease.mssql.skip=true -Drelease.postgresql.skip=false'
 
