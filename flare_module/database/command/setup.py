@@ -39,24 +39,29 @@ class Setup():
             '/setup',
             '/conf'
         ]
+        # create temp directory
         for dir in tempDir:
             path = FlarePath.TEMP_HOME + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 
     def setProperties(self):
-        # modify properties
-        self.modifyProperties(self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
-        self.modifyProperties(self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
-        # modify file
-        self.modifyFile(self.BUILD_FILE[0], self.BUILD_FILE[1])
+        # - s: set value
+        # - r: replace contents
+        self.modifyFile('s', self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
+        self.modifyFile('s', self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
+        self.modifyFile('r', self.BUILD_FILE[0], self.BUILD_FILE[1])
 
-    def modifyProperties(self, source, temp):
+    def modifyFile(self, type, source, temp):
         sourceFile = open(source, 'r',  encoding='UTF8')
         tempFile = open(temp, 'w', encoding='UTF8')
+
         for line in sourceFile:
-            newLine = self.setValue(line)
-            tempFile.write(newLine)
+            if type == 's':
+                line = self.setValue(line)
+            elif type == 'r':
+                line = self.replaceContents(line)
+            tempFile.write(line)
 
         sourceFile.close()
         tempFile.close()
@@ -71,17 +76,11 @@ class Setup():
                     line = '='.join(data)
         return line
 
-    def modifyFile(self, source, temp):
-        sourceFile = open(source, 'r', encoding='UTF8')
-        tempFile = open(temp, 'w', encoding='UTF8')
-        for line in sourceFile:
-            line = line.replace('<input', '<!--input')
-            line = line.replace('</input>', '</input-->')
-            tempFile.write(line)
+    def replaceContents(self, line):
+        line = line.replace('<input', '<!--input')
+        line = line.replace('</input>', '</input-->')
 
-        sourceFile.close()
-        tempFile.close()
-        shutil.copy(temp, source)
+        return line
 
     def setSolr(self):
         solrPath = self.SOLR_SETUP[0] + '/solr.jar'
