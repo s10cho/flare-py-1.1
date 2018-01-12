@@ -5,14 +5,25 @@ from config import FlarePath, FlareEnv
 
 class Setup():
     # engine.properties.oracle
-    ENGINE_PROPERTIES = FlarePath.WORKSPACE_HOME + '/conf/engine.properties.oracle'
-    TEMP_ENGINE_PROPERTIES = FlarePath.TEMP_HOME + '/conf/engine.properties.oracle'
+    ENGINE_PROPERTIES = [
+        FlarePath.WORKSPACE_HOME + '/conf/engine.properties.oracle',
+        FlarePath.TEMP_HOME + '/conf/engine.properties.oracle'
+    ]
     # setup.properties
-    SETUP_FILE = FlarePath.ORACLE_HOME + '/setup/setup.properties'
-    TEMP_SETUP_FILE = FlarePath.TEMP_HOME + '/setup/setup.properties'
+    SETUP_PROPERTIES = [
+        FlarePath.ORACLE_HOME + '/setup/setup.properties',
+        FlarePath.TEMP_HOME + '/setup/setup.properties'
+    ]
+    # build.xml
+    BUILD_FILE = [
+        FlarePath.ORACLE_HOME + '/setup/build.xml',
+        FlarePath.TEMP_HOME + '/setup/build.xml'
+    ]
     # search_engine
-    SOLR_SETUP_PATH = FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app'
-    SOLR_DOWNLOAD_URL = FlareEnv.SOLR_ORACLE_URL
+    SOLR_SETUP = [
+        FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app',
+        FlareEnv.SOLR_ORACLE_URL
+    ]
 
     ORACLE_SETUP_DATA = [
         ['db.driverClassName',  FlareEnv.DB_ORACLE[0]],
@@ -33,23 +44,25 @@ class Setup():
             if not os.path.exists(path):
                 os.makedirs(path)
 
-    def setProperty(self):
-        self.modyfyFile(self.ENGINE_PROPERTIES, self.TEMP_ENGINE_PROPERTIES)
-        self.modyfyFile(self.SETUP_FILE, self.TEMP_SETUP_FILE)
+    def setProperties(self):
+        # modify properties
+        self.modifyProperties(self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
+        self.modifyProperties(self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
+        # modify file
+        self.modifyFile(self.BUILD_FILE[0], self.BUILD_FILE[1])
 
-    def modyfyFile(self, source, temp):
+    def modifyProperties(self, source, temp):
         sourceFile = open(source, 'r',  encoding='UTF8')
         tempFile = open(temp, 'w', encoding='UTF8')
         for line in sourceFile:
-            newLine = self.changeSetInfo(line)
+            newLine = self.setValue(line)
             tempFile.write(newLine)
 
         sourceFile.close()
         tempFile.close()
         shutil.copy(temp, source)
 
-
-    def changeSetInfo(self, line):
+    def setValue(self, line):
         data = line.split('=')
         if len(data) == 2:
             for setupData in self.ORACLE_SETUP_DATA:
@@ -58,10 +71,19 @@ class Setup():
                     line = '='.join(data)
         return line
 
+    def modifyFile(self, source, temp):
+        sourceFile = open(source, 'r', encoding='UTF8')
+        tempFile = open(temp, 'w', encoding='UTF8')
+        for line in sourceFile:
+            line = line.replace('<input', '<!--input')
+            line = line.replace('</input>', '</input-->')
+            tempFile.write(line)
+
+        sourceFile.close()
+        tempFile.close()
+        shutil.copy(temp, source)
 
     def setSolr(self):
-        solrPath = self.SOLR_SETUP_PATH + '/solr.jar'
+        solrPath = self.SOLR_SETUP[0] + '/solr.jar'
         if not os.path.isfile(solrPath):
-            wget.download(self.SOLR_DOWNLOAD_URL, self.SOLR_SETUP_PATH)
-
-
+            wget.download(self.SOLR_SETUP[1], self.SOLR_SETUP[0])
