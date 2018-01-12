@@ -23,6 +23,8 @@ def main():
             Class = getattr(module, ClassName)
             instance = Class()
             instance.run()
+        except ModuleNotFoundError as e:
+            print('No Command is ', e)
         except Exception as e:
             print(e)
 
