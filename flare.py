@@ -1,6 +1,6 @@
 import sys
 from flare_module.build.service import BuildService
-from flare_module.database.service import DatabaseService
+from flare_module.install.service import DatabaseService
 
 def main():
     args = sys.argv[1:]
