@@ -1,18 +1,25 @@
+import os
 import sys
-from flare_module.build.service import BuildService
-from flare_module.install.service import DatabaseService
+import importlib
 
 def main():
     args = sys.argv[1:]
-
-    if args[0] == 'build':
-        buildService = BuildService()
-        buildService.run()
-        del args[0]
-    elif args[0] == 'database':
-        databaseService = DatabaseService()
-        databaseService.run()
-        del args[0]
+    if args[0] == 'help':
+        moduleList = os.listdir('flare_module')
+        print('Usage:')
+        print('    python3 flare.py [command]')
+        print('Commands:')
+        for moduleName in moduleList:
+            if moduleName.isalpha():
+                print('    {0}'.format(moduleName))
+        pass
+    else:
+        moduleName = args[0]
+        ClassName = moduleName.title() + 'Service'
+        module = importlib.import_module('flare_module.{0}.service'.format(moduleName))
+        Class = getattr(module, ClassName)
+        instance = Class()
+        instance.run()
 
 
 if __name__ == '__main__':

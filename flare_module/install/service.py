@@ -2,7 +2,7 @@ from flare_module.install.command.setup import Setup
 from flare_module.install.command.ant import Ant
 from flare_module.install.command.maven import Maven
 
-class DatabaseService():
+class InstallService():
     def __init__(self):
         self.setup = Setup()
         self.maven = Maven()
