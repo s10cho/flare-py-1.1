@@ -16,12 +16,16 @@ def main():
                 print('    {0}'.format(moduleName))
         pass
     else:
-        moduleName = args[0]
-        ClassName = moduleName.title() + 'Service'
-        module = importlib.import_module('flare_module.{0}.service'.format(moduleName))
-        Class = getattr(module, ClassName)
-        instance = Class()
-        instance.run()
+        try:
+            moduleName = args[0]
+            ClassName = moduleName.title() + 'Service'
+            module = importlib.import_module('flare_module.{0}.service'.format(moduleName))
+            Class = getattr(module, ClassName)
+            instance = Class()
+            instance.run()
+        except Exception as e:
+            print(e)
+
 
 
 if __name__ == '__main__':
