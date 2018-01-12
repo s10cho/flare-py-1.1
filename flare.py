@@ -1,6 +1,7 @@
 import os
 import sys
 import importlib
+import traceback
 
 def main():
     args = sys.argv[1:]
@@ -23,10 +24,9 @@ def main():
             Class = getattr(module, ClassName)
             instance = Class()
             instance.run()
-        except ModuleNotFoundError as e:
-            print('No Command is ', e)
         except Exception as e:
             print(e)
+            print(traceback.format_exc())
 
 
 
