@@ -23,10 +23,15 @@ class Docker():
         , '-p {0}:{1}'.format(PORT['GATEWAY'][0], PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(PORT['WEBAPPS'][0], PORT['WEBAPPS'][1])
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
+        , '--env-file="{0}"'.format('/etc/profile')
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
         , 'centos7/eer:1.0'
         , 'bash'
+    ]
+
+    DOCKER_ANT = [
+
     ]
 
     def __init__(self):
