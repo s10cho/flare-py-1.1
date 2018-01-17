@@ -1,15 +1,25 @@
 from flare_module.install.command.setup import Setup
 from flare_module.install.command.ant import Ant
 from flare_module.install.command.maven import Maven
+from flare_module.install.command.docker import Docker
 
 class InstallService():
     def __init__(self):
         self.setup = Setup()
         self.maven = Maven()
         self.ant = Ant()
+        self.docker = Docker()
 
-    def run(self):
-        self.setup.setProperties()
-        self.setup.setSolr()
-        self.maven.database_clean()
-        self.ant.build()
+    def run(self, param):
+        if len(param) == 0:
+            self.docker.rm()
+            self.setup.setProperties()
+            self.setup.setSolr()
+            self.maven.database_clean()
+            self.ant.build()
+            self.docker.run()
+        else:
+            # command run
+            command = param[0]
+            print(command)
+            self.docker.run()

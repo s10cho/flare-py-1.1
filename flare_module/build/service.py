@@ -6,9 +6,14 @@ class BuildService():
         self.svn = Svn()
         self.maven = Maven()
 
-    def run(self):
-        self.svn.checkout()
-        self.maven.clean_install()
+    def run(self, param):
+        if len(param) == 0:
+            self.svn.checkout()
+            self.maven.clean_install()
+        else:
+            # command run
+            command = param[0]
+            print(command)
 
 
 

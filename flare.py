@@ -10,8 +10,8 @@ def main():
         helpMessage = [
             '\n',
             'Usage:\n',
-            '    python3 flare.py [command]\n\n',
-            'Commands:\n'
+            '    python3 flare.py [module]\n\n',
+            'Modules:\n'
         ]
         for moduleName in moduleList:
             if moduleName.isalpha():
@@ -20,11 +20,12 @@ def main():
     else:
         try:
             moduleName = args[0]
+            param = args[1:]
             ClassName = moduleName.title() + 'Service'
             module = importlib.import_module('flare_module.{0}.service'.format(moduleName))
             Class = getattr(module, ClassName)
             instance = Class()
-            instance.run()
+            instance.run(param)
         except Exception:
             print(traceback.format_exc())
 
