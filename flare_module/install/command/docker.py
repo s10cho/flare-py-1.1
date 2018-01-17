@@ -16,7 +16,7 @@ class Docker():
      ]
 
     DOCKER_RUN = [
-        'docker run -t'
+        'docker run --rm -i -t'
         , '--name {0}'.format(DOCKER_NAME)
         , '-h {0}'.format(DOCKER_NAME)
         , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME)
