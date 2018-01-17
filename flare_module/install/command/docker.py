@@ -1,5 +1,6 @@
 import os
 import subprocess
+import docker
 from config import FlarePath
 
 class Docker():
@@ -13,9 +14,8 @@ class Docker():
         'docker run',
         '-it',
         '--name {0}'.format(DOCKER_NAME),
-        '-h eer_trunk',
         '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME),
-        '-p 19010:19010 -p 19090:19090 -p 17070:17070'
+        '-p 19010:19010 -p 19090:19090 -p 17070:17070 '
         '--cpuset-cpus="0-3"',
         '--memory=8G',
         'centos7/eer:1.0'
@@ -30,3 +30,5 @@ class Docker():
 
     def run(self):
         subprocess.call(self.DOCKER_RUN, shell=True)
+
+
