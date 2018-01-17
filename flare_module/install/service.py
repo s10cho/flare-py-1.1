@@ -22,4 +22,5 @@ class InstallService():
             # command run
             command = param[0]
             print(command)
+            self.docker.rm()
             self.docker.run()
