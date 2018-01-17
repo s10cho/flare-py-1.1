@@ -33,10 +33,12 @@ class Docker():
 
     def rm(self):
         print(' '.join(self.DOCKER_RM))
-        subprocess.Popen(self.DOCKER_RM)
+        p = subprocess.Popen(self.DOCKER_RM)
+        p.wait()
 
     def run(self):
         print(' '.join(self.DOCKER_RUN))
-        subprocess.Popen(self.DOCKER_RUN)
+        p = subprocess.Popen(self.DOCKER_RUN)
+        p.wait()
 
 
