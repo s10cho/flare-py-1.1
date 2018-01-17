@@ -3,7 +3,7 @@ from config import FlarePath
 
 class Docker():
 
-    DOCKER_NAME = 'eer_trunk'
+    DOCKER_NAME = 'eer'
     DOCKER_ENOMIX_HOME = '/home/enomix'
     PORT = {
         'GATEWAY': [19010, 19010],
@@ -16,7 +16,7 @@ class Docker():
      ]
 
     DOCKER_RUN = [
-        'docker run -d'
+        'docker run -it'
         , '--name {0}'.format(DOCKER_NAME)
         , '-h {0}'.format(DOCKER_NAME)
         , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME)
