@@ -1,6 +1,5 @@
 import os
 import subprocess
-import docker
 from config import FlarePath
 
 class Docker():
