@@ -6,30 +6,36 @@ class Docker():
 
     DOCKER_NAME = 'eer_trunk'
     DOCKER_ENOMIX_HOME = '/home/enomix'
+    GATEWAY_PORT = [19010, 19010]
+    WEBAPPS_PORT = [19090, 19090]
+    WEBROOT_PORT = [17070, 17070]
 
-    DOCKER_RM = 'docker rm -f {0}'.format(DOCKER_NAME)
+    DOCKER_RM = [
+        'docker', 'rm', '-f', DOCKER_NAME
+     ]
 
     DOCKER_RUN = [
-        'docker run',
-        '-it',
-        '--name {0}'.format(DOCKER_NAME),
-        '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME),
-        '-p 19010:19010 -p 19090:19090 -p 17070:17070 '
-        '--cpuset-cpus="0-3"',
-        '--memory=8G',
-        'centos7/eer:1.0'
+        'docker', 'run', '-it'
+        , '--name', DOCKER_NAME
+        , '-v', '{0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME)
+        , '-p', '{0}:{1}'.format(GATEWAY_PORT[0], GATEWAY_PORT[1])
+        , '-p', '{0}:{1}'.format(WEBAPPS_PORT[0], WEBAPPS_PORT[1])
+        , '-p', '{0}:{1}'.format(WEBROOT_PORT[0], WEBROOT_PORT[1])
+        , '--cpuset-cpus="0-3"'
+        , '--memory=8G'
+        , 'centos7/eer:1.0'
     ]
 
     def __init__(self):
         pass
 
     def rm(self):
-        print(self.DOCKER_RM)
-        subprocess.call(self.DOCKER_RM, shell=True)
+        print(' '.join(self.DOCKER_RM))
+        subprocess.Popen(self.DOCKER_RM, shell=True)
         pass
 
     def run(self):
         print(' '.join(self.DOCKER_RUN))
-        subprocess.call(self.DOCKER_RUN, shell=True)
+        subprocess.Popen(self.DOCKER_RUN, shell=True)
 
 
