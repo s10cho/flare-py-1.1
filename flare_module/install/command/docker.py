@@ -26,6 +26,7 @@ class Docker():
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
         , 'centos7/eer:1.0'
+        , 'bash'
     ]
 
     def __init__(self):
