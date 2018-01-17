@@ -13,10 +13,9 @@ class InstallService():
     def run(self, param):
         if len(param) == 0:
             self.docker.rm()
-            self.setup.setProperties()
-            self.setup.setSolr()
+            self.setup.settings()
             self.maven.database_clean()
-            self.ant.build()
+            #self.ant.build()
             self.docker.run()
         else:
             # command run

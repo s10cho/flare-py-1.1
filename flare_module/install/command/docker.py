@@ -1,4 +1,3 @@
-import os
 import subprocess
 from config import FlarePath
 
@@ -17,8 +16,9 @@ class Docker():
      ]
 
     DOCKER_RUN = [
-        'docker run -it'
+        'docker run -d'
         , '--name {0}'.format(DOCKER_NAME)
+        , '-h {0}'.format(DOCKER_NAME)
         , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME)
         , '-p {0}:{1}'.format(PORT['GATEWAY'][0], PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(PORT['WEBAPPS'][0], PORT['WEBAPPS'][1])
@@ -32,14 +32,13 @@ class Docker():
         pass
 
     def rm(self):
-        command = " ".join(self.DOCKER_RM)
-        print(command)
-        subprocess.call(command, shell=True)
-        pass
+        self.call(self.DOCKER_RM)
 
     def run(self):
-        command = " ".join(self.DOCKER_RUN)
-        print(command)
-        subprocess.call(command, shell=True)
+        self.call(self.DOCKER_RUN)
 
+    def call(self, command):
+        cmd = " ".join(command)
+        print(cmd)
+        subprocess.call(cmd, shell=True)
 

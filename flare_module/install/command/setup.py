@@ -45,6 +45,10 @@ class Setup():
             if not os.path.exists(path):
                 os.makedirs(path)
 
+    def settings(self):
+        self.setProperties()
+        self.setSolr()
+
     def setProperties(self):
         # - s: set value
         # - r: replace contents
