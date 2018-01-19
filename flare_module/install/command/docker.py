@@ -23,16 +23,13 @@ class Docker():
         , '-p {0}:{1}'.format(PORT['GATEWAY'][0], PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(PORT['WEBAPPS'][0], PORT['WEBAPPS'][1])
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
-        , '-e JAVA_HOME=/usr/java/jdk1.8.0_151'
-        , '-e ANT_HOME=/usr/java/apache-ant-1.10.1'
-        , '-e PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$ANT_HOME/bin'
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
         , 'centos7/eer:1.3'
     ]
 
     DOCKER_ANT = [
-
+        'docker exec -it {0} bash -c /home/enomix/bin/flare_ant.sh'.format(DOCKER_NAME)
     ]
 
     def __init__(self):
@@ -43,6 +40,9 @@ class Docker():
 
     def run(self):
         self.call(self.DOCKER_RUN)
+
+    def ant(self):
+        self.call(self.DOCKER_ANT)
 
     def call(self, command):
         cmd = " ".join(command)
