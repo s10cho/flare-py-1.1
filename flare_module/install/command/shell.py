@@ -9,16 +9,24 @@ class Shell():
         FlarePath.TEMP_HOME + '/bin'
     ]
 
+    SHELL_FILE_FORMAT = 'flare_eer_{0}.sh'
+
     SHELL_INFO = [
         {
-            'name': 'flare_ant.sh',
+            'name': SHELL_FILE_FORMAT.format('ant'),
             'contents': '#!/bin/bash\n'
                         'export JAVA_HOME=/usr/java/jdk1.8.0_151\n'
                         'export ANT_HOME=/usr/java/apache-ant-1.10.1\n'
                         'export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$ANT_HOME/bin\n'
                         'cd /home/enomix/setup\n'
                         'ant\n'
-        }
+        },
+        {
+            'name': SHELL_FILE_FORMAT.format('run'),
+            'contents': '#!/bin/bash\n'
+                        'cd /home/enomix/bin\n'
+                        './all_run.sh\n'
+        },
     ]
 
     def __init__(self):
