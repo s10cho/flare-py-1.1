@@ -48,4 +48,5 @@ class Shell():
         tempFile.write(fileContents)
         tempFile.close()
 
+        os.chmod(temp, 0o777)
         shutil.copy(temp, target)
