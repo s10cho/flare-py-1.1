@@ -25,7 +25,7 @@ class Docker():
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
-        , 'centos7/eer:1.2'
+        , 'centos7/eer:1.3'
     ]
 
     DOCKER_ANT = [
