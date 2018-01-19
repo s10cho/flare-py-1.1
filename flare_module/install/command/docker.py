@@ -16,7 +16,7 @@ class Docker():
      ]
 
     DOCKER_RUN = [
-        'docker run --rm -i -t -d'
+        'docker run -it -d'
         , '--name {0}'.format(DOCKER_NAME)
         , '-h {0}'.format(DOCKER_NAME)
         , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME)
@@ -25,7 +25,7 @@ class Docker():
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
-        , 'centos7/eer:1.0'
+        , 'centos7/eer:1.2'
     ]
 
     DOCKER_ANT = [
