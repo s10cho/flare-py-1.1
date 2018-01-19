@@ -23,7 +23,8 @@ class InstallService():
             self.maven.database_clean()
             #self.ant.build()
             self.docker.run()
-            self.docker.ant()
+            self.docker.eer_ant()
+            self.docker.eer_run()
         else:
             # command run
             command = param[0]

@@ -28,9 +28,7 @@ class Docker():
         , 'centos7/eer:1.3'
     ]
 
-    DOCKER_ANT = [
-        'docker exec -it {0} bash -c /home/enomix/bin/flare_ant.sh'.format(DOCKER_NAME)
-    ]
+    DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_{1}.sh'
 
     def __init__(self):
         pass
@@ -41,11 +39,19 @@ class Docker():
     def run(self):
         self.call(self.DOCKER_RUN)
 
-    def ant(self):
-        self.call(self.DOCKER_ANT)
+    def eer_ant(self):
+        command = self.DOCKER_EER[0].format(self.DOCKER_NAME, 'ant')
+        self.call(command)
+
+    def eer_run(self):
+        command = self.DOCKER_EER[0].format(self.DOCKER_NAME, 'run')
+        self.call(command)
 
     def call(self, command):
-        cmd = " ".join(command)
+        if type(command) == str:
+            cmd = command
+        else:
+            cmd = " ".join(command)
         print(cmd)
         subprocess.call(cmd, shell=True)
 
