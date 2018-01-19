@@ -27,7 +27,7 @@ class Logback():
 
     def changeLevel(self):
         logbackList = self.logbackList()
-
+        print(logbackList)
         for logback in logbackList:
             source = os.path.join(self.LOG_BACK[0], logback)
             temp = os.path.join(self.LOG_BACK[1], logback)

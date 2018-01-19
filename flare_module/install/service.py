@@ -24,5 +24,6 @@ class InstallService():
             # command run
             command = param[0]
             print(command)
+            self.logback.changeLevel()
             self.docker.rm()
             self.docker.run()
