@@ -6,7 +6,8 @@ from setuptools import find_packages, setup
 def long_description():
     with io.open('README.rst', 'r', encoding='utf-8') as f:
         readme = f.read()
-    return readme
+    #return readme
+    return ''
 
 setup(name='flare',
       version='1.0',
