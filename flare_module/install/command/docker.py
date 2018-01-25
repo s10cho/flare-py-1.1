@@ -25,7 +25,7 @@ class Docker():
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
-        , 'centos7/eer:1.3'
+        , 'centos7/eer:1.1'
     ]
 
     DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
