@@ -53,3 +53,6 @@ class FlareEnv(FlarePath):
     SOLR_POSTGRESQL_URL = Config['SOLR']['POSTGRESQL']
 
     SERVER = Config['SERVER']
+
+class FlareDeploy():
+    FLARE_DEPLOY_HOME = '/home/enomix/flare'

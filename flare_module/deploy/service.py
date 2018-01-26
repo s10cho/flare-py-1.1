@@ -8,8 +8,7 @@ class DeployService():
 
     def run(self, param):
         if len(param) == 0:
-            self.eer.execute('uname -a')
-            self.gatling.execute('uname -a')
+            self.eer.deploy()
         else:
             # command run
             command = param[0]
