@@ -14,7 +14,6 @@ class EERServer():
         run('rm -rf {0}'.format(FlareDeploy.REMOTE_HOME))
         run('mkdir {0}'.format(FlareDeploy.REMOTE_HOME))
 
-
         put(
             FlareDeploy.DEPLOY_TEMP_PATH + '/' + FlareDeploy.DEPLOY_TAR_NAME,
             FlareDeploy.REMOTE_HOME
