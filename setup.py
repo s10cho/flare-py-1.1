@@ -24,7 +24,7 @@ install_requires = [
 setup(
     name='flare',
     version='1.0',
-    description='eer test tool',
+    description='EER TEST',
     long_description=long_description(),
     url='https://github.com/s10cho/flare-py-1.1',
     author='s10cho',

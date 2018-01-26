@@ -1,13 +1,9 @@
 from fabric.api import *
-from config import FlareEnv, FlareDeploy
+from config import FlarePath, FlareEnv, FlareDeploy
 from decorator import before, remote
 
 @before(remote(FlareEnv.SERVER["EER"]))
 class EERServer():
-    EER_DEPOLY = [
-        'rm -rf {0}'.format(FlareDeploy.FLARE_DEPLOY_HOME),
-        'mkdir {0}'.format(FlareDeploy.FLARE_DEPLOY_HOME)
-    ]
 
     def __init__(self): pass
 
@@ -15,6 +11,7 @@ class EERServer():
         run(command)
 
     def deploy(self):
-        for command in self.EER_DEPOLY:
-            run(command)
+        run('rm -rf {0}'.format(FlareDeploy.FLARE_DEPLOY_HOME))
+        run('mkdir {0}'.format(FlareDeploy.FLARE_DEPLOY_HOME))
+        put(FlarePath.TEMP_HOME + '/bin/web.py', FlareDeploy.FLARE_DEPLOY_HOME)
         pass
