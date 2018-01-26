@@ -1,3 +1,4 @@
+import subprocess
 from fabric.api import *
 from config import FlarePath, FlareDocker, FlareDeploy
 
@@ -11,7 +12,8 @@ class FlareServer():
 
     def compress(self):
         # docker rm
-        local('docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME))
+        cmd  = 'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
+        subprocess.call(cmd, shell=True)
         # rm logs
         local('rm -rf {0}'.format(FlarePath.ORACLE_HOME + '/logs'))
         # temp directory remove
