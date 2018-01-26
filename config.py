@@ -54,6 +54,10 @@ class FlareEnv():
 
     SERVER = Config['SERVER']
 
+class FlareDocker():
+    ENOMIX_NAME = 'eer'
+    ENOMIX_HOME = '/home/enomix'
+
 class FlareDeploy():
     DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
     DEPLOY_TAR_NAME = 'enomix.tar'

@@ -1,10 +1,8 @@
 import subprocess
-from config import FlarePath
+from config import FlarePath, FlareDocker
 
 class Docker():
 
-    DOCKER_NAME = 'eer'
-    DOCKER_ENOMIX_HOME = '/home/enomix'
     PORT = {
         'GATEWAY': [19010, 19010],
         'WEBAPPS': [19090, 19090],
@@ -12,14 +10,14 @@ class Docker():
     }
 
     DOCKER_RM = [
-        'docker rm -f {0}'.format(DOCKER_NAME)
+        'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
      ]
 
     DOCKER_RUN = [
         'docker run -it -d'
-        , '--name {0}'.format(DOCKER_NAME)
-        , '-h {0}'.format(DOCKER_NAME)
-        , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, DOCKER_ENOMIX_HOME)
+        , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
+        , '-h {0}'.format(FlareDocker.ENOMIX_NAME)
+        , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, FlareDocker.DOCKER_ENOMIX_HOME)
         , '-p {0}:{1}'.format(PORT['GATEWAY'][0], PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(PORT['WEBAPPS'][0], PORT['WEBAPPS'][1])
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])

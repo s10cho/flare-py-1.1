@@ -1,5 +1,5 @@
 from fabric.api import *
-from config import FlarePath, FlareDeploy
+from config import FlarePath, FlareDocker, FlareDeploy
 
 class FlareServer():
 
@@ -10,6 +10,10 @@ class FlareServer():
         run(command)
 
     def compress(self):
+        # docker rm
+        local('docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME))
+        # rm logs
+        local('rm -rf {0}'.format(FlarePath.ORACLE_HOME + '/logs'))
         # temp directory remove
         local('rm -rf {0}'.format(FlareDeploy.DEPLOY_TEMP_PATH))
         # create temp directory
