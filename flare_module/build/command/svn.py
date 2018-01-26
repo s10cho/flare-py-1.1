@@ -14,7 +14,7 @@ class Svn():
     def __init__(self): pass
 
     def checkout(self):
-        self.call(self.SVN_CHECKOUT, shell=True)
+        self.call(self.SVN_CHECKOUT)
 
     def call(self, command):
         if type(command) == str:
