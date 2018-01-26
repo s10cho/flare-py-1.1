@@ -31,6 +31,8 @@ class Docker():
         , 'bash -c /home/enomix/bin/flare_eer_{0}.sh'
     ]
 
+    DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
+
     def __init__(self): pass
 
     def rm(self):
@@ -40,13 +42,11 @@ class Docker():
         self.call(self.DOCKER_RUN)
 
     def eer_ant(self):
-        command = self.DOCKER_EER
-        command[1] = command[1].format('ant')
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'ant')
         self.call(command)
 
     def eer_run(self):
-        command = self.DOCKER_EER
-        command[1] = command[1].format('run')
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
         self.call(command)
 
     def call(self, command):
