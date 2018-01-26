@@ -1,4 +1,5 @@
-from flare_module.deploy.command.remote import EERServer, GatlingServer
+from flare_module.deploy.command.eer import EERServer
+from flare_module.deploy.command.gatling import GatlingServer
 
 class DeployService():
     def __init__(self):
