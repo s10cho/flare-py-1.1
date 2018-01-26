@@ -17,7 +17,7 @@ class Docker():
         'docker run -it -d'
         , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
         , '-h {0}'.format(FlareDocker.ENOMIX_NAME)
-        , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, FlareDocker.DOCKER_ENOMIX_HOME)
+        , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, FlareDocker.ENOMIX_HOME)
         , '-p {0}:{1}'.format(PORT['GATEWAY'][0], PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(PORT['WEBAPPS'][0], PORT['WEBAPPS'][1])
         , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
