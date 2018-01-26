@@ -20,4 +20,5 @@ class EERServer():
         )
 
         with cd(FlareDeploy.REMOTE_HOME):
-            run('ls -al')
+            run('tar -xvf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
+            run('rm -rf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
