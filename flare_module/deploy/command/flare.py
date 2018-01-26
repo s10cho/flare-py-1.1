@@ -12,6 +12,5 @@ class FlareServer():
 
     def compress(self):
         local('mkdir -p {0}/{1}'.format(FlarePath.TEMP_HOME, 'deploy'))
-
-        with cd(FlarePath.ORACLE_HOME):
-            local('ls')
+        local('cd {0}'.format(FlarePath.ORACLE_HOME))
+        local('ls -al')
