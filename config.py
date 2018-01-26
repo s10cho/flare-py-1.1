@@ -22,7 +22,6 @@ class FlarePath:
     POSTGRESQL_HOME = os.path.join(WORKSPACE, 'supertalk-99-release/target/enomix-postgresql/enomix-postgresql')
 
 
-
 class FlareEnv():
     SVN = [
         Config['SVN']['ID'],
@@ -54,9 +53,11 @@ class FlareEnv():
 
     SERVER = Config['SERVER']
 
+
 class FlareDocker():
     ENOMIX_NAME = 'eer'
     ENOMIX_HOME = '/home/enomix'
+
 
 class FlareDeploy():
     DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
