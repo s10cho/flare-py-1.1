@@ -8,8 +8,7 @@ class Maven():
 
     MVN_INSTALL = 'mvn install -Drelease.skip=false -Drelease.oracle.skip=false -Drelease.mssql.skip=true -Drelease.postgresql.skip=false'
 
-    def __init__(self):
-        pass
+    def __init__(self): pass
 
     def move_maven_root(self):
         os.chdir(FlarePath.WORKSPACE)

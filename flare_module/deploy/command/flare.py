@@ -4,7 +4,6 @@ from config import FlarePath, FlareDocker, FlareDeploy
 
 class FlareServer():
 
-
     def __init__(self): pass
 
     def execute(self, command):

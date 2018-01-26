@@ -6,8 +6,7 @@ class Maven():
 
     MVN_TEST_DB_CLEAN = 'mvn test -DskipTests=false -Dtest=spectra.ee.test.webapps.DropTestData -DfailIfNoTests=false -Dbuild.service.license=basic'
 
-    def __init__(self):
-        pass
+    def __init__(self): pass
 
     def move_maven_root(self):
         os.chdir(FlarePath.WORKSPACE)

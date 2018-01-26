@@ -28,8 +28,7 @@ class Docker():
 
     DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
 
-    def __init__(self):
-        pass
+    def __init__(self): pass
 
     def rm(self):
         self.call(self.DOCKER_RM)

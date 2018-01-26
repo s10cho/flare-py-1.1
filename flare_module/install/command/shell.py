@@ -41,7 +41,6 @@ class Shell():
             if not os.path.exists(path):
                 os.makedirs(path)
 
-
     def create(self):
         for shell in self.SHELL_INFO:
             fileName = shell['name']
@@ -51,7 +50,6 @@ class Shell():
             temp = os.path.join(self.SHELL_PATH[1], fileName)
 
             self.makeFile(target, temp, fileContents)
-
 
     def makeFile(self, target, temp, fileContents):
         tempFile = open(temp, 'w', encoding='UTF8')
