@@ -12,5 +12,5 @@ class FlareServer():
 
     def compress(self):
         with cd(FlarePath.ORACLE_HOME):
-            local('ll')
+            local('ls')
         pass
