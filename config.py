@@ -23,34 +23,9 @@ class FlarePath:
 
 
 class FlareEnv():
-    SVN = [
-        Config['SVN']['ID'],
-        Config['SVN']['PASSWORD'],
-        Config['SVN']['URL'],
-        FlarePath.WORKSPACE
-    ]
-
-    DB_ORACLE = [
-        Config['DB']['ORACLE']['DRIVER'],
-        Config['DB']['ORACLE']['URL'],
-        Config['DB']['ORACLE']['USERNAME'],
-        Config['DB']['ORACLE']['PASSWORD'],
-        Config['DB']['ORACLE']['OWNERNAME'],
-        Config['DB']['ORACLE']['VALIDATION']
-    ]
-
-    DB_POSTGRESQL = [
-        Config['DB']['POSTGRESQL']['DRIVER'],
-        Config['DB']['POSTGRESQL']['URL'],
-        Config['DB']['POSTGRESQL']['USERNAME'],
-        Config['DB']['POSTGRESQL']['PASSWORD'],
-        Config['DB']['POSTGRESQL']['OWNERNAME'],
-        Config['DB']['POSTGRESQL']['VALIDATION']
-    ]
-
-    SOLR_ORACLE_URL = Config['SOLR']['ORACLE']
-    SOLR_POSTGRESQL_URL = Config['SOLR']['POSTGRESQL']
-
+    SVN = Config['SVN']
+    DB = Config['DB']
+    SOLR_URL = Config['SOLR']
     SERVER = Config['SERVER']
 
 
@@ -62,5 +37,4 @@ class FlareDocker():
 class FlareDeploy():
     DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
     DEPLOY_TAR_NAME = 'enomix.tar'
-
     REMOTE_HOME = '/home/enomix/flare'

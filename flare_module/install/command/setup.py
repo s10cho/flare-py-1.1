@@ -22,16 +22,16 @@ class Setup():
     # search_engine
     SOLR_SETUP = [
         FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app',
-        FlareEnv.SOLR_ORACLE_URL
+        FlareEnv.SOLR_URL['ORACLE']
     ]
 
     ORACLE_SETUP_DATA = [
-        ['db.driverClassName',  FlareEnv.DB_ORACLE[0]],
-        ['db.url',              FlareEnv.DB_ORACLE[1]],
-        ['db.username',         FlareEnv.DB_ORACLE[2]],
-        ['db.password',         FlareEnv.DB_ORACLE[3]],
-        ['db.ownername',        FlareEnv.DB_ORACLE[4]],
-        ['db.validationQuery',  FlareEnv.DB_ORACLE[5]],
+        ['db.driverClassName',  FlareEnv.DB['ORACLE']['DRIVER']],
+        ['db.url',              FlareEnv.DB['ORACLE']['URL']],
+        ['db.username',         FlareEnv.DB['ORACLE']['USERNAME']],
+        ['db.password',         FlareEnv.DB['ORACLE']['PASSWORD']],
+        ['db.ownername',        FlareEnv.DB['ORACLE']['OWNERNAME']],
+        ['db.validationQuery',  FlareEnv.DB['ORACLE']['VALIDATION']],
     ]
 
     def __init__(self):

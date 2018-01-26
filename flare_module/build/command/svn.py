@@ -1,15 +1,25 @@
 import subprocess
-from config import FlareEnv
+from config import FlarePath, FlareEnv
 
 class Svn():
 
-    SVN_CHECKOUT = 'svn checkout --username {0} --password {1} {2} {3}'
+    SVN_CHECKOUT = [
+        'svn checkout',
+        '--username {0}'.format(FlareEnv.SVN['ID']),
+        '--password {0}'.format(FlareEnv.SVN['PASSWORD']),
+        '{0}'.format(FlareEnv.SVN['URL']),
+        '{0}'.format(FlarePath.WORKSPACE)
+    ]
 
-    def __init__(self):
-        self.svn = FlareEnv.SVN
-
+    def __init__(self): pass
 
     def checkout(self):
-        command = self.SVN_CHECKOUT.format(self.svn[0], self.svn[1], self.svn[2], self.svn[3])
-        print(command)
-        subprocess.call(command, shell=True)
+        subprocess.call(self.SVN_CHECKOUT, shell=True)
+
+    def call(self, command):
+        if type(command) == str:
+            cmd = command
+        else:
+            cmd = " ".join(command)
+        print(cmd)
+        subprocess.call(cmd, shell=True)
