@@ -27,8 +27,8 @@ class Docker():
     ]
 
     DOCKER_EER = [
-        'docker exec -it {0}'.format(FlareDocker.ENOMIX_NAME),
-        'bash -c /home/enomix/bin/flare_eer_{0}.sh'
+        'docker exec -it {0}'.format(FlareDocker.ENOMIX_NAME)
+        , 'bash -c /home/enomix/bin/flare_eer_{0}.sh'
     ]
 
     def __init__(self): pass
