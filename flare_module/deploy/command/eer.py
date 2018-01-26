@@ -11,7 +11,11 @@ class EERServer():
         run(command)
 
     def deploy(self):
-        run('rm -rf {0}'.format(FlareDeploy.FLARE_DEPLOY_HOME))
-        run('mkdir {0}'.format(FlareDeploy.FLARE_DEPLOY_HOME))
-        put(FlarePath.TEMP_HOME + '/bin/web.py', FlareDeploy.FLARE_DEPLOY_HOME)
-        pass
+        run('rm -rf {0}'.format(FlareDeploy.REMOTE_HOME))
+        run('mkdir {0}'.format(FlareDeploy.REMOTE_HOME))
+
+
+        put(
+            FlareDeploy.DEPLOY_TEMP_PATH + '/' + FlareDeploy.DEPLOY_TAR_NAME,
+            FlareDeploy.REMOTE_HOME
+        )

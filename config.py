@@ -23,7 +23,7 @@ class FlarePath:
 
 
 
-class FlareEnv(FlarePath):
+class FlareEnv():
     SVN = [
         Config['SVN']['ID'],
         Config['SVN']['PASSWORD'],
@@ -55,4 +55,7 @@ class FlareEnv(FlarePath):
     SERVER = Config['SERVER']
 
 class FlareDeploy():
-    FLARE_DEPLOY_HOME = '/home/enomix/flare'
+    DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
+    DEPLOY_TAR_NAME = 'enomix.tar'
+
+    REMOTE_HOME = '/home/enomix/flare'
