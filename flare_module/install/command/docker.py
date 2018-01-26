@@ -26,7 +26,10 @@ class Docker():
         , 'centos7/eer:1.1'
     ]
 
-    DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
+    DOCKER_EER = [
+        'docker exec -it {0}'.format(FlareDocker.ENOMIX_NAME),
+        'bash -c /home/enomix/bin/flare_eer_{0}.sh'
+    ]
 
     def __init__(self): pass
 
@@ -37,11 +40,13 @@ class Docker():
         self.call(self.DOCKER_RUN)
 
     def eer_ant(self):
-        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'ant')
+        command = self.DOCKER_EER
+        command[1].format('ant')
         self.call(command)
 
     def eer_run(self):
-        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
+        command = self.DOCKER_EER
+        command[1].format('run')
         self.call(command)
 
     def call(self, command):
