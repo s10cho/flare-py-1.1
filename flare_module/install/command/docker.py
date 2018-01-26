@@ -37,11 +37,11 @@ class Docker():
         self.call(self.DOCKER_RUN)
 
     def eer_ant(self):
-        command = self.DOCKER_EER.format(self.DOCKER_NAME, 'ant')
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'ant')
         self.call(command)
 
     def eer_run(self):
-        command = self.DOCKER_EER.format(self.DOCKER_NAME, 'run')
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
         self.call(command)
 
     def call(self, command):
