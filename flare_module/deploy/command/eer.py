@@ -18,3 +18,6 @@ class EERServer():
             FlareDeploy.DEPLOY_TEMP_PATH + '/' + FlareDeploy.DEPLOY_TAR_NAME,
             FlareDeploy.REMOTE_HOME
         )
+
+        with cd(FlareDeploy.REMOTE_HOME):
+            run('ls -al')
