@@ -15,7 +15,7 @@ class FlareServer():
         cmd  = 'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
         subprocess.call(cmd, shell=True)
         # rm logs
-        local('rm -rf {0}'.format(FlarePath.ORACLE_HOME + '/logs'))
+        local('sudo rm -rf {0}'.format(FlarePath.ORACLE_HOME + '/logs'))
         # temp directory remove
         local('rm -rf {0}'.format(FlareDeploy.DEPLOY_TEMP_PATH))
         # create temp directory
