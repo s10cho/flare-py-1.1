@@ -15,4 +15,3 @@ class FlareServer():
 
         with cd(FlarePath.ORACLE_HOME):
             local('ls')
-        pass
