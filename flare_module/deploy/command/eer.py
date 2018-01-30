@@ -18,7 +18,7 @@ class EERServer():
         , '-p {0}:{1}'.format(FlareDocker.PORT['GATEWAY'][0], FlareDocker.PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(FlareDocker.PORT['WEBAPPS'][0], FlareDocker.PORT['WEBAPPS'][1])
         , '-p {0}:{1}'.format(FlareDocker.PORT['WEBROOT'][0], FlareDocker.PORT['WEBROOT'][1])
-        , '--cpuset-cpus="0-3"'
+        , '--cpuset-cpus=0-3'
         , '--memory=8G'
         , 'centos7/eer:1.1'
     ]
