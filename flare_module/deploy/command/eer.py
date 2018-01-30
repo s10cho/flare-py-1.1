@@ -30,14 +30,6 @@ class EERServer():
 
     def __init__(self): pass
 
-    def call(self, command):
-        if type(command) == str:
-            cmd = command
-        else:
-            cmd = " ".join(command)
-        print(cmd)
-        subprocess.call(cmd, shell=True)
-
     def execute(self, command):
         with settings(warn_only=True):
             result = run(command)
