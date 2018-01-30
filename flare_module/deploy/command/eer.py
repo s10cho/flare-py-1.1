@@ -1,6 +1,7 @@
 from fabric.api import *
 from config import FlareEnv, FlareDeploy, FlareDocker
 from decorator import before, remote
+import subprocess
 
 @before(remote(FlareEnv.SERVER["EER"]))
 class EERServer():
@@ -49,7 +50,7 @@ class EERServer():
             run('rm -rf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
 
     def docker_rm(self):
-        self.execute(" ".join(self.DOCKER_RM))
+        self.call(self.DOCKER_RM)
 
     def docker_run(self):
         self.execute(" ".join(self.DOCKER_RUN))
@@ -57,3 +58,10 @@ class EERServer():
     def docker_eer_run(self):
         self.execute(" ".join(self.DOCKER_EER_RUN))
 
+    def call(self, command):
+        if type(command) == str:
+            cmd = command
+        else:
+            cmd = " ".join(command)
+        print(cmd)
+        subprocess.call(cmd, shell=True)
