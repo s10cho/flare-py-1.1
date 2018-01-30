@@ -30,6 +30,14 @@ class EERServer():
 
     def __init__(self): pass
 
+    def call(self, command):
+        if type(command) == str:
+            cmd = command
+        else:
+            cmd = " ".join(command)
+        print(cmd)
+        subprocess.call(cmd, shell=True)
+
     def execute(self, command):
         run(command)
 
@@ -57,11 +65,3 @@ class EERServer():
 
     def docker_eer_run(self):
         self.execute(" ".join(self.DOCKER_EER_RUN))
-
-    def call(self, command):
-        if type(command) == str:
-            cmd = command
-        else:
-            cmd = " ".join(command)
-        print(cmd)
-        subprocess.call(cmd, shell=True)
