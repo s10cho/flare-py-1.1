@@ -43,13 +43,13 @@ class EERServer():
 
     def deploy(self):
         # rm remote home
-        run('rm -rf {0}'.format(FlareDeploy.REMOTE_HOME))
+        run('sudo rm -rf {0}'.format(FlareDeploy.REMOTE_HOME))
         # create remote home
         run('mkdir {0}'.format(FlareDeploy.REMOTE_HOME))
 
         # copy enomix.tar
         put(
-            FlareDeploy.DEPLOY_TEMP_PATH + '/' + FlareDeploy.DEPLOY_EER_TAR_NAME,
+            FlareDeploy.DEPLOY_TEMP_EER_PATH + '/' + FlareDeploy.DEPLOY_EER_TAR_NAME,
             FlareDeploy.REMOTE_HOME
         )
         # cd remote home
