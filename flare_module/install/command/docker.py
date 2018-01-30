@@ -3,12 +3,6 @@ from config import FlarePath, FlareDocker
 
 class Docker():
 
-    PORT = {
-        'GATEWAY': [19010, 19010],
-        'WEBAPPS': [19090, 19090],
-        'WEBROOT': [17070, 17070]
-    }
-
     DOCKER_RM = [
         'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
      ]
@@ -18,9 +12,9 @@ class Docker():
         , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
         , '-h {0}'.format(FlareDocker.ENOMIX_NAME)
         , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, FlareDocker.ENOMIX_HOME)
-        , '-p {0}:{1}'.format(PORT['GATEWAY'][0], PORT['GATEWAY'][1])
-        , '-p {0}:{1}'.format(PORT['WEBAPPS'][0], PORT['WEBAPPS'][1])
-        , '-p {0}:{1}'.format(PORT['WEBROOT'][0], PORT['WEBROOT'][1])
+        , '-p {0}:{1}'.format(FlareDocker.PORT['GATEWAY'][0], FlareDocker.PORT['GATEWAY'][1])
+        , '-p {0}:{1}'.format(FlareDocker.PORT['WEBAPPS'][0], FlareDocker.PORT['WEBAPPS'][1])
+        , '-p {0}:{1}'.format(FlareDocker.PORT['WEBROOT'][0], FlareDocker.PORT['WEBROOT'][1])
         , '--cpuset-cpus="0-3"'
         , '--memory=8G'
         , 'centos7/eer:1.1'

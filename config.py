@@ -32,7 +32,11 @@ class FlareEnv():
 class FlareDocker():
     ENOMIX_NAME = 'eer'
     ENOMIX_HOME = '/home/enomix'
-
+    PORT = {
+        'GATEWAY': [19010, 19010],
+        'WEBAPPS': [19090, 19090],
+        'WEBROOT': [17070, 17070]
+    }
 
 class FlareDeploy():
     DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
@@ -41,3 +45,4 @@ class FlareDeploy():
 
     DEPLOY_EER_TAR_NAME = 'enomix.tar'
     REMOTE_HOME = '/home/enomix/flare'
+    REMOTE_ORACLE_HOME = os.path.join(REMOTE_HOME, 'enomix-oracle')

@@ -1,9 +1,31 @@
 from fabric.api import *
-from config import FlareEnv, FlareDeploy
+from config import FlareEnv, FlareDeploy, FlareDocker
 from decorator import before, remote
 
 @before(remote(FlareEnv.SERVER["EER"]))
 class EERServer():
+
+    DOCKER_RM = [
+        'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
+     ]
+
+    DOCKER_RUN = [
+        'docker run -it -d'
+        , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
+        , '-h {0}'.format(FlareDocker.ENOMIX_NAME)
+        , '-v {0}:{1}'.format(FlareDeploy.REMOTE_ORACLE_HOME, FlareDocker.ENOMIX_HOME)
+        , '-p {0}:{1}'.format(FlareDocker.PORT['GATEWAY'][0], FlareDocker.PORT['GATEWAY'][1])
+        , '-p {0}:{1}'.format(FlareDocker.PORT['WEBAPPS'][0], FlareDocker.PORT['WEBAPPS'][1])
+        , '-p {0}:{1}'.format(FlareDocker.PORT['WEBROOT'][0], FlareDocker.PORT['WEBROOT'][1])
+        , '--cpuset-cpus="0-3"'
+        , '--memory=8G'
+        , 'centos7/eer:1.1'
+    ]
+
+    DOCKER_EER_RUN = [
+        'docker exec -it {0}'.format(FlareDocker.ENOMIX_NAME),
+        'bash -c /home/enomix/bin/flare_eer_{0}.sh'.format('run')
+    ]
 
     def __init__(self): pass
 
@@ -25,3 +47,13 @@ class EERServer():
         with cd(FlareDeploy.REMOTE_HOME):
             run('tar -xf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
             run('rm -rf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
+
+    def docker_rm(self):
+        self.execute(" ".join(self.DOCKER_RM))
+
+    def docker_run(self):
+        self.execute(" ".join(self.DOCKER_RUN))
+
+    def docker_eer_run(self):
+        self.execute(" ".join(self.DOCKER_EER_RUN))
+

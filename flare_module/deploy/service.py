@@ -11,7 +11,10 @@ class DeployService():
     def run(self, param):
         if len(param) == 0:
             self.flare.prepare_eer()
+            self.eer.docker_rm()
             self.eer.deploy()
+            self.eer.docker_run()
+            self.eer.docker_eer_run()
         else:
             # command run
             command = param[0]
