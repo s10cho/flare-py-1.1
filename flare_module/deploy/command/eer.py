@@ -58,7 +58,7 @@ class EERServer():
             run('rm -rf {0}'.format(FlareDeploy.DEPLOY_EER_TAR_NAME))
 
     def docker_rm(self):
-        self.call(self.DOCKER_RM)
+        self.execute(" ".join(self.DOCKER_RM))
 
     def docker_run(self):
         self.execute(" ".join(self.DOCKER_RUN))
