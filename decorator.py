@@ -23,8 +23,11 @@ def remote(server):
     return wrapper
 
 def chown_path(path):
-    whoami = getpass.getuser()
-    command = 'sudo chown -R {0}:{0} {1}'.format(whoami, path)
-    subprocess.call(command, shell=True)
-
-
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            whoami = getpass.getuser()
+            command = 'sudo chown -R {0}:{0} {1}'.format(whoami, path)
+            subprocess.call(command, shell=True)
+            func(*args, **kwargs)
+        return wrapper
+    return decorator
