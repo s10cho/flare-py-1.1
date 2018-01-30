@@ -3,8 +3,12 @@ from flare_module.install.command.maven import Maven
 from flare_module.install.command.docker import Docker
 from flare_module.install.command.logback import Logback
 from flare_module.install.command.shell import Shell
+from config import FlarePath
+import decorator
 
 class InstallService():
+
+    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.setup = Setup()
         self.maven = Maven()

@@ -1,8 +1,12 @@
 from flare_module.deploy.command.eer import EERServer
 from flare_module.deploy.command.flare import FlareServer
 from flare_module.deploy.command.gatling import GatlingServer
+from config import FlarePath
+import decorator
 
 class DeployService():
+
+    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.eer = EERServer()
         self.flare = FlareServer()

@@ -1,7 +1,11 @@
 from flare_module.build.command.svn import Svn
 from flare_module.build.command.maven import Maven
+from config import FlarePath
+import decorator
 
 class BuildService():
+
+    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.svn = Svn()
         self.maven = Maven()

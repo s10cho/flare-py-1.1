@@ -1,3 +1,5 @@
+import getpass
+import subprocess
 from fabric.api import env, settings
 
 def before(decorator):
@@ -19,3 +21,10 @@ def remote(server):
                     func(*args, **kwargs)
         return decorator
     return wrapper
+
+def chown_path(path):
+    whoami = getpass.getuser()
+    command = 'sudo chown -R {0}:{0} {1}'.format(whoami, path)
+    subprocess.call(command, shell=True)
+
+
