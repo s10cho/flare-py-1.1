@@ -39,7 +39,7 @@ class EERServer():
         subprocess.call(cmd, shell=True)
 
     def execute(self, command):
-        run(command)
+        return run(command)
 
     def deploy(self):
         # rm remote home
@@ -58,7 +58,10 @@ class EERServer():
             run('rm -rf {0}'.format(FlareDeploy.DEPLOY_EER_TAR_NAME))
 
     def docker_rm(self):
-        self.execute(" ".join(self.DOCKER_RM))
+        with settings(warn_only=True):
+            result = self.execute(" ".join(self.DOCKER_RM))
+        if result.failed:
+            pass
 
     def docker_run(self):
         self.execute(" ".join(self.DOCKER_RUN))
