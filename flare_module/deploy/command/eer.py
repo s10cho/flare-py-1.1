@@ -49,13 +49,13 @@ class EERServer():
 
         # copy enomix.tar
         put(
-            FlareDeploy.DEPLOY_TEMP_PATH + '/' + FlareDeploy.DEPLOY_TAR_NAME,
+            FlareDeploy.DEPLOY_TEMP_PATH + '/' + FlareDeploy.DEPLOY_EER_TAR_NAME,
             FlareDeploy.REMOTE_HOME
         )
         # cd remote home
         with cd(FlareDeploy.REMOTE_HOME):
-            run('tar -xf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
-            run('rm -rf {0}'.format(FlareDeploy.DEPLOY_TAR_NAME))
+            run('tar -xf {0}'.format(FlareDeploy.DEPLOY_EER_TAR_NAME))
+            run('rm -rf {0}'.format(FlareDeploy.DEPLOY_EER_TAR_NAME))
 
     def docker_rm(self):
         self.call(self.DOCKER_RM)
