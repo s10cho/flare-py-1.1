@@ -25,16 +25,16 @@ class Logback():
             if not os.path.exists(path):
                 os.makedirs(path)
 
-    def changeLevel(self):
-        logbackList = self.logbackList()
+    def change_log_level(self):
+        logbackList = self.logback_list()
 
         for logback in logbackList:
             source = os.path.join(self.LOG_BACK[0], logback)
             temp = os.path.join(self.LOG_BACK[1], logback)
-            self.modifyFile(source, temp)
+            self.modify_file(source, temp)
 
 
-    def logbackList(self):
+    def logback_list(self):
         fileList = os.listdir(self.LOG_BACK[0])
         logbackList = []
         for file in fileList:
@@ -44,12 +44,12 @@ class Logback():
         return logbackList
 
 
-    def modifyFile(self, source, temp):
+    def modify_file(self, source, temp):
         sourceFile = open(source, 'r',  encoding='UTF8')
         tempFile = open(temp, 'w', encoding='UTF8')
 
         for line in sourceFile:
-            line = self.replaceContents(line)
+            line = self.replace_contents(line)
             tempFile.write(line)
 
         sourceFile.close()
@@ -57,7 +57,7 @@ class Logback():
         shutil.copy(temp, source)
 
 
-    def replaceContents(self, line):
+    def replace_contents(self, line):
         # default
         line = line.replace('level=\"DEBUG\"', 'level=\"ERROR\"')
         line = line.replace('level=\"INFO\"', 'level=\"ERROR\"')

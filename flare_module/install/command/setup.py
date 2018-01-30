@@ -46,32 +46,32 @@ class Setup():
                 os.makedirs(path)
 
     def settings(self):
-        self.setProperties()
-        self.setSolr()
+        self.set_properties()
+        self.set_solr()
 
-    def setProperties(self):
+    def set_properties(self):
         # - s: set value
         # - r: replace contents
-        self.modifyFile('s', self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
-        self.modifyFile('s', self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
-        self.modifyFile('r', self.BUILD_FILE[0], self.BUILD_FILE[1])
+        self.modify_file('s', self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
+        self.modify_file('s', self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
+        self.modify_file('r', self.BUILD_FILE[0], self.BUILD_FILE[1])
 
-    def modifyFile(self, type, source, temp):
+    def modify_file(self, type, source, temp):
         sourceFile = open(source, 'r',  encoding='UTF8')
         tempFile = open(temp, 'w', encoding='UTF8')
 
         for line in sourceFile:
             if type == 's':
-                line = self.setValue(line)
+                line = self.set_value(line)
             elif type == 'r':
-                line = self.replaceContents(line)
+                line = self.replace_contents(line)
             tempFile.write(line)
 
         sourceFile.close()
         tempFile.close()
         shutil.copy(temp, source)
 
-    def setValue(self, line):
+    def set_value(self, line):
         data = line.split('=')
         if len(data) == 2:
             for setupData in self.ORACLE_SETUP_DATA:
@@ -80,13 +80,13 @@ class Setup():
                     line = '='.join(data)
         return line
 
-    def replaceContents(self, line):
+    def replace_contents(self, line):
         line = line.replace('<input', '<!--input')
         line = line.replace('</input>', '</input-->')
 
         return line
 
-    def setSolr(self):
+    def set_solr(self):
         solrPath = self.SOLR_SETUP[0] + '/solr.jar'
         if not os.path.isfile(solrPath):
             print('Download solr: {0}'.format(self.SOLR_SETUP[1]))

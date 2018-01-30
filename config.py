@@ -36,5 +36,8 @@ class FlareDocker():
 
 class FlareDeploy():
     DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
-    DEPLOY_TAR_NAME = 'enomix.tar'
+    DEPLOY_TEMP_EER_PATH = os.path.join(DEPLOY_TEMP_PATH, 'eer')
+    DEPLOY_TEMP_GATLING_PATH = os.path.join(DEPLOY_TEMP_PATH, 'gatling')
+
+    DEPLOY_EER_TAR_NAME = 'enomix.tar'
     REMOTE_HOME = '/home/enomix/flare'

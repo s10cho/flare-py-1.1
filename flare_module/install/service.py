@@ -16,7 +16,7 @@ class InstallService():
         if len(param) == 0:
             self.docker.rm()
             self.setup.settings()
-            self.logback.changeLevel()
+            self.logback.change_log_level()
             self.shell.create()
             self.maven.database_clean()
             self.docker.run()

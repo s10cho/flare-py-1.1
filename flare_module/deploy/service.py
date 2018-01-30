@@ -10,7 +10,7 @@ class DeployService():
 
     def run(self, param):
         if len(param) == 0:
-            self.flare.compress()
+            self.flare.prepare_eer()
             self.eer.deploy()
         else:
             # command run
