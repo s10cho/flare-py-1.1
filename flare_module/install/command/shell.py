@@ -15,6 +15,7 @@ class Shell():
         {
             'name': SHELL_FILE_FORMAT.format('ant'),
             'contents': '#!/bin/bash\n'
+                        'export LANG=ko_KR\n'
                         'export JAVA_HOME=/usr/java/jdk1.8.0_151\n'
                         'export ANT_HOME=/usr/java/apache-ant-1.10.1\n'
                         'export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$ANT_HOME/bin\n'
