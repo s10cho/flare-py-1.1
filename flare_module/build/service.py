@@ -5,6 +5,7 @@ import decorator
 
 class BuildService():
 
+    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.svn = Svn()
         self.maven = Maven()

@@ -6,6 +6,7 @@ import decorator
 
 class DeployService():
 
+    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.eer = EERServer()
         self.flare = FlareServer()

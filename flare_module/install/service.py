@@ -8,6 +8,7 @@ import decorator
 
 class InstallService():
 
+    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.setup = Setup()
         self.maven = Maven()
