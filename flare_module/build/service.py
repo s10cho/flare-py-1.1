@@ -1,5 +1,9 @@
 from flare_module.build.command.svn import Svn
 from flare_module.build.command.maven import Maven
+from flare_module.build.command.setup import Setup
+from flare_module.build.command.docker import Docker
+from flare_module.build.command.logback import Logback
+from flare_module.build.command.shell import Shell
 from config import FlarePath
 import decorator
 
@@ -9,11 +13,23 @@ class BuildService():
     def __init__(self):
         self.svn = Svn()
         self.maven = Maven()
+        self.setup = Setup()
+        self.docker = Docker()
+        self.logback = Logback()
+        self.shell = Shell()
 
     def run(self, param):
         if len(param) == 0:
+            self.docker.rm()
             self.svn.checkout()
             self.maven.clean_install()
+            self.setup.settings()
+            self.logback.change_log_level()
+            self.shell.create()
+            self.maven.database_clean()
+            self.docker.run()
+            self.docker.eer_ant()
+            self.docker.eer_run()
         else:
             # command run
             command = param[0]
