@@ -40,11 +40,11 @@ class Scouter():
         fileName = downloadUrl[downloadUrl.rfind('/') + 1:]
         with lcd(scouterPath):
             local('tar -xf {0}'.format(fileName))
-            local('mv ./* .')
+            local('mv ./scouter/* .')
             local('rmdir scouter')
 
 
     def deploy_agent(self):
         scouterPath = self.SCOUTER_SETUP[0] + '/agent.java'
         if os.path.exists(scouterPath):
-            local('copy {0} {1}'.format(scouterPath, self.SCOUTER_SETUP[2]))
+            local('cp -r {0} {1}'.format(scouterPath, self.SCOUTER_SETUP[2]))
