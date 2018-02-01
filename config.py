@@ -23,6 +23,7 @@ class FlarePath:
 
 
 class FlareEnv():
+    STORE = Config["STORE"]
     SVN = Config['SVN']
     DB = Config['DB']
     SOLR_URL = Config['SOLR']

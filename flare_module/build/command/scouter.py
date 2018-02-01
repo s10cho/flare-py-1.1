@@ -8,9 +8,13 @@ class Scouter():
     SCOUTER_SETUP = [
         FlarePath.TEMP_HOME + '/scouter',
         FlareEnv.SCOUTER["DOWNLOAD_URL"],
-        FlarePath.ORACLE_HOME + '/lib'
+        FlarePath.ORACLE_HOME + '/scouter'
     ]
 
+    STORE_SCOUTER_CONF_PATH = [
+        FlareEnv.STORE["PATH"] + '/scouter/conf',
+        FlarePath.TEMP_HOME + '/scouter/agent.java/conf',
+    ]
 
     def __init__(self):
         tempDir = [
@@ -24,7 +28,6 @@ class Scouter():
 
     def agent_set(self):
         self.download()
-        self.untar()
         self.deploy_agent()
 
     def download(self):
@@ -32,6 +35,8 @@ class Scouter():
         if not os.path.exists(scouterPath):
             print('Download scouter: {0}'.format(self.SCOUTER_SETUP[1]))
             wget.download(self.SCOUTER_SETUP[1], self.SCOUTER_SETUP[0])
+            self.untar()
+            self.cp_agent_conf()
 
 
     def untar(self):
@@ -42,6 +47,10 @@ class Scouter():
             local('tar -xf {0}'.format(fileName))
             local('mv ./scouter/* .')
             local('rmdir scouter')
+
+
+    def cp_agent_conf(self):
+        local('cp {0} {1}'.format(self.STORE_SCOUTER_CONF_PATH[0], self.STORE_SCOUTER_CONF_PATH[1]))
 
 
     def deploy_agent(self):
