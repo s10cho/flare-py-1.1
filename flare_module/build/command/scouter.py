@@ -26,30 +26,28 @@ class Scouter():
             if not os.path.exists(path):
                 os.makedirs(path)
 
+        self.scouterTarName = self.SCOUTER_SETUP[1][self.SCOUTER_SETUP[1].rfind('/') + 1:]
+
     def agent_set(self):
         self.download()
         self.deploy_agent()
 
     def download(self):
-        scouterPath = self.SCOUTER_SETUP[0] + '/agent.java'
-        if not os.path.exists(scouterPath):
-            print('Download scouter: {0}'.format(self.SCOUTER_SETUP[1]))
-            wget.download(self.SCOUTER_SETUP[1], self.SCOUTER_SETUP[0])
-            self.untar()
-            self.cp_agent_conf()
+        scouterTarPath = self.SCOUTER_SETUP[0] + '/' + self.scouterTarName
+        if os.path.isfile(scouterTarPath):
+            return
 
+        with lcd(self.SCOUTER_SETUP[0]):
+            local('rm -rf *')
 
-    def untar(self):
-        scouterPath = self.SCOUTER_SETUP[0]
-        downloadUrl = self.SCOUTER_SETUP[1]
-        fileName = downloadUrl[downloadUrl.rfind('/') + 1:]
-        with lcd(scouterPath):
-            local('tar -xf {0}'.format(fileName))
+        print('Download scouter: {0}'.format(self.SCOUTER_SETUP[1]))
+        wget.download(self.SCOUTER_SETUP[1], self.SCOUTER_SETUP[0])
+
+        with lcd(self.SCOUTER_SETUP[0]):
+            local('tar -xf {0}'.format(self.scouterTarName))
             local('mv ./scouter/* .')
             local('rmdir scouter')
 
-
-    def cp_agent_conf(self):
         local('cp {0} {1}'.format(self.STORE_SCOUTER_CONF_PATH[0], self.STORE_SCOUTER_CONF_PATH[1]))
 
 
