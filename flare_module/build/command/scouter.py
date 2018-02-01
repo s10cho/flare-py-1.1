@@ -32,7 +32,6 @@ class Scouter():
 
     def agent_set(self):
         self.download()
-        self.modify_conf()
         self.deploy_agent()
 
     def download(self):
@@ -52,6 +51,8 @@ class Scouter():
             local('rmdir scouter')
 
         local('cp {0}/* {1}/'.format(self.STORE_SCOUTER_CONF_PATH[0], self.STORE_SCOUTER_CONF_PATH[1]))
+
+        self.modify_conf()
 
 
     def modify_conf(self):
