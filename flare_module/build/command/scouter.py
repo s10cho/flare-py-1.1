@@ -48,7 +48,7 @@ class Scouter():
             local('mv ./scouter/* .')
             local('rmdir scouter')
 
-        local('cp {0} {1}'.format(self.STORE_SCOUTER_CONF_PATH[0], self.STORE_SCOUTER_CONF_PATH[1]))
+        local('cp {0}/* {1}/'.format(self.STORE_SCOUTER_CONF_PATH[0], self.STORE_SCOUTER_CONF_PATH[1]))
 
 
     def deploy_agent(self):
