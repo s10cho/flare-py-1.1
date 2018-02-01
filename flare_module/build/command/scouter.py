@@ -55,5 +55,5 @@ class Scouter():
         for scouterModule in ['/agent.java', '/agent.host']:
             scouterPath = self.SCOUTER_SETUP[0] + scouterModule
             deployPath = self.SCOUTER_SETUP[2] + scouterModule
-            local('mkdir {0}'.format(deployPath))
+            local('mkdir -p {0}'.format(deployPath))
             local('cp -r {0} {1}'.format(scouterPath, deployPath))
