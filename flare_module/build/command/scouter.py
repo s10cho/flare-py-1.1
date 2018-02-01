@@ -16,6 +16,8 @@ class Scouter():
         FlarePath.TEMP_HOME + '/scouter/agent.java/conf',
     ]
 
+    SERVER_IP = FlareEnv.SERVER["FLARE"]["HOSTS"][0]
+
     def __init__(self):
         tempDir = [
             '/scouter'
@@ -30,6 +32,7 @@ class Scouter():
 
     def agent_set(self):
         self.download()
+        self.modify_conf()
         self.deploy_agent()
 
     def download(self):
@@ -50,6 +53,13 @@ class Scouter():
 
         local('cp {0}/* {1}/'.format(self.STORE_SCOUTER_CONF_PATH[0], self.STORE_SCOUTER_CONF_PATH[1]))
 
+
+    def modify_conf(self):
+        for scouterModule in ['/agent.java', '/agent.host']:
+            scouterPath = self.SCOUTER_SETUP[0] + scouterModule
+            confFile = scouterPath + '/conf/scouter.conf'
+            with open(confFile, "a") as f:
+                f.write("net_collector_ip={0}\n".format(self.SERVER_IP))
 
     def deploy_agent(self):
         if os.path.exists(self.SCOUTER_SETUP[2]):
