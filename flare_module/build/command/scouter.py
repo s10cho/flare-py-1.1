@@ -54,5 +54,5 @@ class Scouter():
     def deploy_agent(self):
         for scouterModule in ['/agent.java', '/agent.host']:
             scouterPath = self.SCOUTER_SETUP[0] + scouterModule
-            if os.path.exists(scouterPath):
-                local('cp -r {0} {1}'.format(scouterPath, self.SCOUTER_SETUP[2]))
+            deployPath = self.SCOUTER_SETUP[2] + scouterModule
+            local('cp -r {0} {1}'.format(scouterPath, deployPath))
