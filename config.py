@@ -27,6 +27,7 @@ class FlareEnv():
     DB = Config['DB']
     SOLR_URL = Config['SOLR']
     SERVER = Config['SERVER']
+    SCOUTER = Config['SCOUTER']
 
 
 class FlareDocker():

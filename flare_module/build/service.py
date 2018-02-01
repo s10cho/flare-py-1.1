@@ -4,6 +4,7 @@ from flare_module.build.command.setup import Setup
 from flare_module.build.command.docker import Docker
 from flare_module.build.command.logback import Logback
 from flare_module.build.command.shell import Shell
+from flare_module.build.command.scouter import Scouter
 from config import FlarePath
 import decorator
 
@@ -17,6 +18,7 @@ class BuildService():
         self.docker = Docker()
         self.logback = Logback()
         self.shell = Shell()
+        self.scouter = Scouter()
 
     def run(self, param):
         if len(param) == 0:
@@ -26,6 +28,7 @@ class BuildService():
             self.setup.settings()
             self.logback.change_log_level()
             self.shell.create()
+            self.scouter.agent_set()
             self.maven.database_clean()
             self.docker.run()
             self.docker.eer_ant()
@@ -34,6 +37,7 @@ class BuildService():
             # command run
             command = param[0]
             print(command)
+            self.scouter.agent_set()
 
 
 
