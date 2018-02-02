@@ -43,6 +43,10 @@ class Docker():
         command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
         self.call(command)
 
+    def eer_scouter(self):
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'scouter')
+        self.call(command)
+
     def call(self, command):
         if type(command) == str:
             cmd = command

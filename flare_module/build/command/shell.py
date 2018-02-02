@@ -25,9 +25,15 @@ class Shell():
             'name': SHELL_FILE_FORMAT.format('run'),
             'contents': '#!/bin/bash\n'
                         'cd /home/enomix/bin\n'
-                        './all_run.sh\n'''
+                        './all_run.sh\n'
                         'cd /home/enomix/apps/solr\n'
                         './run.sh > /dev/null\n'
+        },
+        {
+            'name': SHELL_FILE_FORMAT.format('scouter'),
+            'contents': '#!/bin/bash\n'
+                        'cd /home/enomix/scouter/agent.host\n'
+                        './host.sh\n'
         },
     ]
 
