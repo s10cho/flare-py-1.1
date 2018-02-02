@@ -12,8 +12,6 @@ class FlarePath:
     FLARE_HOME = FLARE_ROOT_PATH
     # FLARE_WORKSPACE
     FLARE_WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['FLARE_WORKSPACE'])
-    # FLARE_MODULE
-    FLARE_MODULE = os.path.join(FLARE_HOME, Config['DIR']['FLARE_MODULE'])
     # FLARE_FRAME
     FLARE_FRAME = os.path.join(FLARE_HOME, Config['DIR']['FLARE_FRAME'])
     # TEMP HOME
