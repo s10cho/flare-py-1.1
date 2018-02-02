@@ -8,7 +8,7 @@ class Svn():
         '--username {0}'.format(FlareEnv.SVN['ID']),
         '--password {0}'.format(FlareEnv.SVN['PASSWORD']),
         '{0}'.format(FlareEnv.SVN['URL']),
-        '{0}'.format(FlarePath.WORKSPACE)
+        '{0}'.format(FlarePath.FLARE_WORKSPACE)
     ]
 
     def __init__(self): pass

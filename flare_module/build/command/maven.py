@@ -13,7 +13,7 @@ class Maven():
     def __init__(self): pass
 
     def move_maven_root(self):
-        os.chdir(FlarePath.WORKSPACE)
+        os.chdir(FlarePath.FLARE_WORKSPACE)
 
     def clean(self):
         self.move_maven_root()
