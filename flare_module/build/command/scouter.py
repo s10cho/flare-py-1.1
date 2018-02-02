@@ -92,8 +92,6 @@ class Scouter():
             local('mkdir -p {0}'.format(deployPath))
             local('cp -r {0} {1}'.format(scouterPath, deployPath))
 
-        self.create_ecc_sh()
-
 
     def create_ecc_sh(self):
         source = self.ECC_SH[0]
@@ -125,4 +123,4 @@ class Scouter():
 
         sourceFile.close()
         tempFile.close()
-        shutil.copy(temp, source)
+        local('sudo cp -r {0} {1}'.format(temp, source))

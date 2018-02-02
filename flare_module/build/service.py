@@ -33,6 +33,7 @@ class BuildService():
             self.docker.run()
             self.docker.eer_scouter()
             self.docker.eer_ant()
+            self.scouter.create_ecc_sh()
             self.docker.eer_run()
         else:
             # command run
