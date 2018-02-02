@@ -37,7 +37,8 @@ class BuildService():
             # command run
             command = param[0]
             print(command)
-            self.scouter.agent_set()
+            if command == 'scouter':
+                self.scouter.agent_set()
 
 
 
