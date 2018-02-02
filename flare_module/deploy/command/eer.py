@@ -55,12 +55,12 @@ class EERServer():
         self.execute(self.DOCKER_RM)
 
     def docker_run(self):
-        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
-        self.execute(command)
+        self.execute(self.DOCKER_RUN)
 
     def docker_eer_scouter(self):
         command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'scouter')
         self.execute(command)
 
     def docker_eer_run(self):
-        self.execute(self.DOCKER_EER_RUN)
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
+        self.execute(command)
