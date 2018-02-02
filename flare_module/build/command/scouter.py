@@ -20,7 +20,7 @@ class Scouter():
     SERVER_IP = FlareEnv.SERVER["FLARE"]["HOSTS"][0]
 
     ECC_SH = [
-        FlarePath.ORACLE_HOME + '/bin/ecc.sh',
+        FlarePath.ORACLE_HOME + '/setup/frame/bin/ecc.sh',
         FlarePath.TEMP_HOME + '/scouter/ecc.sh'
     ]
 
@@ -92,6 +92,8 @@ class Scouter():
             local('mkdir -p {0}'.format(deployPath))
             local('cp -r {0} {1}'.format(scouterPath, deployPath))
 
+        self.create_ecc_sh()
+
 
     def create_ecc_sh(self):
         source = self.ECC_SH[0]
@@ -112,7 +114,7 @@ class Scouter():
             tempFile.write(line)
 
             for jvmOpts in self.JVM_OPTION:
-                checkLine = 'CONTEXT_PATH=/{0}'.format(jvmOpts[0])
+                checkLine = 'BASE_RESOURCE=webapps/{0}'.format(jvmOpts[0])
                 if checkLine in line:
                     scouter_opts = '        SCT_OPTS="' \
                                    '-Xms{1}m -Xmx{2}m ' \
