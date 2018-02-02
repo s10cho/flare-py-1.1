@@ -125,4 +125,4 @@ class Scouter():
 
         sourceFile.close()
         tempFile.close()
-        local('sudo cp -r {0} {1}'.format(temp, source))
+        shutil.copy(temp, source)
