@@ -6,7 +6,7 @@ class Shell():
     # logback.xml
     SHELL_PATH = [
         FlarePath.ORACLE_HOME + '/bin',
-        FlarePath.TEMP_HOME + '/bin'
+        FlarePath.FLARE_TEMP + '/bin'
     ]
 
     SHELL_FILE_FORMAT = 'flare_eer_{0}.sh'
@@ -43,7 +43,7 @@ class Shell():
         ]
         # create temp directory
         for dir in tempDir:
-            path = FlarePath.TEMP_HOME + dir
+            path = FlarePath.FLARE_TEMP + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 

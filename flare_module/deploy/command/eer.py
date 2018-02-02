@@ -1,14 +1,11 @@
 from fabric.api import *
 from config import FlareEnv, FlareDeploy, FlareDocker
 from decorator import before, remote
-import subprocess
 
 @before(remote(FlareEnv.SERVER["EER"]))
 class EERServer():
 
-    DOCKER_RM = [
-        'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
-     ]
+    DOCKER_RM = 'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
 
     DOCKER_RUN = [
         'docker run -it -d'
@@ -23,14 +20,14 @@ class EERServer():
         , 'centos7/eer:1.1'
     ]
 
-    DOCKER_EER_RUN = [
-        'docker exec -it {0}'.format(FlareDocker.ENOMIX_NAME),
-        'bash -c /home/enomix/bin/flare_eer_{0}.sh'.format('run')
-    ]
+    DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
 
     def __init__(self): pass
 
     def execute(self, command):
+        if type(command) == list:
+            command = " ".join(command)
+
         with settings(warn_only=True):
             result = run(command)
         if result.failed:
@@ -53,10 +50,15 @@ class EERServer():
             run('rm -rf {0}'.format(FlareDeploy.DEPLOY_EER_TAR_NAME))
 
     def docker_rm(self):
-        self.execute(" ".join(self.DOCKER_RM))
+        self.execute(self.DOCKER_RM)
 
     def docker_run(self):
-        self.execute(" ".join(self.DOCKER_RUN))
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
+        self.execute(command)
+
+    def docker_eer_scouter(self):
+        command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'scouter')
+        self.execute(command)
 
     def docker_eer_run(self):
-        self.execute(" ".join(self.DOCKER_EER_RUN))
+        self.execute(self.DOCKER_EER_RUN)

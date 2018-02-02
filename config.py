@@ -2,7 +2,7 @@ import os
 import json
 
 FLARE_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
-CONFIG_PATH = os.path.join(FLARE_ROOT_PATH, 'conf/config.json')
+CONFIG_PATH = os.path.join(FLARE_ROOT_PATH, 'flare_conf/config.json')
 print('load conig = ' + CONFIG_PATH)
 with open(CONFIG_PATH, 'r') as f:
     Config = json.load(f)
@@ -10,20 +10,23 @@ with open(CONFIG_PATH, 'r') as f:
 class FlarePath:
     # FLARE HOME
     FLARE_HOME = FLARE_ROOT_PATH
-    # WORKSPACE
-    WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['WORKSPACE'])
-    # WORKSPACE
-    WORKSPACE_HOME = os.path.join(WORKSPACE, 'home')
+    # FLARE_WORKSPACE
+    FLARE_WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['FLARE_WORKSPACE'])
+    # FLARE_MODULE
+    FLARE_MODULE = os.path.join(FLARE_HOME, Config['DIR']['FLARE_MODULE'])
+    # FLARE_FRAME
+    FLARE_FRAME = os.path.join(FLARE_HOME, Config['DIR']['FLARE_FRAME'])
     # TEMP HOME
-    TEMP_HOME = os.path.join(FLARE_HOME, 'temp')
+    FLARE_TEMP = os.path.join(FLARE_HOME, Config['DIR']['FLARE_TEMP'])
+    # WORKSPACE
+    PROJECT_EER_HOME = os.path.join(FLARE_WORKSPACE, 'home')
     # ORACLE HOME
-    ORACLE_HOME = os.path.join(WORKSPACE, 'supertalk-99-release/target/enomix-oracle/enomix-oracle')
+    ORACLE_HOME = os.path.join(FLARE_WORKSPACE, 'supertalk-99-release/target/enomix-oracle/enomix-oracle')
     # POSTGRESQL HOME
-    POSTGRESQL_HOME = os.path.join(WORKSPACE, 'supertalk-99-release/target/enomix-postgresql/enomix-postgresql')
+    POSTGRESQL_HOME = os.path.join(FLARE_WORKSPACE, 'supertalk-99-release/target/enomix-postgresql/enomix-postgresql')
 
 
 class FlareEnv():
-    STORE = Config["STORE"]
     SVN = Config['SVN']
     DB = Config['DB']
     SOLR_URL = Config['SOLR']
@@ -41,7 +44,7 @@ class FlareDocker():
     }
 
 class FlareDeploy():
-    DEPLOY_TEMP_PATH = FlarePath.TEMP_HOME + '/deploy'
+    DEPLOY_TEMP_PATH = FlarePath.FLARE_TEMP + '/deploy'
     DEPLOY_TEMP_EER_PATH = os.path.join(DEPLOY_TEMP_PATH, 'eer')
     DEPLOY_TEMP_GATLING_PATH = os.path.join(DEPLOY_TEMP_PATH, 'gatling')
 

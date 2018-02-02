@@ -1,0 +1,60 @@
+{
+    "DIR": {
+        "FLARE_WORKSPACE": "",
+        "FLARE_MODULE": "",
+        "FLARE_FRAME": "",
+        "FLARE_TEMP": ""
+    },
+    "SVN": {
+        "URL": "",
+        "ID": "",
+        "PASSWORD": ""
+    },
+    "DB": {
+        "ORACLE": {
+            "DRIVER": "",
+            "URL": "",
+            "USERNAME": "",
+            "PASSWORD": "",
+            "OWNERNAME": "",
+            "VALIDATION": ""
+        },
+        "POSTGRESQL": {
+            "DRIVER": "",
+            "URL": "",
+            "USERNAME": "",
+            "PASSWORD": "",
+            "OWNERNAME": "",
+            "VALIDATION": ""
+        }
+    },
+    "SOLR": {
+        "ORACLE": "",
+        "POSTGRESQL": ""
+    },
+    "SCOUTER": {
+        "DOWNLOAD_URL": ""
+    },
+    "SERVER": {
+        "FLARE": {
+            "HOSTS": [""],
+            "USER": "",
+            "PASSWORD": ""
+        },
+        "GATLING": {
+            "HOSTS": [""],
+            "USER": "",
+            "PASSWORD": ""
+        },
+        "EER": {
+            "HOSTS": [""],
+            "USER": "",
+            "PASSWORD": ""
+        },
+        "DB": {
+            "HOSTS": [""],
+            "USER": "",
+            "PASSWORD": ""
+        }
+    }
+}

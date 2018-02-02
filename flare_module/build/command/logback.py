@@ -6,7 +6,7 @@ class Logback():
     # logback.xml
     LOG_BACK = [
         FlarePath.ORACLE_HOME + '/conf',
-        FlarePath.TEMP_HOME + '/conf'
+        FlarePath.FLARE_TEMP + '/conf'
     ]
 
     LOG_LEVEL_SET = [
@@ -21,7 +21,7 @@ class Logback():
         ]
         # create temp directory
         for dir in tempDir:
-            path = FlarePath.TEMP_HOME + dir
+            path = FlarePath.FLARE_TEMP + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 

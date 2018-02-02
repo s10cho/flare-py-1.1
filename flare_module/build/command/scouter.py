@@ -7,21 +7,21 @@ from config import FlarePath, FlareEnv
 class Scouter():
 
     SCOUTER_SETUP = [
-        FlarePath.TEMP_HOME + '/scouter',
+        FlarePath.FLARE_TEMP + '/scouter',
         FlareEnv.SCOUTER["DOWNLOAD_URL"],
         FlarePath.ORACLE_HOME + '/scouter'
     ]
 
     STORE_SCOUTER_CONF_PATH = [
-        FlareEnv.STORE["PATH"] + '/scouter/conf',
-        FlarePath.TEMP_HOME + '/scouter/agent.java/conf',
+        FlarePath.FLARE_FRAME + '/build/scouter/conf',
+        FlarePath.FLARE_TEMP + '/scouter/agent.java/conf',
     ]
 
     SERVER_IP = FlareEnv.SERVER["FLARE"]["HOSTS"][0]
 
     ECC_SH = [
         FlarePath.ORACLE_HOME + '/setup/frame/bin/ecc.sh',
-        FlarePath.TEMP_HOME + '/scouter/ecc.sh'
+        FlarePath.FLARE_TEMP + '/scouter/ecc.sh'
     ]
 
     JVM_OPTION = [
@@ -42,7 +42,7 @@ class Scouter():
         ]
         # create temp directory
         for dir in tempDir:
-            path = FlarePath.TEMP_HOME + dir
+            path = FlarePath.FLARE_TEMP + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 

@@ -6,18 +6,18 @@ from config import FlarePath, FlareEnv
 class Setup():
     # engine.properties.oracle
     ENGINE_PROPERTIES = [
-        FlarePath.WORKSPACE_HOME + '/conf/engine.properties.oracle',
-        FlarePath.TEMP_HOME + '/conf/engine.properties.oracle'
+        FlarePath.PROJECT_EER_HOME + '/conf/engine.properties.oracle',
+        FlarePath.FLARE_TEMP + '/conf/engine.properties.oracle'
     ]
     # setup.properties
     SETUP_PROPERTIES = [
         FlarePath.ORACLE_HOME + '/setup/setup.properties',
-        FlarePath.TEMP_HOME + '/setup/setup.properties'
+        FlarePath.FLARE_TEMP + '/setup/setup.properties'
     ]
     # build.xml
     BUILD_FILE = [
         FlarePath.ORACLE_HOME + '/setup/build.xml',
-        FlarePath.TEMP_HOME + '/setup/build.xml'
+        FlarePath.FLARE_TEMP + '/setup/build.xml'
     ]
     # search_engine
     SOLR_SETUP = [
@@ -41,7 +41,7 @@ class Setup():
         ]
         # create temp directory
         for dir in tempDir:
-            path = FlarePath.TEMP_HOME + dir
+            path = FlarePath.FLARE_TEMP + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 

@@ -2,6 +2,7 @@ import os
 import sys
 import importlib
 import traceback
+from config import FlarePath
 
 def main():
     args = sys.argv[1:]
@@ -22,14 +23,12 @@ def main():
             moduleName = args[0]
             param = args[1:]
             ClassName = moduleName.title() + 'Service'
-            module = importlib.import_module('flare_module.{0}.service'.format(moduleName))
+            module = importlib.import_module('{0}.{1}.service'.format(FlarePath.FLARE_MODULE, moduleName))
             Class = getattr(module, ClassName)
             instance = Class()
             instance.run(param)
         except Exception:
             print(traceback.format_exc())
-
-
 
 if __name__ == '__main__':
     main()
