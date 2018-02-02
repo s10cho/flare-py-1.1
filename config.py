@@ -40,7 +40,8 @@ class FlareDocker():
     PORT = {
         'GATEWAY': [19010, 19010],
         'WEBAPPS': [19090, 19090],
-        'WEBROOT': [17070, 17070]
+        'WEBROOT': [17070, 17070],
+        'SCOUTER': [6100, 6100]
     }
 
 class FlareDeploy():
