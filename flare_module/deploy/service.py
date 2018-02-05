@@ -18,6 +18,7 @@ class DeployService():
             self.eer.docker_rm()
             self.eer.deploy()
             self.eer.docker_run()
+            self.eer.docker_eer_scouter()
             self.eer.docker_eer_run()
         else:
             # command run
