@@ -73,5 +73,21 @@ class GatlingServer():
         )
 
 
+    def deploy_gatling_script(self):
+        checkoutList = [
+            [
+                FlareEnv.GATLING["GATLING_DATA"],
+                FlareDeploy.REMOTE_GATLING_HOME + '/user-files/data'
+            ],
+            [
+                FlareEnv.GATLING["GATLING_SCRIPT"],
+                FlareDeploy.REMOTE_GATLING_HOME + '/user-files/simulations'
+            ]
+        ]
+
+        for checkout in checkoutList:
+            command = " ".join(self.SVN_CHECKOUT).format(checkout[0], checkout[1])
+            print(command)
+            run(command)
 
 
