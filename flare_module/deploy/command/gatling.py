@@ -68,7 +68,7 @@ class GatlingServer():
             run('sudo rm -rf *')
 
         put(
-            FlarePath.FLARE_FRAME + '/deploy/gatling/lib/date-util.jar',
+            FlarePath.FLARE_FRAME + '/deploy/gatling/lib/*',
             FlareDeploy.REMOTE_GATLING_HOME +'/lib'
         )
 
