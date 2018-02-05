@@ -1,4 +1,5 @@
 import os
+from subprocess import call
 from fabric.api import *
 from config import FlarePath, FlareDocker
 
@@ -47,7 +48,8 @@ class Docker():
         if type(command) == list:
             command = " ".join(command)
 
-        os.system(command)
+        call(command)
+        # os.system(command)
 
         # with settings(warn_only=True):
         #     local(command)
