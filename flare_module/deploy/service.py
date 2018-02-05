@@ -26,6 +26,7 @@ class DeployService():
             print(command)
             if command == 'gatling':
                 self.gatling.deploy_gatling()
+                self.gatling.deploy_gatling_script()
 
 
 
