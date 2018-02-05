@@ -40,6 +40,13 @@ class BuildService():
             print(command)
             if command == 'scouter':
                 self.scouter.agent_set()
+            elif command == 'docker':
+                self.docker.rm()
+                self.docker.run()
+                self.docker.eer_scouter()
+                self.docker.eer_ant()
+                self.docker.eer_run()
+
 
 
 

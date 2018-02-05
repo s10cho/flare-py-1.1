@@ -1,4 +1,4 @@
-import subprocess
+from fabric.api import *
 from config import FlarePath, FlareDocker
 
 class Docker():
@@ -25,28 +25,29 @@ class Docker():
     def __init__(self): pass
 
     def rm(self):
-        self.call(self.DOCKER_RM)
+        self.execute(self.DOCKER_RM)
 
     def run(self):
-        self.call(self.DOCKER_RUN)
+        self.execute(self.DOCKER_RUN)
 
     def eer_ant(self):
         command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'ant')
-        self.call(command)
+        self.execute(command)
 
     def eer_run(self):
         command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
-        self.call(command)
+        self.execute(command)
 
     def eer_scouter(self):
         command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'scouter')
-        self.call(command)
+        self.execute(command)
 
-    def call(self, command):
-        if type(command) == str:
-            cmd = command
-        else:
-            cmd = " ".join(command)
-        print(cmd)
-        subprocess.call(cmd, shell=True)
+    def execute(self, command):
+        if type(command) == list:
+            command = " ".join(command)
+
+        with settings(warn_only=True):
+            result = local(command)
+        if result.failed:
+            print('[FAIL] {0}'.format(command))
 
