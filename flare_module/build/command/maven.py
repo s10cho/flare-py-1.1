@@ -35,4 +35,4 @@ class Maven():
         if type(command) == list:
             command = " ".join(command)
         with settings(warn_only=True):
-            local(command, capture=True)
+            local(command)
