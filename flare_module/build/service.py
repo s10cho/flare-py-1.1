@@ -42,6 +42,7 @@ class BuildService():
                 self.scouter.agent_set()
             elif command == 'docker':
                 self.docker.rm()
+                self.maven.database_clean()
                 self.docker.run()
                 self.docker.eer_scouter()
                 self.docker.eer_ant()
