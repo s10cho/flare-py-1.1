@@ -1,4 +1,4 @@
-from fabric.api import *
+from subprocess import call
 from config import FlarePath, FlareEnv
 
 class Svn():
@@ -19,5 +19,4 @@ class Svn():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
-        with settings(warn_only=True):
-            local(command)
+        call(command, shell=True)

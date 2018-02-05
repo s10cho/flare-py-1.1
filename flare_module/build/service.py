@@ -40,7 +40,8 @@ class BuildService():
             print(command)
             if command == 'scouter':
                 self.scouter.agent_set()
-            elif command == 'docker':
+
+            if command == 'docker':
                 self.docker.rm()
                 self.maven.database_clean()
                 self.docker.run()

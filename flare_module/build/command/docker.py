@@ -1,7 +1,5 @@
-import os
 from subprocess import call
-from fabric.api import *
-from config import FlarePath, FlareDocker
+from config import FlarePath, FlareDocker, FlareEnv
 
 class Docker():
 
@@ -12,7 +10,7 @@ class Docker():
     DOCKER_RUN = [
         'docker run -it -d'
         , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
-        , '-h {0}'.format(FlareDocker.ENOMIX_NAME)
+        , '-h {0}/{1}'.format(FlareDocker.ENOMIX_NAME, FlareEnv.SERVER["FLARE"]["HOSTS"][0])
         , '-v {0}:{1}'.format(FlarePath.ORACLE_HOME, FlareDocker.ENOMIX_HOME)
         , '-p {0}:{1}'.format(FlareDocker.PORT['GATEWAY'][0], FlareDocker.PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(FlareDocker.PORT['WEBAPPS'][0], FlareDocker.PORT['WEBAPPS'][1])
@@ -47,10 +45,7 @@ class Docker():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
-
         call(command, shell=True)
 
-        # with settings(warn_only=True):
-        #     local(command)
 
 
