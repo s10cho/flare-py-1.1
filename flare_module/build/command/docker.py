@@ -21,7 +21,7 @@ class Docker():
         , 'centos7/eer:1.1'
     ]
 
-    DOCKER_EER = 'docker exec -it {0} tmux bash -c /home/enomix/bin/flare_eer_{1}.sh'
+    DOCKER_EER = 'docker exec -i {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
 
     def __init__(self): pass
 
