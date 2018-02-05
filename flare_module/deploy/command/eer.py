@@ -11,7 +11,7 @@ class EERServer():
         'docker run -it -d'
         , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
         , '-h {0}/{1}'.format(FlareDocker.ENOMIX_NAME, FlareEnv.SERVER["EER"]["HOSTS"][0])
-        , '-v {0}:{1}'.format(FlareDeploy.REMOTE_ORACLE_HOME, FlareDocker.ENOMIX_HOME)
+        , '-v {0}:{1}'.format(FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME, FlareDocker.ENOMIX_HOME)
         , '-p {0}:{1}'.format(FlareDocker.PORT['GATEWAY'][0], FlareDocker.PORT['GATEWAY'][1])
         , '-p {0}:{1}'.format(FlareDocker.PORT['WEBAPPS'][0], FlareDocker.PORT['WEBAPPS'][1])
         , '-p {0}:{1}'.format(FlareDocker.PORT['WEBROOT'][0], FlareDocker.PORT['WEBROOT'][1])

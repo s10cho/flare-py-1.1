@@ -29,6 +29,9 @@ class GatlingServer():
         print('Download gatling: {0}'.format(self.GATLING_SETUP[1]))
         wget.download(self.GATLING_SETUP[1], self.GATLING_SETUP[0])
 
+        # remote svn install
+        run('yum install -y subversion')
+
 
     def execute(self, command):
         if type(command) == list:
@@ -53,6 +56,7 @@ class GatlingServer():
             run('unzip {0}'.format(self.gatlingZipName))
             run('rm -rf {0}'.format(self.gatlingZipName))
             run('mv {0} gatling'.format(self.gatlingZipName[0:self.gatlingZipName.rfind('-')]))
+
 
 
 
