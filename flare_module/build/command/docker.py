@@ -22,7 +22,7 @@ class Docker():
         , 'centos7/eer:1.1'
     ]
 
-    DOCKER_EER = 'docker exec {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
+    DOCKER_EER = 'docker exec -t {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
 
     def __init__(self): pass
 
@@ -51,7 +51,7 @@ class Docker():
         #call(command, shell=True)
         os.system(command)
 
-        # with settings(warn_only=True):
-        #     local(command)
+        with settings(warn_only=True):
+            local(command)
 
 
