@@ -6,6 +6,11 @@ from config import FlarePath, FlareDocker, FlareDeploy, FlareEnv
 
 class FlareServer():
 
+    EER_SETUP = [
+        FlareDeploy.DEPLOY_TEMP_EER_PATH,
+        FlareDeploy.DEPLOY_EER_TAR_NAME
+    ]
+
     GATLING_SETUP = [
         FlareDeploy.DEPLOY_TEMP_GATLING_PATH,
         FlareEnv.GATLING["DOWNLOAD_URL"],
@@ -15,8 +20,8 @@ class FlareServer():
         # create deploy temp directory
         if not os.path.exists(FlareDeploy.DEPLOY_TEMP_PATH):
             os.makedirs(FlareDeploy.DEPLOY_TEMP_PATH)
-        if not os.path.exists(FlareDeploy.DEPLOY_TEMP_EER_PATH):
-            os.makedirs(self.GATLING_SETUP[0])
+        if not os.path.exists(self.EER_SETUP[0]):
+            os.makedirs(self.EER_SETUP[0])
         if not os.path.exists(self.GATLING_SETUP[0]):
             os.makedirs(self.GATLING_SETUP[0])
 
@@ -32,9 +37,9 @@ class FlareServer():
         # cd oracle home
         with lcd(FlarePath.ORACLE_HOME):
             # tar enomix
-            local('tar -cf {0} ../'.format(FlareDeploy.DEPLOY_EER_TAR_NAME))
+            local('tar -cf {0} ../'.format(self.EER_SETUP[1]))
             # move enomix.tar
-            local('mv {0} {1}'.format(FlareDeploy.DEPLOY_EER_TAR_NAME, FlareDeploy.DEPLOY_TEMP_EER_PATH))
+            local('mv {0} {1}'.format(self.EER_SETUP[1], self.EER_SETUP[0]))
 
     def prepare_gatling(self):
         self.gatlingZipName = self.GATLING_SETUP[1][self.GATLING_SETUP[1].rfind('/') + 1:]
