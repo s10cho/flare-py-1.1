@@ -1,4 +1,4 @@
-import subprocess
+from fabric.api import *
 from config import FlarePath, FlareEnv
 
 class Svn():
@@ -14,12 +14,11 @@ class Svn():
     def __init__(self): pass
 
     def checkout(self):
-        self.call(self.SVN_CHECKOUT)
+        self.execute(self.SVN_CHECKOUT)
 
-    def call(self, command):
-        if type(command) == str:
-            cmd = command
-        else:
-            cmd = " ".join(command)
-        print(cmd)
-        subprocess.call(cmd, shell=True)
+    def execute(self, command):
+        if type(command) == list:
+            command = " ".join(command)
+        with settings(warn_only=True):
+            result = local(command)
+            print(result.stdout)

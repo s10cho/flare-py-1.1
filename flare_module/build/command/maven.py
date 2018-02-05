@@ -1,5 +1,5 @@
 import os
-import subprocess
+from fabric.api import *
 from config import FlarePath
 
 class Maven():
@@ -15,18 +15,25 @@ class Maven():
     def move_maven_root(self):
         os.chdir(FlarePath.FLARE_WORKSPACE)
 
-    def clean(self):
-        self.move_maven_root()
-        subprocess.call(self.MVN_CLEAN, shell=True)
-
-    def install(self):
-        self.move_maven_root()
-        subprocess.call(self.MVN_INSTALL, shell=True)
-
     def clean_install(self):
         self.clean()
         self.install()
 
+    def clean(self):
+        self.move_maven_root()
+        self.execute(self.MVN_CLEAN, shell=True)
+
+    def install(self):
+        self.move_maven_root()
+        self.execute(self.MVN_INSTALL, shell=True)
+
     def database_clean(self):
         self.move_maven_root()
-        subprocess.call(self.MVN_TEST_DB_CLEAN, shell=True)
+        self.execute(self.MVN_TEST_DB_CLEAN, shell=True)
+
+    def execute(self, command):
+        if type(command) == list:
+            command = " ".join(command)
+        with settings(warn_only=True):
+            result = local(command)
+            print(result.stdout)

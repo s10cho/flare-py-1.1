@@ -45,9 +45,8 @@ class Docker():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
-
         with settings(warn_only=True):
             result = local(command)
-        if result.failed:
-            print('[FAIL] {0}'.format(command))
+            print(result.stdout)
+
 
