@@ -15,11 +15,14 @@ class DeployService():
     def run(self, param):
         if len(param) == 0:
             self.flare.prepare_eer()
+            self.flare.prepare_gatling()
             self.eer.docker_rm()
             self.eer.deploy()
             self.eer.docker_run()
             self.eer.docker_eer_scouter()
             self.eer.docker_eer_run()
+            self.gatling.deploy_gatling()
+            self.gatling.deploy_gatling_script()
         else:
             # command run
             command = param[0]
