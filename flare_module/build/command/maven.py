@@ -21,15 +21,15 @@ class Maven():
 
     def clean(self):
         self.move_maven_root()
-        self.execute(self.MVN_CLEAN, shell=True)
+        self.execute(self.MVN_CLEAN)
 
     def install(self):
         self.move_maven_root()
-        self.execute(self.MVN_INSTALL, shell=True)
+        self.execute(self.MVN_INSTALL)
 
     def database_clean(self):
         self.move_maven_root()
-        self.execute(self.MVN_TEST_DB_CLEAN, shell=True)
+        self.execute(self.MVN_TEST_DB_CLEAN)
 
     def execute(self, command):
         if type(command) == list:
