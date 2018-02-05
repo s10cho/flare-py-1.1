@@ -69,7 +69,7 @@ class GatlingServer():
 
         put(
             FlarePath.FLARE_FRAME + '/deploy/gatling/lib/*',
-            FlareDeploy.REMOTE_GATLING_HOME +'/gatling/lib'
+            FlareDeploy.REMOTE_GATLING_HOME +'/lib'
         )
 
 
