@@ -13,9 +13,9 @@ class GatlingServer():
 
     def __init__(self):
         if not os.path.exists(FlareDeploy.DEPLOY_TEMP_PATH):
-            os.makedirs(path)
+            os.makedirs(FlareDeploy.DEPLOY_TEMP_PATH)
         if not os.path.exists(self.GATLING_SETUP[0]):
-            os.makedirs(path)
+            os.makedirs(self.GATLING_SETUP[0])
 
         self.gatlingZipName = self.GATLING_SETUP[1][self.GATLING_SETUP[1].rfind('/') + 1:]
         self.gatlingZipPath = self.GATLING_SETUP[0] + '/' + self.gatlingZipName
