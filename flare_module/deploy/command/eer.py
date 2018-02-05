@@ -30,8 +30,7 @@ class EERServer():
         if type(command) == list:
             command = " ".join(command)
         with settings(warn_only=True):
-            result = run(command)
-            print(result.stdout)
+            run(command)
 
     def deploy(self):
         # rm remote home

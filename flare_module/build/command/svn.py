@@ -20,5 +20,4 @@ class Svn():
         if type(command) == list:
             command = " ".join(command)
         with settings(warn_only=True):
-            result = local(command)
-            print(result.stdout)
+            local(command)
