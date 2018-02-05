@@ -1,7 +1,7 @@
 import os
 import wget
 from fabric.api import *
-from config import FlareEnv, FlareDeploy
+from config import FlareEnv, FlareDeploy, FlarePath
 from decorator import before, remote
 
 @before(remote(FlareEnv.SERVER["GATLING"]))
@@ -11,10 +11,14 @@ class GatlingServer():
         FlareEnv.GATLING["DOWNLOAD_URL"],
     ]
 
-    def __init__(self):
-        # remote svn install
-        run('yum install -y subversion')
+    SVN_CHECKOUT = [
+        'svn checkout',
+        '--username {0}'.format(FlareEnv.SVN['ID']),
+        '--password {0}'.format(FlareEnv.SVN['PASSWORD']),
+        '{0} {1}'
+    ]
 
+    def __init__(self):
         if not os.path.exists(FlareDeploy.DEPLOY_TEMP_PATH):
             os.makedirs(FlareDeploy.DEPLOY_TEMP_PATH)
         if not os.path.exists(self.GATLING_SETUP[0]):
@@ -56,6 +60,17 @@ class GatlingServer():
             run('unzip {0}'.format(self.gatlingZipName))
             run('rm -rf {0}'.format(self.gatlingZipName))
             run('mv {0} gatling'.format(self.gatlingZipName[0:self.gatlingZipName.rfind('-')]))
+
+        with cd(FlareDeploy.REMOTE_GATLING_HOME + '/user-files/simulations'):
+            run('sudo rm -rf *')
+
+        with cd(FlareDeploy.REMOTE_GATLING_HOME + '/user-files/data'):
+            run('sudo rm -rf *')
+
+        put(
+            FlarePath.FLARE_FRAME + '/deploy/gatling/lib/*',
+            FlareDeploy.REMOTE_GATLING_HOME +'/gatling/lib'
+        )
 
 
 
