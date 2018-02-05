@@ -8,3 +8,4 @@ cd $FLARE_HOME
 
 git pull
 find . -name "*.py" -exec chmod -v 755 {} \;
+find . -name "*.sh" -exec chmod -v 755 {} \;
