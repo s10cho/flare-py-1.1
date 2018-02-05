@@ -20,10 +20,13 @@ class DeployService():
             self.eer.docker_run()
             self.eer.docker_eer_scouter()
             self.eer.docker_eer_run()
+            self.gatling.deploy_gatling()
         else:
             # command run
             command = param[0]
             print(command)
+            if command == 'gatling':
+                self.gatling.deploy_gatling()
 
 
 

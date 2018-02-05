@@ -30,6 +30,7 @@ class FlareEnv():
     SOLR_URL = Config['SOLR']
     SERVER = Config['SERVER']
     SCOUTER = Config['SCOUTER']
+    GATLING = Config['GATLING']
 
 
 class FlareDocker():
