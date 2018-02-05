@@ -48,10 +48,9 @@ class Docker():
         if type(command) == list:
             command = " ".join(command)
 
-        #call(command, shell=True)
-        os.system(command)
+        call(command, shell=True)
 
-        with settings(warn_only=True):
-            local(command)
+        # with settings(warn_only=True):
+        #     local(command)
 
 
