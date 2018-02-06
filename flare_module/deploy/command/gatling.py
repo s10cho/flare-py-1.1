@@ -32,7 +32,7 @@ class GatlingServer():
 
         # copy gatling.zip
         put(
-            self.gatlingZipPath,
+            FlareDeploy.DEPLOY_TEMP_GATLING_PATH + '/' + 'gatling*.zip',
             FlareDeploy.REMOTE_HOME
         )
         # cd remote home
