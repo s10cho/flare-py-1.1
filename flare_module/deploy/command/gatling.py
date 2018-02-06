@@ -37,9 +37,9 @@ class GatlingServer():
         )
         # cd remote home
         with cd(FlareDeploy.REMOTE_HOME):
-            run('unzip {0}'.format(self.gatlingZipName))
-            run('rm -rf {0}'.format(self.gatlingZipName))
-            run('mv {0} gatling'.format(self.gatlingZipName[0:self.gatlingZipName.rfind('-')]))
+            run('unzip {0}'.format('gatling*.zip'))
+            run('rm -rf {0}'.format('gatling*.zip'))
+            run('mv {0} gatling'.format('gatling*'))
 
         with cd(FlareDeploy.REMOTE_GATLING_HOME + '/user-files/simulations'):
             run('sudo rm -rf *')
