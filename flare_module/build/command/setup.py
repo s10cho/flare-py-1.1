@@ -24,9 +24,9 @@ class Setup():
         FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app',
         FlareEnv.SOLR_URL['ORACLE']
     ]
-
-    LICENSE_SETUP = [
-        FlareEnv.OPTION['LICENSE'],
+    # t_config_property
+    CONFIG_PROPERTY_SETUP = [
+        FlareEnv.OPTION['CONFIG_PROPERTY'],
         FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
     ]
 
@@ -54,7 +54,7 @@ class Setup():
     def settings(self):
         self.set_properties()
         self.set_solr()
-        self.add_license_update_sql()
+        self.add_config_update_sql()
 
     def set_properties(self):
         # - s: set value
@@ -100,13 +100,20 @@ class Setup():
             wget.download(self.SOLR_SETUP[1], self.SOLR_SETUP[0])
 
 
-    def add_license_update_sql(self):
-        sql = [
-            "UPDATE t_config_property",
-            "SET value = '{0}'".format(self.LICENSE_SETUP[0]),
-            "WHERE property_id = 'LICENSE'"
-        ]
+    def add_config_update_sql(self):
 
-        file = open(self.LICENSE_SETUP[1], 'a', encoding='UTF8')
-        file.write(" ".join(sql))
-        file.close()
+        configList = self.CONFIG_PROPERTY_SETUP[0]
+
+        for config in configList:
+            propertyId = config[0]
+            value = config[1]
+
+            sql = [
+                "UPDATE t_config_property",
+                "SET value = '{0}'".format(value),
+                "WHERE property_id = '{0}'".format(propertyId)
+            ]
+
+            file = open(self.CONFIG_PROPERTY_SETUP[1], 'a', encoding='UTF8')
+            file.write(" ".join(sql))
+            file.close()

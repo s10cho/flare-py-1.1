@@ -32,6 +32,7 @@ class FlareEnv():
     SCOUTER = Config['SCOUTER']
     GATLING = Config['GATLING']
     OPTION = Config['OPTION']
+    TEST = Config['TEST']
 
 
 class FlareDocker():
