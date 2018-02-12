@@ -48,6 +48,7 @@ class Setup():
     def settings(self):
         self.set_properties()
         self.set_solr()
+        self.add_license_update_sql()
 
     def set_properties(self):
         # - s: set value
@@ -91,3 +92,14 @@ class Setup():
         if not os.path.isfile(solrPath):
             print('Download solr: {0}'.format(self.SOLR_SETUP[1]))
             wget.download(self.SOLR_SETUP[1], self.SOLR_SETUP[0])
+
+
+    def add_license_update_sql(self):
+        sql = 'UPDATE t_config_property' \
+              'SET value = \'{0}\'' \
+              'WHERE property_id = \'LICENSE\''.format(FlareEnv.OPTION['LICENSE'])
+
+        filePath = FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.SQL'
+        file = open(filePath, 'a', encoding='UTF8')
+        file.write(sql)
+        file.close()
