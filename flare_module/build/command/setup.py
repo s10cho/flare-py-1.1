@@ -95,11 +95,11 @@ class Setup():
 
 
     def add_license_update_sql(self):
-        sql = 'UPDATE t_config_property' \
-              'SET value = \'{0}\'' \
+        sql = 'UPDATE t_config_property ' \
+              'SET value = \'{0}\' ' \
               'WHERE property_id = \'LICENSE\''.format(FlareEnv.OPTION['LICENSE'])
 
-        filePath = FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.SQL'
+        filePath = FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
         file = open(filePath, 'a', encoding='UTF8')
         file.write(sql)
         file.close()
