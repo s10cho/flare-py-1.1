@@ -14,6 +14,12 @@ class GatlingServer():
         '{0}'.format(FlareEnv.GATLING['URL'])
     ]
 
+    MVN_CLEAN_COMPILE = [
+        'mvn -f',
+        '{0}/flare-gatling/pom.xml'.format(FlareDeploy.REMOTE_HOME),
+        'clean compile'
+    ]
+
     def __init__(self): pass
 
 
@@ -33,5 +39,6 @@ class GatlingServer():
             self.execute(self.SVN_CHECKOUT)
 
 
-
+    def gatling_clean_compile(self):
+        self.execute(self.MVN_CLEAN_COMPILE)
 
