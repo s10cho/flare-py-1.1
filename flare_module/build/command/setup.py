@@ -111,7 +111,7 @@ class Setup():
                 "\n",
                 "UPDATE t_config_property",
                 "SET value = '{0}'".format(value),
-                "WHERE property_id = '{0}'".format(propertyId),
+                "WHERE property_id = '{0}';".format(propertyId),
                 "\n"
             ]
 
