@@ -101,7 +101,6 @@ class Setup():
 
 
     def add_config_update_sql(self):
-
         configList = self.CONFIG_PROPERTY_SETUP[0]
 
         for config in configList:
