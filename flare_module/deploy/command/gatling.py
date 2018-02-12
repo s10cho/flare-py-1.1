@@ -36,9 +36,7 @@ class GatlingServer():
 
         # cd remote home
         with cd(FlareDeploy.REMOTE_HOME):
+            # svn checkout
             self.execute(self.SVN_CHECKOUT)
-
-
-    def gatling_clean_compile(self):
-        self.execute(self.MVN_CLEAN_COMPILE)
-
+            # maven clean compile
+            self.execute(self.MVN_CLEAN_COMPILE)

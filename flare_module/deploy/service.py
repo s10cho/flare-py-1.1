@@ -29,7 +29,6 @@ class DeployService():
             print(command)
             if command == 'gatling':
                 self.gatling.deploy_gatling()
-                self.gatling.gatling_clean_compile()
 
 
 
