@@ -51,4 +51,4 @@ class FlareDeploy():
     DEPLOY_EER_TAR_NAME = 'enomix.tar'
     REMOTE_HOME = '/home/enomix/flare'
     REMOTE_ENOMIX_ORACLE_HOME = os.path.join(REMOTE_HOME, 'enomix-oracle')
-    REMOTE_GATLING_HOME = os.path.join(REMOTE_HOME, 'gatling')
+    REMOTE_GATLING_HOME = os.path.join(REMOTE_HOME, 'flare-gatling')

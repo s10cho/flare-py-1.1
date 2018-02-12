@@ -16,7 +16,7 @@ class GatlingServer():
 
     MVN_CLEAN_COMPILE = [
         'mvn -f',
-        '{0}/flare-gatling/pom.xml'.format(FlareDeploy.REMOTE_HOME),
+        '{0}/pom.xml'.format(FlareDeploy.REMOTE_GATLING_HOME),
         'clean compile'
     ]
 
