@@ -30,13 +30,14 @@ class Setup():
         FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
     ]
 
-    ORACLE_SETUP_DATA = [
+    SETUP_DATA = [
         ['db.driverClassName',  FlareEnv.DB['ORACLE']['DRIVER']],
         ['db.url',              FlareEnv.DB['ORACLE']['URL']],
         ['db.username',         FlareEnv.DB['ORACLE']['USERNAME']],
         ['db.password',         FlareEnv.DB['ORACLE']['PASSWORD']],
         ['db.ownername',        FlareEnv.DB['ORACLE']['OWNERNAME']],
         ['db.validationQuery',  FlareEnv.DB['ORACLE']['VALIDATION']],
+        ['helper.useflag',      'Y'],
     ]
 
     def __init__(self):
@@ -80,7 +81,7 @@ class Setup():
     def set_value(self, line):
         data = line.split('=')
         if len(data) == 2:
-            for setupData in self.ORACLE_SETUP_DATA:
+            for setupData in self.SETUP_DATA:
                 if data[0] == setupData[0]:
                     data[1] = setupData[1] + '\n'
                     line = '='.join(data)
