@@ -25,6 +25,11 @@ class Setup():
         FlareEnv.SOLR_URL['ORACLE']
     ]
 
+    LICENSE_SETUP = [
+        FlareEnv.OPTION['LICENSE'],
+        FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
+    ]
+
     ORACLE_SETUP_DATA = [
         ['db.driverClassName',  FlareEnv.DB['ORACLE']['DRIVER']],
         ['db.url',              FlareEnv.DB['ORACLE']['URL']],
@@ -95,11 +100,12 @@ class Setup():
 
 
     def add_license_update_sql(self):
-        sql = 'UPDATE t_config_property ' \
-              'SET value = \'{0}\' ' \
-              'WHERE property_id = \'LICENSE\''.format(FlareEnv.OPTION['LICENSE'])
+        sql = [
+            "UPDATE t_config_property",
+            "SET value = '{0}'".format(self.LICENSE_SETUP[0]),
+            "WHERE property_id = 'LICENSE'"
+        ]
 
-        filePath = FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
-        file = open(filePath, 'a', encoding='UTF8')
-        file.write(sql)
+        file = open(self.LICENSE_SETUP[1], 'a', encoding='UTF8')
+        file.write(" ".join(sql))
         file.close()
