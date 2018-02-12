@@ -108,6 +108,7 @@ class Setup():
             value = config[1]
 
             sql = [
+                "\n",
                 "UPDATE t_config_property",
                 "SET value = '{0}'".format(value),
                 "WHERE property_id = '{0}'".format(propertyId),
