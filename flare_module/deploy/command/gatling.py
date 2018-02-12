@@ -31,8 +31,10 @@ class GatlingServer():
 
 
     def deploy_gatling(self):
+        # rm remote home
+        run('sudo rm -rf {0}'.format(FlareDeploy.REMOTE_HOME))
         # create remote home
-        run('mkdir -p {0}'.format(FlareDeploy.REMOTE_HOME))
+        run('mkdir {0}'.format(FlareDeploy.REMOTE_HOME))
 
         # cd remote home
         with cd(FlareDeploy.REMOTE_HOME):
