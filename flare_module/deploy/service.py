@@ -22,7 +22,6 @@ class DeployService():
             self.eer.docker_eer_scouter()
             self.eer.docker_eer_run()
             self.gatling.deploy_gatling()
-            self.gatling.deploy_gatling_script()
         else:
             # command run
             command = param[0]
