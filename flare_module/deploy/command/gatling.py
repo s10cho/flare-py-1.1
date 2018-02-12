@@ -9,9 +9,9 @@ class GatlingServer():
 
     SVN_CHECKOUT = [
         'svn checkout',
-        '--username {0}'.format(FlareEnv.SVN['ID']),
-        '--password {0}'.format(FlareEnv.SVN['PASSWORD']),
-        '{0} {1}'
+        '--username {0}'.format(FlareEnv.GATLING['ID']),
+        '--password {0}'.format(FlareEnv.GATLING['PASSWORD']),
+        '{0}'.format(FlareEnv.GATLING['URL'])
     ]
 
     def __init__(self): pass
@@ -25,49 +25,13 @@ class GatlingServer():
 
 
     def deploy_gatling(self):
-        # rm remote home
-        run('sudo rm -rf {0}'.format(FlareDeploy.REMOTE_HOME))
         # create remote home
-        run('mkdir {0}'.format(FlareDeploy.REMOTE_HOME))
+        run('mkdir -p {0}'.format(FlareDeploy.REMOTE_HOME))
 
-        # copy gatling.zip
-        put(
-            FlareDeploy.DEPLOY_TEMP_GATLING_PATH + '/' + 'gatling*.zip',
-            FlareDeploy.REMOTE_HOME
-        )
         # cd remote home
         with cd(FlareDeploy.REMOTE_HOME):
-            run('unzip {0}'.format('gatling*.zip'))
-            run('rm -rf {0}'.format('gatling*.zip'))
-            run('mv {0} gatling'.format('gatling*'))
-
-        with cd(FlareDeploy.REMOTE_GATLING_HOME + '/user-files/simulations'):
-            run('sudo rm -rf *')
-
-        with cd(FlareDeploy.REMOTE_GATLING_HOME + '/user-files/data'):
-            run('sudo rm -rf *')
-
-        put(
-            FlarePath.FLARE_FRAME + '/deploy/gatling/lib/*',
-            FlareDeploy.REMOTE_GATLING_HOME +'/lib'
-        )
+            self.execute(self.SVN_CHECKOUT)
 
 
-    def deploy_gatling_script(self):
-        checkoutList = [
-            [
-                FlareEnv.GATLING["GATLING_DATA"],
-                FlareDeploy.REMOTE_GATLING_HOME + '/user-files/data'
-            ],
-            [
-                FlareEnv.GATLING["GATLING_SCRIPT"],
-                FlareDeploy.REMOTE_GATLING_HOME + '/user-files/simulations'
-            ]
-        ]
-
-        for checkout in checkoutList:
-            command = " ".join(self.SVN_CHECKOUT).format(checkout[0], checkout[1])
-            print(command)
-            run(command)
 
 

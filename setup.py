@@ -19,6 +19,7 @@ install_requires = [
         'wget',
         'fabric',
         'fabric3',
+        'docker',
     ]
 
 setup(

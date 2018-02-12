@@ -1,5 +1,4 @@
 import os
-import wget
 from subprocess import call
 from fabric.api import *
 from config import FlarePath, FlareDocker, FlareDeploy, FlareEnv
@@ -11,19 +10,12 @@ class FlareServer():
         FlareDeploy.DEPLOY_EER_TAR_NAME
     ]
 
-    GATLING_SETUP = [
-        FlareDeploy.DEPLOY_TEMP_GATLING_PATH,
-        FlareEnv.GATLING["DOWNLOAD_URL"],
-    ]
-
     def __init__(self):
         # create deploy temp directory
         if not os.path.exists(FlareDeploy.DEPLOY_TEMP_PATH):
             os.makedirs(FlareDeploy.DEPLOY_TEMP_PATH)
         if not os.path.exists(self.EER_SETUP[0]):
             os.makedirs(self.EER_SETUP[0])
-        if not os.path.exists(self.GATLING_SETUP[0]):
-            os.makedirs(self.GATLING_SETUP[0])
 
     def prepare_eer(self):
         # docker rm
@@ -41,15 +33,4 @@ class FlareServer():
             # move enomix.tar
             local('mv {0} {1}'.format(self.EER_SETUP[1], self.EER_SETUP[0]))
 
-    def prepare_gatling(self):
-        self.gatlingZipName = self.GATLING_SETUP[1][self.GATLING_SETUP[1].rfind('/') + 1:]
-        self.gatlingZipPath = self.GATLING_SETUP[0] + '/' + self.gatlingZipName
-        if os.path.isfile(self.gatlingZipPath):
-            print('Already download gatling : {0}'.format(self.gatlingZipName))
-            return
-
-        with lcd(self.GATLING_SETUP[0]):
-            local('rm -rf *')
-
-        print('Download gatling: {0}'.format(self.GATLING_SETUP[1]))
-        wget.download(self.GATLING_SETUP[1], self.GATLING_SETUP[0])
+    def prepare_gatling(self): pass
