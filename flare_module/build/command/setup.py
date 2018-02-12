@@ -110,7 +110,8 @@ class Setup():
             sql = [
                 "UPDATE t_config_property",
                 "SET value = '{0}'".format(value),
-                "WHERE property_id = '{0}'".format(propertyId)
+                "WHERE property_id = '{0}'".format(propertyId),
+                "\n"
             ]
 
             file = open(self.CONFIG_PROPERTY_SETUP[1], 'a', encoding='UTF8')
