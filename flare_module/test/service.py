@@ -10,6 +10,7 @@ class TestService():
         pass
 
     def run(self, param):
+        print(param)
         if len(param) == 0:
             self.test.talk_test()
             pass
