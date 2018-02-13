@@ -17,7 +17,7 @@ class TestService():
             # command run
             command = param[0]
             print(command)
-            if command == 'init':
+            if command == 'ready':
                 self.test.init_data()
             elif command == 'talk':
                 self.test.talk_test()

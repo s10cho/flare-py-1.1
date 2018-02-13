@@ -48,16 +48,14 @@ class BuildService():
                 self.logback.change_log_level()
                 self.shell.create()
                 self.scouter.agent_set()
-            elif command == 'dbclean':
+            elif command == 'clean':
                 self.maven.database_clean()
-            elif command == 'docker':
+            elif command == 'run':
                 self.docker.run()
-            elif command == 'scouter':
                 self.docker.eer_scouter()
-            elif command == 'ant':
                 self.docker.eer_ant()
-            elif command == 'eer':
                 self.docker.eer_run()
+
 
 
 

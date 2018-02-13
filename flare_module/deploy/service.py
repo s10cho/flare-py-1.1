@@ -32,7 +32,6 @@ class DeployService():
             if command == 'eer':
                 self.eer.docker_rm()
                 self.eer.deploy()
-            if command == 'run':
                 self.eer.docker_run()
                 self.eer.docker_eer_scouter()
                 self.eer.docker_eer_run()
