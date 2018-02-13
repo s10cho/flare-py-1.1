@@ -38,15 +38,25 @@ class BuildService():
             # command run
             command = param[0]
             print(command)
-            if command == 'scouter':
-                self.scouter.agent_set()
-
-            if command == 'docker':
+            if command == 'svn':
                 self.docker.rm()
+                self.svn.checkout()
+            elif command == 'maven':
+                self.maven.clean_install()
+            elif command == 'setup':
+                self.setup.settings()
+                self.logback.change_log_level()
+                self.shell.create()
+                self.scouter.agent_set()
+            elif command == 'dbclean':
                 self.maven.database_clean()
+            elif command == 'docker':
                 self.docker.run()
+            elif command == 'scouter':
                 self.docker.eer_scouter()
+            elif command == 'ant':
                 self.docker.eer_ant()
+            elif command == 'eer':
                 self.docker.eer_run()
 
 

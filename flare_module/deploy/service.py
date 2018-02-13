@@ -26,6 +26,16 @@ class DeployService():
             # command run
             command = param[0]
             print(command)
+            if command == 'ready':
+                self.flare.prepare_eer()
+                self.flare.prepare_gatling()
+            if command == 'eer':
+                self.eer.docker_rm()
+                self.eer.deploy()
+            if command == 'run':
+                self.eer.docker_run()
+                self.eer.docker_eer_scouter()
+                self.eer.docker_eer_run()
             if command == 'gatling':
                 self.gatling.deploy_gatling()
 
