@@ -1,4 +1,5 @@
 import os
+import datetime
 from fabric.api import *
 from config import FlareEnv, FlareResult, FlarePath
 from decorator import before, remote
@@ -55,13 +56,26 @@ class Test():
         tarName = '{0}.tar'.format(outputDirectoryBaseName)
 
         with cd(FlareResult.REMOTE_GATLING_RESULT):
-            run('tar -cf {0} {1}-*'.format(tarName, outputDirectoryBaseName))   # tar gatling report
-            get(tarName, FlarePath.FLARE_RESULT + '/gatling')                   # download gatling.tar
-            run('rm -rf {0}*'.format(outputDirectoryBaseName))                  # remove gatling report
+            lsOutput = run('ls')
+            fileNames = lsOutput.split()
+            for fileName in fileNames:
+                file = fileName.split('-')
+                timestamp = file[1]
+                timestamp = datetime.datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
+                date = timestamp[:8]
+                time = timestamp[8:]
+                downloadPath = self.FLARE_RESILT_GATLING + '/' + date
 
-        with lcd(self.FLARE_RESILT_GATLING):
-            local('tar -xf {0}'.format(tarName))        # tar gatling report
-            local('rm -rf {0}'.format(tarName))         # remove tar file
+                run('tar -cf {0}.tar {0}'.format(fileName))     # tar gatling report
+                local('mkdir -p {0}'.format(downloadPath))      # mkdir download path
+                get('{0}.tar'.format(fileName), downloadPath)   # download gatling.tar
+                run('rm -rf {0}*'.format(fileName))             # remove gatling report
+
+            with lcd(downloadPath):
+                local('tar -xf {0}.tar'.format(fileName))        # tar gatling report
+                local('rm -rf {0}.tar'.format(fileName))         # remove tar file
+
+
 
 
     def init_data(self):
@@ -78,3 +92,6 @@ class Test():
 
     def chatbot_talk_test(self):
         self.simulation(self.CHATBOT_TALK_SIMULATION_CLASS)
+
+
+
