@@ -23,6 +23,7 @@ class Test():
             path = FlarePath.FLARE_RESULT + dir
             if not os.path.exists(path):
                 os.makedirs(path)
+        self.FLARE_RESILT_GATLING = FlarePath.FLARE_RESULT + resultDir[0]
 
 
     def execute(self, command):
@@ -58,7 +59,7 @@ class Test():
             get(tarName, FlarePath.FLARE_RESULT + '/gatling')                   # download gatling.tar
             run('rm -rf {0}*'.format(outputDirectoryBaseName))                  # remove gatling report
 
-        with lcd(FlareResult.REMOTE_GATLING_RESULT):
+        with lcd(self.FLARE_RESILT_GATLING):
             local('tar -xf {0}'.format(tarName))        # tar gatling report
             local('rm -rf {0}'.format(tarName))         # remove tar file
 
