@@ -1,13 +1,12 @@
 import os
-import wget
 from fabric.api import *
-from config import FlareEnv, FlareDeploy, FlarePath
+from config import FlareEnv, FlareResult, FlarePath
 from decorator import before, remote
 
 @before(remote(FlareEnv.SERVER["GATLING"]))
 class Test():
 
-    MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} test'
+    MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} test'
 
     INIT_SIMULATION_CLASS = FlareEnv.TEST['INIT']
 
@@ -17,7 +16,14 @@ class Test():
 
     CHATBOT_TALK_SIMULATION_CLASS = FlareEnv.TEST['CHATBOT']
 
-    def __init__(self): pass
+    def __init__(self):
+        resultDir = ['/gatling']
+        # create result directory
+        for dir in resultDir:
+            path = FlarePath.FLARE_RESULT + dir
+            if not os.path.exists(path):
+                os.makedirs(path)
+
 
     def execute(self, command):
         if type(command) == list:
@@ -25,25 +31,49 @@ class Test():
         with settings(warn_only=True):
             run(command)
 
-    def run_test(self, simulationClassList):
+
+    def simulation(self, simulationClassList):
         if len(simulationClassList) < 0:
             print('No Simulation')
             return
-
         # cd gatling home
-        with cd(FlareDeploy.REMOTE_GATLING_HOME):
+        with cd(FlareResult.REMOTE_GATLING_HOME):
             # maven test
             for simulationClass in simulationClassList:
-                self.execute(self.MVN_TEST.format(simulationClass))
+                self.simulation_run(simulationClass)
+                self.result_download(simulationClass)
+
+
+    def simulation_run(self, simulationClass):
+        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:]
+        self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName))
+
+
+    def result_download(self, simulationClass):
+        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:]
+        tarName = '{0}.tar'.format(outputDirectoryBaseName)
+
+        with cd(FlareResult.REMOTE_GATLING_RESULT):
+            run('tar -cf {0} {1}-*'.format(tarName, outputDirectoryBaseName))   # tar gatling report
+            get(tarName, FlareResult.REMOTE_GATLING_RESULT)                     # download gatling.tar
+            run('rm -rf {0}*'.format(outputDirectoryBaseName))                  # remove gatling report
+
+        with lcd(FlareResult.REMOTE_GATLING_RESULT):
+            local('tar -xf {0}'.format(tarName))        # tar gatling report
+            local('rm -rf {0}'.format(tarName))         # remove tar file
+
 
     def init_data(self):
-        self.run_test(self.INIT_SIMULATION_CLASS)
+        self.simulation(self.INIT_SIMULATION_CLASS)
+
 
     def talk_test(self):
-        self.run_test(self.TALK_SIMULATION_CLASS)
+        self.simulation(self.TALK_SIMULATION_CLASS)
+
 
     def scenario_talk_test(self):
-        self.run_test(self.SCENARIO_TALK_SIMULATION_CLASS)
+        self.simulation(self.SCENARIO_TALK_SIMULATION_CLASS)
+
 
     def chatbot_talk_test(self):
-        self.run_test(self.CHATBOT_TALK_SIMULATION_CLASS)
+        self.simulation(self.CHATBOT_TALK_SIMULATION_CLASS)

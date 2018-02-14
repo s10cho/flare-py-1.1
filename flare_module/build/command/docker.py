@@ -1,4 +1,4 @@
-from subprocess import call
+import subprocess
 from config import FlarePath, FlareDocker, FlareEnv
 
 class Docker():
@@ -45,7 +45,7 @@ class Docker():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
-        call(command, shell=True)
+            subprocess.call(command, shell=True)
 
 
 

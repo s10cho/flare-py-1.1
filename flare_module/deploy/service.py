@@ -1,8 +1,8 @@
+import decorator
+from config import FlarePath
 from flare_module.deploy.command.eer import EERServer
 from flare_module.deploy.command.flare import FlareServer
 from flare_module.deploy.command.gatling import GatlingServer
-from config import FlarePath
-import decorator
 
 class DeployService():
 

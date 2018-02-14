@@ -1,7 +1,7 @@
 import os
-from subprocess import call
+import subprocess
 from fabric.api import *
-from config import FlarePath, FlareDocker, FlareDeploy, FlareEnv
+from config import FlarePath, FlareDocker, FlareDeploy
 
 class FlareServer():
 
@@ -20,7 +20,7 @@ class FlareServer():
     def prepare_eer(self):
         # docker rm
         cmd  = 'docker rm -f {0}'.format(FlareDocker.ENOMIX_NAME)
-        call(cmd, shell=True)
+        subprocess.call(cmd, shell=True)
         # rm logs
         local('sudo rm -rf {0}'.format(FlarePath.ORACLE_HOME + '/logs'))
         with lcd(FlareDeploy.DEPLOY_TEMP_EER_PATH):

@@ -1,10 +1,7 @@
 from flare_module.test.command.test import Test
-from config import FlarePath
-import decorator
 
 class TestService():
 
-    @decorator.chown_path(FlarePath.ORACLE_HOME)
     def __init__(self):
         self.test = Test()
         pass

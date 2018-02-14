@@ -12,6 +12,8 @@ class FlarePath:
     FLARE_HOME = FLARE_ROOT_PATH
     # FLARE_WORKSPACE
     FLARE_WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['FLARE_WORKSPACE'])
+    # FLARE_RESULT
+    FLARE_RESULT = os.path.join(FLARE_HOME, Config['DIR']['FLARE_RESULT'])
     # FLARE_FRAME
     FLARE_FRAME = os.path.join(FLARE_HOME, Config['DIR']['FLARE_FRAME'])
     # TEMP HOME
@@ -54,3 +56,7 @@ class FlareDeploy():
     REMOTE_HOME = '/home/enomix/flare'
     REMOTE_ENOMIX_ORACLE_HOME = os.path.join(REMOTE_HOME, 'enomix-oracle')
     REMOTE_GATLING_HOME = os.path.join(REMOTE_HOME, 'flare-gatling')
+
+class FlareResult():
+    REMOTE_GATLING_HOME = FlareDeploy.REMOTE_GATLING_HOME
+    REMOTE_GATLING_RESULT = os.path.join(REMOTE_GATLING_HOME, 'target/gatling')

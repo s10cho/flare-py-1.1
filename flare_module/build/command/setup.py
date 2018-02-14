@@ -45,21 +45,21 @@ class Setup():
         ['helper.useflag',      'Y'],
     ]
 
+
     def __init__(self):
-        tempDir = [
-            '/setup',
-            '/conf'
-        ]
+        tempDir = ['/setup', '/conf']
         # create temp directory
         for dir in tempDir:
             path = FlarePath.FLARE_TEMP + dir
             if not os.path.exists(path):
                 os.makedirs(path)
 
+
     def settings(self):
         self.set_properties()
         self.set_solr()
         self.add_update_sql()
+
 
     def set_properties(self):
         # - s: set value
@@ -67,6 +67,7 @@ class Setup():
         self.modify_file('s', self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
         self.modify_file('s', self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
         self.modify_file('r', self.BUILD_FILE[0], self.BUILD_FILE[1])
+
 
     def modify_file(self, type, source, temp):
         sourceFile = open(source, 'r',  encoding='UTF8')
@@ -83,6 +84,7 @@ class Setup():
         tempFile.close()
         shutil.copy(temp, source)
 
+
     def set_value(self, line):
         data = line.split('=')
         if len(data) == 2:
@@ -92,11 +94,13 @@ class Setup():
                     line = '='.join(data)
         return line
 
+
     def replace_contents(self, line):
         line = line.replace('<input', '<!--input')
         line = line.replace('</input>', '</input-->')
 
         return line
+
 
     def set_solr(self):
         solrPath = self.SOLR_SETUP[0] + '/solr.jar'

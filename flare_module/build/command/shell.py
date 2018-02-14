@@ -3,7 +3,6 @@ import shutil
 from config import FlarePath
 
 class Shell():
-    # logback.xml
     SHELL_PATH = [
         FlarePath.ORACLE_HOME + '/bin',
         FlarePath.FLARE_TEMP + '/bin'
@@ -38,9 +37,7 @@ class Shell():
     ]
 
     def __init__(self):
-        tempDir = [
-            '/bin'
-        ]
+        tempDir = ['/bin']
         # create temp directory
         for dir in tempDir:
             path = FlarePath.FLARE_TEMP + dir

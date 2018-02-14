@@ -16,9 +16,7 @@ class Logback():
     ]
 
     def __init__(self):
-        tempDir = [
-            '/conf'
-        ]
+        tempDir = ['/conf']
         # create temp directory
         for dir in tempDir:
             path = FlarePath.FLARE_TEMP + dir

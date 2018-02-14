@@ -1,7 +1,5 @@
-import os
-import wget
 from fabric.api import *
-from config import FlareEnv, FlareDeploy, FlarePath
+from config import FlareEnv, FlareDeploy
 from decorator import before, remote
 
 @before(remote(FlareEnv.SERVER["GATLING"]))

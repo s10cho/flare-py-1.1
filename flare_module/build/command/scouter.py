@@ -37,9 +37,7 @@ class Scouter():
     ]
 
     def __init__(self):
-        tempDir = [
-            '/scouter'
-        ]
+        tempDir = ['/scouter']
         # create temp directory
         for dir in tempDir:
             path = FlarePath.FLARE_TEMP + dir
