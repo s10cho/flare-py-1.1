@@ -38,12 +38,12 @@ class Test():
         if len(simulationClassList) < 0:
             print('No Simulation')
             return
-        # cd gatling home
-        with cd(FlareResult.REMOTE_GATLING_HOME):
-            # maven test
-            for simulationClass in simulationClassList:
-                self.simulation_run(simulationClass)
-                self.result_download(simulationClass)
+
+        with cd(FlareResult.REMOTE_GATLING_HOME):           # cd gatling home
+            for simulationClass in simulationClassList:     # loop simulation run
+                self.simulation_run(simulationClass)        # maven test
+
+        self.result_download()                              # download gatling report
 
 
     def simulation_run(self, simulationClass):
@@ -51,10 +51,7 @@ class Test():
         self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName))
 
 
-    def result_download(self, simulationClass):
-        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:]
-        tarName = '{0}.tar'.format(outputDirectoryBaseName)
-
+    def result_download(self):
         with cd(FlareResult.REMOTE_GATLING_RESULT):
             lsOutput = run('ls')
             fileNames = lsOutput.split()
@@ -63,8 +60,8 @@ class Test():
                 timestamp = file[1]
                 timestamp = datetime.datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
                 date = timestamp[:8]
-                time = timestamp[8:]
                 downloadPath = self.FLARE_RESILT_GATLING + '/' + date
+                changeFilename = file[0] + '-' + timestamp
 
                 run('tar -cf {0}.tar {0}'.format(fileName))     # tar gatling report
                 local('mkdir -p {0}'.format(downloadPath))      # mkdir download path
@@ -74,6 +71,7 @@ class Test():
             with lcd(downloadPath):
                 local('tar -xf {0}.tar'.format(fileName))        # tar gatling report
                 local('rm -rf {0}.tar'.format(fileName))         # remove tar file
+                local('mv {0} {1}'.format(fileName, changeFilename))
 
 
 
