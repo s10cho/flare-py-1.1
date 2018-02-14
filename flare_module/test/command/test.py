@@ -55,7 +55,7 @@ class Test():
 
         with cd(FlareResult.REMOTE_GATLING_RESULT):
             run('tar -cf {0} {1}-*'.format(tarName, outputDirectoryBaseName))   # tar gatling report
-            get(tarName, FlareResult.REMOTE_GATLING_RESULT)                     # download gatling.tar
+            get(FlareResult.REMOTE_GATLING_RESULT + '/' + tarName)              # download gatling.tar
             run('rm -rf {0}*'.format(outputDirectoryBaseName))                  # remove gatling report
 
         with lcd(FlareResult.REMOTE_GATLING_RESULT):
