@@ -19,4 +19,4 @@ class Svn():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
-            subprocess.call(command, shell=True)
+        subprocess.call(command, shell=True)
