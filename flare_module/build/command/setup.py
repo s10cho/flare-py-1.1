@@ -38,7 +38,8 @@ class Setup():
     # add sql
     ADD_SQL_SETUP = [
         FlarePath.FLARE_FRAME + '/setup/oracle',
-        FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
+        FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql',
+        FlarePath.ORACLE_HOME + '/setup/dbscript/common/SVBOT/ee_05_02_sampleSceanrio_initData.sql'
     ]
 
     SETUP_DATA = [
@@ -141,18 +142,24 @@ class Setup():
     def add_sql(self):
         addFilePath = self.ADD_SQL_SETUP[0]
         initFilePath = self.ADD_SQL_SETUP[1]
+        initSceanrioFilePath = self.ADD_SQL_SETUP[2]
         addFileList = os.listdir(addFilePath)
 
         for addFile in addFileList:
             sqlFilePath = addFilePath + '/' + addFile
             sqlFile = open(sqlFilePath, 'r', encoding='UTF8')
             initFile = open(initFilePath, 'a', encoding='UTF8')
-
-            initFile.write('\n')
+            initSceanrioFile = open(initSceanrioFilePath, 'a', encoding='UTF8')
 
             for line in sqlFile:
-                initFile.write(line)
+                if addFile.find('INIT_DATA') > -1:
+                    initFile.write('\n')
+                    initFile.write(line)
+                elif addFile.find('T_SCENARIO') > -1:
+                    initSceanrioFile.write('\n')
+                    initSceanrioFile.write(line)
 
             sqlFile.close()
             initFile.close()
+            initSceanrioFile.close()
 
