@@ -30,10 +30,7 @@ class BuildService():
             self.shell.create()
             self.scouter.agent_set()
             self.maven.database_clean()
-            self.docker.run()
-            self.docker.eer_scouter()
-            self.docker.eer_ant()
-            self.docker.eer_run()
+            self.docker.all_run()
         else:
             # command run
             command = param[0]
@@ -51,10 +48,7 @@ class BuildService():
             elif command == 'clean':
                 self.maven.database_clean()
             elif command == 'run':
-                self.docker.run()
-                self.docker.eer_scouter()
-                self.docker.eer_ant()
-                self.docker.eer_run()
+                self.docker.all_run()
 
 
 
