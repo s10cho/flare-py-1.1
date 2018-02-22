@@ -156,7 +156,7 @@ class Setup():
                     initFile.write('\n')
                     initFile.write(line)
                     initFile.write('\n')
-                elif addFile.find('T_SCENARIO') > -1:
+                elif addFile.find('T_SCENARIO_123') > -1:
                     initSceanrioFile.write('\n')
                     initSceanrioFile.write(line)
                     initSceanrioFile.write('\n')
