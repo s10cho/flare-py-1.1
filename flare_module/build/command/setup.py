@@ -114,6 +114,8 @@ class Setup():
             sqlFile = open(sqlFilePath, 'r', encoding='UTF8')
             initFile = open(initFilePath, 'a', encoding='UTF8')
 
+            initFile.write('\n')
+
             for line in sqlFile:
                 initFile.write(line)
 
