@@ -155,9 +155,13 @@ class Setup():
                 if addFile.find('INIT_DATA') > -1:
                     initFile.write('\n')
                     initFile.write(line)
+                    initFile.write('\n')
+                    initFile.write('/')
                 elif addFile.find('T_SCENARIO') > -1:
                     initSceanrioFile.write('\n')
                     initSceanrioFile.write(line)
+                    initSceanrioFile.write('\n')
+                    initSceanrioFile.write('/')
 
             sqlFile.close()
             initFile.close()
