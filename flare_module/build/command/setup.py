@@ -23,12 +23,12 @@ class Setup():
     # engine dao-context.xml
     ENGINE_DAO = [
         FlarePath.ORACLE_HOME + '/webapps/engine/WEB-INF/dao-context.xml',
-        FlarePath.FLARE_TEMP + '/webapps/engine/WEB-INF/dao-context.xml'
+        FlarePath.FLARE_TEMP + '/setup/dao-context.xml.engine'
     ]
     # restapi dao-context.xml
     RESTAPI_DAO = [
         FlarePath.ORACLE_HOME + '/webapps/restapi/WEB-INF/dao-context.xml',
-        FlarePath.FLARE_TEMP + '/webapps/restapi/WEB-INF/dao-context.xml'
+        FlarePath.FLARE_TEMP + '/setup/dao-context.xml.restapi'
     ]
     # search_engine
     SOLR_SETUP = [
