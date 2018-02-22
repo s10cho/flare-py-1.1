@@ -24,14 +24,9 @@ class Setup():
         FlarePath.ORACLE_HOME + '/setup/search_engine/solr/app',
         FlareEnv.SOLR_URL['ORACLE']
     ]
-    # t_config_property
-    CONFIG_PROPERTY_SETUP = [
-        FlareEnv.OPTION['CONFIG_PROPERTY'],
-        FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
-    ]
-
-    SCHEDULE_JOB_SETUP = [
-        FlareEnv.OPTION['SCHEDULE_JOB'],
+    # add sql
+    ADD_SQL_SETUP = [
+        FlarePath.FLARE_FRAME + '/setup/oracle',
         FlarePath.ORACLE_HOME + '/setup/dbscript/common/ee_05_01_initData.sql'
     ]
 
@@ -58,7 +53,7 @@ class Setup():
     def settings(self):
         self.set_properties()
         self.set_solr()
-        self.add_update_sql()
+        self.add_sql()
 
 
     def set_properties(self):
@@ -109,38 +104,18 @@ class Setup():
             wget.download(self.SOLR_SETUP[1], self.SOLR_SETUP[0])
 
 
-    def add_update_sql(self):
-        configList = self.CONFIG_PROPERTY_SETUP[0]
-        scheduleList = self.SCHEDULE_JOB_SETUP[0]
+    def add_sql(self):
+        addFilePath = self.ADD_SQL_SETUP[0]
+        initFilePath = self.ADD_SQL_SETUP[1]
+        addFileList = os.listdir(addFilePath)
 
-        for config in configList:
-            propertyId = config[0]
-            value = config[1]
+        for addFile in addFileList:
+            sqlFilePath = addFilePath + '/' + addFile
+            sqlFile = open(sqlFilePath, 'r', encoding='UTF8')
+            initFile = open(initFilePath, 'a', encoding='UTF8')
 
-            sql = [
-                "\n",
-                "UPDATE t_config_property",
-                "SET value = '{0}'".format(value),
-                "WHERE property_id = '{0}';".format(propertyId),
-                "\n"
-            ]
+            for line in sqlFile:
+                initFile.write(line)
 
-            file = open(self.CONFIG_PROPERTY_SETUP[1], 'a', encoding='UTF8')
-            file.write(" ".join(sql))
-            file.close()
-
-        for schedule in scheduleList:
-            scheduleId = schedule[0]
-            useFlag = schedule[1]
-
-            sql = [
-                "\n",
-                "UPDATE t_schedule_job",
-                "SET use_flag = '{0}'".format(useFlag),
-                "WHERE job_id = '{0}';".format(scheduleId),
-                "\n"
-            ]
-
-            file = open(self.SCHEDULE_JOB_SETUP[1], 'a', encoding='UTF8')
-            file.write(" ".join(sql))
-            file.close()
+            sqlFile.close()
+            initFile.close()
