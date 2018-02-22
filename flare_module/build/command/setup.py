@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import wget
 from config import FlarePath, FlareEnv
@@ -18,6 +19,16 @@ class Setup():
     BUILD_FILE = [
         FlarePath.ORACLE_HOME + '/setup/build.xml',
         FlarePath.FLARE_TEMP + '/setup/build.xml'
+    ]
+    # engine dao-context.xml
+    ENGINE_DAO = [
+        FlarePath.ORACLE_HOME + '/webapps/engine/WEB-INF/dao-context.xml',
+        FlarePath.FLARE_TEMP + '/webapps/engine/WEB-INF/dao-context.xml'
+    ]
+    # restapi dao-context.xml
+    RESTAPI_DAO = [
+        FlarePath.ORACLE_HOME + '/webapps/restapi/WEB-INF/dao-context.xml',
+        FlarePath.FLARE_TEMP + '/webapps/restapi/WEB-INF/dao-context.xml'
     ]
     # search_engine
     SOLR_SETUP = [
@@ -40,6 +51,13 @@ class Setup():
         ['helper.useflag',      'Y'],
     ]
 
+    DBCP_DATA = [
+        ['initialSize', 100],
+        ['maxActive', 200],
+        ['maxIdle', 200],
+        ['minIdle', 50]
+    ]
+
 
     def __init__(self):
         tempDir = ['/setup', '/conf']
@@ -59,9 +77,12 @@ class Setup():
     def set_properties(self):
         # - s: set value
         # - r: replace contents
+        # - d: set dbcp
         self.modify_file('s', self.ENGINE_PROPERTIES[0], self.ENGINE_PROPERTIES[1])
         self.modify_file('s', self.SETUP_PROPERTIES[0], self.SETUP_PROPERTIES[1])
         self.modify_file('r', self.BUILD_FILE[0], self.BUILD_FILE[1])
+        self.modify_file('d', self.ENGINE_DAO[0], self.ENGINE_DAO[1])
+        self.modify_file('d', self.RESTAPI_DAO[0], self.RESTAPI_DAO[1])
 
 
     def modify_file(self, type, source, temp):
@@ -73,6 +94,8 @@ class Setup():
                 line = self.set_value(line)
             elif type == 'r':
                 line = self.replace_contents(line)
+            elif type == 'd':
+                line = self.set_dbcp(line)
             tempFile.write(line)
 
         sourceFile.close()
@@ -93,6 +116,17 @@ class Setup():
     def replace_contents(self, line):
         line = line.replace('<input', '<!--input')
         line = line.replace('</input>', '</input-->')
+
+        return line
+
+
+    def set_dbcp(self, line):
+        for dbcp in self.DBCP_DATA:
+            property = dbcp[0]
+            value = str(dbcp[1])
+            if line.find(property) > -1:
+                oldValue = re.findall('[0-9]+', line)
+                line = line.replace(oldValue[0], value)
 
         return line
 
@@ -121,3 +155,4 @@ class Setup():
 
             sqlFile.close()
             initFile.close()
+
