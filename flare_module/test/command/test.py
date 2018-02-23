@@ -34,6 +34,22 @@ class Test():
             run(command)
 
 
+    def init_data(self):
+        self.simulation(self.INIT_SIMULATION_CLASS)
+
+
+    def talk_test(self):
+        self.simulation(self.TALK_SIMULATION_CLASS)
+
+
+    def scenario_talk_test(self):
+        self.simulation(self.SCENARIO_TALK_SIMULATION_CLASS)
+
+
+    def chatbot_talk_test(self):
+        self.simulation(self.CHATBOT_TALK_SIMULATION_CLASS)
+
+
     def simulation(self, simulationClassList):
         if len(simulationClassList) < 0:
             print('No Simulation')
@@ -74,20 +90,6 @@ class Test():
                 local('mv {0} {1}'.format(fileName, changeFilename))    # change name
 
 
-    def init_data(self):
-        self.simulation(self.INIT_SIMULATION_CLASS)
-
-
-    def talk_test(self):
-        self.simulation(self.TALK_SIMULATION_CLASS)
-
-
-    def scenario_talk_test(self):
-        self.simulation(self.SCENARIO_TALK_SIMULATION_CLASS)
-
-
-    def chatbot_talk_test(self):
-        self.simulation(self.CHATBOT_TALK_SIMULATION_CLASS)
 
 
 
