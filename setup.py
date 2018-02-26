@@ -20,6 +20,7 @@ install_requires = [
         'fabric',
         'fabric3',
         'docker',
+        'tornado',
     ]
 
 setup(

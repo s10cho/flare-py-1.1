@@ -7,15 +7,15 @@ from decorator import before, remote
 @before(remote(FlareEnv.SERVER["GATLING"]))
 class Test():
 
-    MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} test'
+    MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} {2} test'
 
-    INIT_SIMULATION_CLASS = FlareEnv.TEST['INIT']
+    INIT_SIMULATION = FlareEnv.TEST['INIT']
 
-    TALK_SIMULATION_CLASS = FlareEnv.TEST['TALK']
+    TALK_SIMULATION = FlareEnv.TEST['TALK']
 
-    SCENARIO_TALK_SIMULATION_CLASS = FlareEnv.TEST['SCENARIO_TALK']
+    SCENARIO_TALK_SIMULATION = FlareEnv.TEST['SCENARIO_TALK']
 
-    CHATBOT_TALK_SIMULATION_CLASS = FlareEnv.TEST['CHATBOT']
+    CHATBOT_TALK_SIMULATION = FlareEnv.TEST['CHATBOT']
 
     def __init__(self):
         resultDir = ['/gatling']
@@ -35,36 +35,38 @@ class Test():
 
 
     def init_data(self):
-        self.simulation(self.INIT_SIMULATION_CLASS)
+        self.simulation(self.INIT_SIMULATION)
 
 
     def talk_test(self):
-        self.simulation(self.TALK_SIMULATION_CLASS)
+        self.simulation(self.TALK_SIMULATION)
 
 
     def scenario_talk_test(self):
-        self.simulation(self.SCENARIO_TALK_SIMULATION_CLASS)
+        self.simulation(self.SCENARIO_TALK_SIMULATION)
 
 
     def chatbot_talk_test(self):
-        self.simulation(self.CHATBOT_TALK_SIMULATION_CLASS)
+        self.simulation(self.CHATBOT_TALK_SIMULATION)
 
 
-    def simulation(self, simulationClassList):
-        if len(simulationClassList) < 0:
+    def simulation(self, simulationList):
+        if len(simulationList) < 0:
             print('No Simulation')
             return
 
         with cd(FlareResult.REMOTE_GATLING_HOME):           # cd gatling home
-            for simulationClass in simulationClassList:     # loop simulation run
-                self.simulation_run(simulationClass)        # maven test
+            for simulation in simulationList:               # loop simulation run
+                self.simulation_run(simulation)             # maven test
+                self.result_download()                      # download gatling report
 
-        self.result_download()                              # download gatling report
 
-
-    def simulation_run(self, simulationClass):
-        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:]
-        self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName))
+    def simulation_run(self, simulation):
+        testId = simulation["TEST_ID"]
+        jvm = " ".join(['-D' + jvm for jvm in simulation["JVM"]])
+        simulationClass = simulation["SIMULATION_CLASS"]
+        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + testId
+        self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
 
 
     def result_download(self):
