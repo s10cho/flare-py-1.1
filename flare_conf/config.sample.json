@@ -1,9 +1,10 @@
 {
     "DIR": {
-        "FLARE_WORKSPACE": "",
-        "FLARE_MODULE": "",
-        "FLARE_FRAME": "",
-        "FLARE_TEMP": ""
+        "FLARE_WORKSPACE": "flare_workspace",
+        "FLARE_MODULE": "flare_module",
+        "FLARE_RESULT": "flare_result",
+        "FLARE_FRAME": "flare_frame",
+        "FLARE_TEMP": "flare_temp"
     },
     "SVN": {
         "URL": "",
@@ -12,20 +13,20 @@
     },
     "DB": {
         "ORACLE": {
-            "DRIVER": "",
+            "DRIVER": "oracle.jdbc.driver.OracleDriver",
             "URL": "",
             "USERNAME": "",
             "PASSWORD": "",
             "OWNERNAME": "",
-            "VALIDATION": ""
+            "VALIDATION": "select 1 from dual"
         },
         "POSTGRESQL": {
-            "DRIVER": "",
+            "DRIVER": "org.postgresql.Driver",
             "URL": "",
             "USERNAME": "",
             "PASSWORD": "",
             "OWNERNAME": "",
-            "VALIDATION": ""
+            "VALIDATION": "select 1"
         }
     },
     "SOLR": {
@@ -33,28 +34,60 @@
         "POSTGRESQL": ""
     },
     "SCOUTER": {
-        "DOWNLOAD_URL": ""
+        "DOWNLOAD_URL": "https://github.com/scouter-project/scouter/releases/download/v1.8.1.1/scouter-all-1.8.1.1.tar.gz"
+    },
+    "GATLING": {
+        "URL": "",
+        "ID": "",
+        "PASSWORD": ""
     },
     "SERVER": {
         "FLARE": {
-            "HOSTS": [""],
+            "HOSTS": ["127.0.0.1"],
             "USER": "",
             "PASSWORD": ""
         },
         "GATLING": {
-            "HOSTS": [""],
+            "HOSTS": ["127.0.0.1"],
             "USER": "",
             "PASSWORD": ""
         },
         "EER": {
-            "HOSTS": [""],
+            "HOSTS": ["127.0.0.1"],
             "USER": "",
             "PASSWORD": ""
         },
         "DB": {
-            "HOSTS": [""],
+            "HOSTS": ["127.0.0.1"],
             "USER": "",
             "PASSWORD": ""
         }
+    },
+    "TEST": {
+        "INIT": [
+            {
+                "TEST_ID": "INIT",
+                "SIMULATION_CLASS": "",
+                "JVM": []
+            }
+        ],
+        "TALK": [
+            {
+                "TEST_ID": "WARM",
+                "SIMULATION_CLASS": "",
+                "JVM": []
+            },
+            {
+                "TEST_ID": "A50C120",
+                "SIMULATION_CLASS": "",
+                "JVM": []
+            }
+        ],
+        "SCENARIO_TALK": [
+
+        ],
+        "CHATBOT": [
+
+        ]
     }
 }
