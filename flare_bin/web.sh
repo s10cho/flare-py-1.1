@@ -14,7 +14,10 @@ else
     PROCESS="ps -ef | grep python3 | grep server.py"
     proc=`eval $PROCESS`
     pid=`echo $proc | awk '{print $2}'`
-    kill $pid
+
+    if [ -n "$pid" ]; then
+        kill $pid
+    fi
 fi
 
 python3 server.py > server.log 2>&1 &
