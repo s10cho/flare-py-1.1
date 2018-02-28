@@ -9,7 +9,7 @@ if [ -f server.pid ]; then
 	pid=`cat server.pid`
 	kill $pid
 	rm -f server.pid
-	echo "server stopped"
+	echo "server stop"
 else
     PROCESS="ps -ef | grep python3 | grep server.py"
     proc=`eval $PROCESS`
@@ -19,3 +19,4 @@ fi
 
 python3 server.py > server.log 2>&1 &
 echo $! > server.pid
+echo "server start"
