@@ -18,13 +18,13 @@ class Test():
     CHATBOT_TALK_SIMULATION = FlareEnv.TEST['CHATBOT']
 
     def __init__(self):
-        resultDir = ['/gatling']
+        resultDir = ['/report', '/report/gatling']
         # create result directory
         for dir in resultDir:
             path = FlarePath.FLARE_RESULT + dir
             if not os.path.exists(path):
                 os.makedirs(path)
-        self.FLARE_RESILT_GATLING = FlarePath.FLARE_RESULT + resultDir[0]
+        self.FLARE_RESILT_GATLING = FlarePath.FLARE_RESULT + resultDir[1]
 
 
     def execute(self, command):

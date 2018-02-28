@@ -59,3 +59,6 @@ class FlareDeploy():
 class FlareResult():
     REMOTE_GATLING_HOME = FlareDeploy.REMOTE_GATLING_HOME
     REMOTE_GATLING_RESULT = os.path.join(REMOTE_GATLING_HOME, 'target/gatling')
+
+class FlareWeb():
+    PORT =Config['WEB']["PORT"]
