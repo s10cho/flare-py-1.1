@@ -17,7 +17,7 @@ class Report():
         return jsonify(result)
 
     def selectType(self):
-        return self.list(self.RESULT_ROOT)
+        return self.list(self.REPORT_ROOT)
 
     def selectDate(self, type):
         return self.list(self.REPORT_TYPE.format(type))
