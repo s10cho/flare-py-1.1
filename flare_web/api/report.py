@@ -25,5 +25,5 @@ class Report():
     def selectReport(self, type, date):
         return self.list(self.REPORT_DATE.format(type, date))
 
-    def view(self, view):
+    def view(self, type, date, view):
         return view

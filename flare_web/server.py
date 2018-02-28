@@ -1,17 +1,15 @@
-from flask import Flask
-from flask.views import View
-from flask import render_template
+from flask import Flask, Response, render_template, views
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from config import FlarePath, FlareWeb
 from flare_web.api.report import Report
 
-class FlareView(View):
+class FlareView(views.View):
     def __init__(self, template_name):
         self.template_name = template_name
     def dispatch_request(self):
-        return render_template(self.template_name)
+        return render_template(self.template_name, flower="")
 
 # Define
 app = Flask(__name__, static_folder=FlarePath.FLARE_RESULT, static_url_path='', template_folder=FlarePath.FLARE_RESULT)
@@ -20,7 +18,6 @@ report = Report()
 
 # Router
 app.add_url_rule('/', view_func=FlareView.as_view('index', template_name='index.html'))
-
 app.add_url_rule('/api/report', view_func=report.selectType)
 app.add_url_rule('/api/report/<type>', view_func=report.selectDate)
 app.add_url_rule('/api/report/<type>/<date>', view_func=report.selectReport)
