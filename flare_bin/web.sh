@@ -20,6 +20,6 @@ else
     fi
 fi
 
-python3 server.py 2>&1 &
+nohup python3 server.py > server.log 2>&1 &
 echo $! > server.pid
 echo "server start"
