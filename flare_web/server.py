@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template, views
+from flask import Flask, views, render_template
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
