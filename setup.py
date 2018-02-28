@@ -21,6 +21,7 @@ install_requires = [
         'fabric3',
         'docker',
         'tornado',
+        'flask',
     ]
 
 setup(
