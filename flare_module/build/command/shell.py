@@ -29,6 +29,33 @@ class Shell():
                         './run.sh > /dev/null\n'
         },
         {
+            'name': SHELL_FILE_FORMAT.format('4G_run'),
+            'contents': '#!/bin/bash\n'
+                        'cd /home/enomix/bin\n'
+                        'cp ecc_4G.sh ecc.sh\n'
+                        './all_run.sh\n'
+                        'cd /home/enomix/apps/solr\n'
+                        './run.sh > /dev/null\n'
+        },
+        {
+            'name': SHELL_FILE_FORMAT.format('8G_run'),
+            'contents': '#!/bin/bash\n'
+                        'cd /home/enomix/bin\n'
+                        'cp ecc_8G.sh ecc.sh\n'
+                        './all_run.sh\n'
+                        'cd /home/enomix/apps/solr\n'
+                        './run.sh > /dev/null\n'
+        },
+        {
+            'name': SHELL_FILE_FORMAT.format('16G_run'),
+            'contents': '#!/bin/bash\n'
+                        'cd /home/enomix/bin\n'
+                        'cp ecc_16G.sh ecc.sh\n'
+                        './all_run.sh\n'
+                        'cd /home/enomix/apps/solr\n'
+                        './run.sh > /dev/null\n'
+        },
+        {
             'name': SHELL_FILE_FORMAT.format('scouter'),
             'contents': '#!/bin/bash\n'
                         'cd /home/enomix/scouter/agent.host\n'

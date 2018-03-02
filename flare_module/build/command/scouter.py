@@ -20,8 +20,9 @@ class Scouter():
     SERVER_IP = FlareEnv.SERVER["FLARE"]["HOSTS"][0]
 
     ECC_SH = [
-        FlarePath.ORACLE_HOME + '/setup/frame/bin/ecc.sh',
-        FlarePath.FLARE_TEMP + '/scouter/ecc.sh'
+        #FlarePath.ORACLE_HOME + '/setup/frame/bin/ecc.sh',
+        FlarePath.FLARE_TEMP + '/bin/ecc.sh',
+        FlarePath.FLARE_TEMP + '/scouter/ecc_{0}.sh'
     ]
 
     JVM_OPTION = [
@@ -35,6 +36,42 @@ class Scouter():
         ['thirdparty', 256, 256],
         ['legw', 256, 256],
     ]
+
+    JVM_OPTIONS = {
+        "4G": [
+            ['gateway', 256, 256],
+            ['router', 256, 256],
+            ['engine', 512, 512],
+            ['rtis', 256, 256],
+            ['webapps', 512, 512],
+            ['restapi', 1024, 1024],
+            ['webroot', 256, 256],
+            ['thirdparty', 256, 256],
+            ['legw', 256, 256],
+        ],
+        "8G": [
+            ['gateway', 256, 256],
+            ['router', 256, 256],
+            ['engine', 1024, 1024],
+            ['rtis', 256, 256],
+            ['webapps', 1024, 1024],
+            ['restapi', 1024, 1024],
+            ['webroot', 128, 128],
+            ['thirdparty', 256, 256],
+            ['legw', 256, 256],
+        ],
+        "16G": [
+            ['gateway', 256, 256],
+            ['router', 256, 256],
+            ['engine', 1024, 1024],
+            ['rtis', 256, 256],
+            ['webapps', 1024, 1024],
+            ['restapi', 1024, 1024],
+            ['webroot', 128, 128],
+            ['thirdparty', 256, 256],
+            ['legw', 256, 256],
+        ]
+    }
 
     def __init__(self):
         tempDir = ['/scouter']
@@ -90,12 +127,13 @@ class Scouter():
             local('mkdir -p {0}'.format(deployPath))
             local('cp -r {0} {1}'.format(scouterPath, deployPath))
 
-        self.create_ecc_sh()
+        for memory in self.JVM_OPTIONS.keys():
+            self.create_ecc_sh(self.ECC_SH[0], self.ECC_SH[1], memory)
+
+        self.deploy_ecc_sh(self.ECC_SH[0], self.ECC_SH[1].format("8G"))
 
 
-    def create_ecc_sh(self):
-        source = self.ECC_SH[0]
-        temp = self.ECC_SH[1]
+    def create_ecc_sh(self, source, temp, memory):
         sourceFile = open(source, 'r', encoding='UTF8')
 
         if 'SCT_OPTS' in sourceFile.read():
@@ -104,6 +142,7 @@ class Scouter():
             return
 
         sourceFile.seek(0, 0)
+        temp = temp.format(memory)
         tempFile = open(temp, 'w', encoding='UTF8')
         for line in sourceFile.readlines():
             if 'JVM_OPTS' in line and '-Xms128m -Xmx512m' in line:
@@ -111,7 +150,7 @@ class Scouter():
 
             tempFile.write(line)
 
-            for jvmOpts in self.JVM_OPTION:
+            for jvmOpts in self.JVM_OPTIONS[memory]:
                 checkLine = 'BASE_RESOURCE=webapps/{0}'.format(jvmOpts[0])
                 if checkLine in line:
                     scouter_opts = '        SCT_OPTS="' \
@@ -123,4 +162,7 @@ class Scouter():
 
         sourceFile.close()
         tempFile.close()
+        shutil.copy(temp.format(), source[:source.rfind('/')])
+
+    def deploy_ecc_sh(self, source, temp):
         shutil.copy(temp, source)
