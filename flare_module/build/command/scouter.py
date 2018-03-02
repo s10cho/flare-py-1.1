@@ -20,8 +20,7 @@ class Scouter():
     SERVER_IP = FlareEnv.SERVER["FLARE"]["HOSTS"][0]
 
     ECC_SH = [
-        #FlarePath.ORACLE_HOME + '/setup/frame/bin/ecc.sh',
-        FlarePath.FLARE_TEMP + '/bin/ecc.sh',
+        FlarePath.ORACLE_HOME + '/setup/frame/bin/ecc.sh',
         FlarePath.FLARE_TEMP + '/scouter/ecc_{0}.sh'
     ]
 
