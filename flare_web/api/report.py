@@ -9,22 +9,28 @@ class Report():
     REPORT_TYPE = REPORT_ROOT + '/{0}'
     REPORT_DATE = REPORT_ROOT + '/{0}/{1}'
 
-    def list(self, path, reverse):
-        data = os.listdir(path)
-        data.sort(reverse=reverse)
-
-        return jsonify({
-            'data': data
-        })
+    def listDir(self, path):
+        return os.listdir(path)
 
     def selectType(self):
-        return self.list(self.REPORT_ROOT, False)
+        typeList = self.listDir(self.REPORT_ROOT)
+        return jsonify({
+            'data': typeList
+        })
 
     def selectDate(self, type):
-        return self.list(self.REPORT_TYPE.format(type), True)
+        dateList = self.listDir(self.REPORT_TYPE.format(type))
+        dateList.sort(reverse=True)
+        return jsonify({
+            'data': dateList
+        })
 
-    def selectReport(self, type, date):
-        return self.list(self.REPORT_DATE.format(type, date), False)
+    def selectTest(self, type, date):
+        testList = self.listDir(self.REPORT_DATE.format(type, date))
+        testList.sort(key=lambda x: x[-14:], reverse=True)
+        return jsonify({
+            'data': testList
+        })
 
     def view(self, type, date, view):
         return view
