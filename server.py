@@ -18,9 +18,9 @@ report = Report()
 
 # Router
 app.add_url_rule('/', view_func=FlareView.as_view('index', template_name='index.html'))
-app.add_url_rule('/api/report', view_func=report.selectType)
-app.add_url_rule('/api/report/<type>', view_func=report.selectDate)
-app.add_url_rule('/api/report/<type>/<date>', view_func=report.selectReport)
+app.add_url_rule('/api/report', view_func=report.selectType, methods=['GET', 'POST'])
+app.add_url_rule('/api/report/<type>', view_func=report.selectDate, methods=['GET', 'POST'])
+app.add_url_rule('/api/report/<type>/<date>', view_func=report.selectReport, methods=['GET', 'POST'])
 
 # Main
 if __name__ == '__main__':
