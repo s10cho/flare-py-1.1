@@ -31,6 +31,3 @@ class Report():
         return jsonify({
             'data': testList
         })
-
-    def view(self, type, date, view):
-        return view
