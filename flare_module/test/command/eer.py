@@ -14,6 +14,9 @@ class EERServer():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
+
+        print(command)
+
         with settings(warn_only=True):
             run(command)
 
