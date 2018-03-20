@@ -35,7 +35,7 @@ class TestService():
             elif command == 'chatbot':
                 self.gatling.chatbot_talk_test()
 
-    def loop_resource_test(self, testMethod):
+    def loop_resource_test(self, method):
         for resouce in self.TEST_OS_RESOURCE:
             cpu = resouce[0]
             memory = resouce[1]
@@ -44,5 +44,5 @@ class TestService():
             self.eer.docker_restart(cpu, memory)
 
             # start test
-            #testMethod()
+            method()
 
