@@ -44,5 +44,5 @@ class TestService():
             self.eer.docker_restart(cpu, memory)
 
             # start test
-            testMethod()
+            #testMethod()
 
