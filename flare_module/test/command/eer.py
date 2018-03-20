@@ -26,8 +26,8 @@ class EERServer():
             , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc_{0}.sh'.format(docker_memory)
             , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc.sh'
         ]
-        command = " ".join(command)
-        return command
+        test = " ".join(command)
+        return test
 
     def get_docker_run_command(self, dockerCpu, dockerMemory):
         command = [
@@ -44,8 +44,8 @@ class EERServer():
             , '--memory={0}'.format(dockerMemory)
             , 'centos7/eer:1.1'
         ]
-        command = " ".join(command)
-        return command
+        test = " ".join(command)
+        return test
 
     def docker_restart(self, cpu, memory):
         dockerCpu = '0-{0}'.format(cpu-1)
