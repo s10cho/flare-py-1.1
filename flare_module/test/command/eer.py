@@ -18,7 +18,8 @@ class EERServer():
         print(command)
 
         with settings(warn_only=True):
-            run(command)
+            # run(command)
+            pass
 
     def change_ecc_shell(self, docker_memory):
         return [
