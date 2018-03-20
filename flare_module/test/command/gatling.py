@@ -5,7 +5,7 @@ from config import FlareEnv, FlareResult, FlarePath
 from decorator import before, remote
 
 @before(remote(FlareEnv.SERVER["GATLING"]))
-class Test():
+class GatlingServer():
 
     MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} {2} test'
 
