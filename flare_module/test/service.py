@@ -39,10 +39,8 @@ class TestService():
     def loop_resource_test(self, method):
         for cpu in self.CPU_RESOURCE:
             for memory in self.MEMORY_RESOURCE:
-
                 # docker restart
                 self.eer.docker_restart(cpu, memory)
-
                 # start test
                 method()
 
