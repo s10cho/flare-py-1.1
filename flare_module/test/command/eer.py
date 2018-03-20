@@ -21,22 +21,15 @@ class EERServer():
         #     run(command)
 
     def change_ecc_shell(self, docker_memory):
-        test = [
+        command = [
             'cp'
             , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc_{0}.sh'.format(docker_memory)
             , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc.sh'
         ]
-        print(" ".join(test))
-
-
-        return [
-            'cp'
-            , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc_{0}.sh'.format(docker_memory)
-            , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc.sh'
-        ]
+        return " ".join(command)
 
     def get_docker_run_command(self, dockerCpu, dockerMemory):
-        return [
+        command = [
             'docker run -it -d'
             , '--name {0}'.format(FlareDocker.ENOMIX_NAME)
             , '-h {0}/{1}'.format(FlareDocker.ENOMIX_NAME, FlareEnv.SERVER["EER"]["HOSTS"][0])
@@ -50,6 +43,7 @@ class EERServer():
             , '--memory={0}'.format(dockerMemory)
             , 'centos7/eer:1.1'
         ]
+        return " ".join(command)
 
     def docker_restart(self, cpu, memory):
         dockerCpu = '0-{0}'.format(cpu-1)
