@@ -5,10 +5,12 @@ class TestService():
 
     # Test Docker Resource Limit
     # [core, memory(G)]
-    TEST_OS_RESOURCE = [
-        [2, 4]
-        , [4, 8]
-        , [8, 16]
+    CPU_RESOURCE = [
+        2, 4, 8
+    ]
+
+    MEMORY_RESOURCE = [
+        4, 8, 16
     ]
 
     def __init__(self):
@@ -28,7 +30,6 @@ class TestService():
             if command == 'ready':
                 self.gatling.init_data()
             elif command == 'talk':
-                #self.gatling.talk_test()
                 self.loop_resource_test(self.gatling.talk_test)
             elif command == 'scenario':
                 self.gatling.scenario_talk_test()
@@ -36,13 +37,12 @@ class TestService():
                 self.gatling.chatbot_talk_test()
 
     def loop_resource_test(self, method):
-        for resouce in self.TEST_OS_RESOURCE:
-            cpu = resouce[0]
-            memory = resouce[1]
+        for cpu in self.CPU_RESOURCE:
+            for memory in self.MEMORY_RESOURCE:
 
-            # docker restart
-            self.eer.docker_restart(cpu, memory)
+                # docker restart
+                self.eer.docker_restart(cpu, memory)
 
-            # start test
-            method()
+                # start test
+                method()
 
