@@ -21,6 +21,14 @@ class EERServer():
         #     run(command)
 
     def change_ecc_shell(self, docker_memory):
+        test = [
+            'cp'
+            , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc_{0}.sh'.format(docker_memory)
+            , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc.sh'
+        ]
+        print(" ".join(test))
+
+
         return [
             'cp'
             , FlareDeploy.REMOTE_ENOMIX_ORACLE_HOME + '/bin/ecc_{0}.sh'.format(docker_memory)
