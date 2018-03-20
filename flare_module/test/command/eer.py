@@ -15,8 +15,10 @@ class EERServer():
         if type(command) == list:
             command = " ".join(command)
 
-        with settings(warn_only=True):
-            run(command)
+        print(command)
+
+        # with settings(warn_only=True):
+        #     run(command)
 
     def change_ecc_shell(self, docker_memory):
         return [
