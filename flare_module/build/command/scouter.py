@@ -129,7 +129,12 @@ class Scouter():
         for memory in self.JVM_OPTIONS.keys():
             self.create_ecc_sh(self.ECC_SH[0], self.ECC_SH[1], memory)
 
+        # overwrite
         self.deploy_ecc_sh(self.ECC_SH[0], self.ECC_SH[1].format("8G"))
+        # copy
+        copyPath = self.ECC_SH[0][:self.ECC_SH[0].rfind('/')]
+        self.deploy_ecc_sh(copyPath, self.ECC_SH[1].format("4G"))
+        self.deploy_ecc_sh(copyPath, self.ECC_SH[1].format("16G"))
 
 
     def create_ecc_sh(self, source, temp, memory):
