@@ -35,7 +35,7 @@ class GatlingServer():
 
 
     def init_data(self):
-        self.simulation(self.INIT_SIMULATION)
+        self.simulation(self.INIT_SIMULATION, '4C8G')
 
 
     def talk_test(self, resourceId):
