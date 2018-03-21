@@ -55,10 +55,10 @@ class GatlingServer():
             print('No Simulation')
             return
 
-        with cd(FlareResult.REMOTE_GATLING_HOME):           # cd gatling home
-            for simulation in simulationList:               # loop simulation run
-                self.simulation_run(simulation, resourceId) # maven test
-                self.result_download()                      # download gatling report
+        with cd(FlareResult.REMOTE_GATLING_HOME):               # cd gatling home
+            for simulation in simulationList:                   # loop simulation run
+                self.simulation_run(simulation, resourceId)     # maven test
+                self.result_download()                          # download gatling report
 
 
     def simulation_run(self, simulation, resourceId):
