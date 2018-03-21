@@ -38,34 +38,34 @@ class GatlingServer():
         self.simulation(self.INIT_SIMULATION)
 
 
-    def talk_test(self):
-        self.simulation(self.TALK_SIMULATION)
+    def talk_test(self, resourceId):
+        self.simulation(self.TALK_SIMULATION, resourceId)
 
 
-    def scenario_talk_test(self):
-        self.simulation(self.SCENARIO_TALK_SIMULATION)
+    def scenario_talk_test(self, resourceId):
+        self.simulation(self.SCENARIO_TALK_SIMULATION, resourceId)
 
 
-    def chatbot_talk_test(self):
-        self.simulation(self.CHATBOT_TALK_SIMULATION)
+    def chatbot_talk_test(self, resourceId):
+        self.simulation(self.CHATBOT_TALK_SIMULATION, resourceId)
 
 
-    def simulation(self, simulationList):
+    def simulation(self, simulationList, resourceId):
         if len(simulationList) < 0:
             print('No Simulation')
             return
 
         with cd(FlareResult.REMOTE_GATLING_HOME):           # cd gatling home
             for simulation in simulationList:               # loop simulation run
-                self.simulation_run(simulation)             # maven test
+                self.simulation_run(simulation, resourceId) # maven test
                 self.result_download()                      # download gatling report
 
 
-    def simulation_run(self, simulation):
+    def simulation_run(self, simulation, resourceId):
         testId = simulation["TEST_ID"]
         jvm = " ".join(['-D' + jvm for jvm in simulation["JVM"]])
         simulationClass = simulation["SIMULATION_CLASS"]
-        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + testId
+        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resourceId + '-' + testId
         self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
 
 
@@ -75,11 +75,11 @@ class GatlingServer():
             fileNames = lsOutput.split()
             for fileName in fileNames:
                 file = fileName.split('-')
-                timestamp = file[1]
+                timestamp = file[2]
                 timestamp = datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
                 date = timestamp[:8]
                 downloadPath = self.FLARE_RESILT_GATLING + '/' + date
-                changeFilename = file[0] + '-' + timestamp
+                changeFilename = file[0] + '-' + file[1] + '-' + timestamp
 
                 run('tar -cf {0}.tar {0}'.format(fileName))             # tar gatling report
                 local('mkdir -p {0}'.format(downloadPath))              # mkdir download path

@@ -1,17 +1,12 @@
 from flare_module.test.command.gatling import GatlingServer
 from flare_module.test.command.eer import EERServer
+from config import FlareEnv
 
 class TestService():
 
     # Test Docker Resource Limit
     # [core, memory(G)]
-    CPU_RESOURCE = [
-        2, 4, 8
-    ]
-
-    MEMORY_RESOURCE = [
-        4, 8, 16
-    ]
+    RESOURCE = FlareEnv.TEST['RESOURCE']
 
     def __init__(self):
         self.gatling = GatlingServer()
@@ -29,18 +24,23 @@ class TestService():
             print(command)
             if command == 'ready':
                 self.gatling.init_data()
-            elif command == 'talk':
-                self.loop_resource_test(self.gatling.talk_test)
-            elif command == 'scenario':
-                self.gatling.scenario_talk_test()
-            elif command == 'chatbot':
-                self.gatling.chatbot_talk_test()
+            else:
+                self.loop_resource_test(command)
 
-    def loop_resource_test(self, method):
-        for cpu in self.CPU_RESOURCE:
-            for memory in self.MEMORY_RESOURCE:
+    def loop_resource_test(self, command):
+        for resource in self.RESOURCE:
+            cpu = resource['CPU']
+            for memory in self.resource['MEMORY']:
                 # docker restart
                 self.eer.docker_restart(cpu, memory)
                 # start test
-                method()
+                resourceId = '{0}C{1}G'.format(cpu, memory)
+                self.execute_test(command, resourceId)
 
+    def execute_test(self, command, resourceId):
+        if command == 'talk':
+            self.gatling.talk_test(resourceId)
+        elif command == 'scenario':
+            self.gatling.scenario_talk_test(resourceId)
+        elif command == 'chatbot':
+            self.gatling.chatbot_talk_test(resourceId)
