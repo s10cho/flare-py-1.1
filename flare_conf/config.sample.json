@@ -7,90 +7,124 @@
         "FLARE_TEMP": "flare_temp"
     },
     "SVN": {
-        "URL": "",
-        "ID": "",
-        "PASSWORD": ""
+        "URL": "https://www.spectra.co.kr",
+        "ID": "id",
+        "PASSWORD": "1234"
     },
     "DB": {
         "ORACLE": {
             "DRIVER": "oracle.jdbc.driver.OracleDriver",
-            "URL": "",
-            "USERNAME": "",
-            "PASSWORD": "",
-            "OWNERNAME": "",
+            "URL": "jdbc:oracle:thin:@127.0.0.1:1234:xe",
+            "USERNAME": "id",
+            "PASSWORD": "id",
+            "OWNERNAME": "id",
             "VALIDATION": "select 1 from dual"
         },
         "POSTGRESQL": {
             "DRIVER": "org.postgresql.Driver",
-            "URL": "",
-            "USERNAME": "",
-            "PASSWORD": "",
-            "OWNERNAME": "",
+            "URL": "jdbc:postgresql://127.0.0.1:1234/pg",
+            "USERNAME": "id",
+            "PASSWORD": "1234",
+            "OWNERNAME": "id",
             "VALIDATION": "select 1"
         }
     },
     "SOLR": {
-        "ORACLE": "",
-        "POSTGRESQL": ""
+        "ORACLE": "http://www.spectra.co.kr/solr.jar",
+        "POSTGRESQL": "http://www.spectra.co.kr/solr.jar"
     },
     "SCOUTER": {
         "DOWNLOAD_URL": "https://github.com/scouter-project/scouter/releases/download/v1.8.1.1/scouter-all-1.8.1.1.tar.gz"
     },
     "GATLING": {
-        "URL": "",
-        "ID": "",
-        "PASSWORD": ""
+        "URL": "https://www.spectra.co.kr",
+        "ID": "id",
+        "PASSWORD": "1234"
     },
     "SERVER": {
         "FLARE": {
             "HOSTS": ["127.0.0.1"],
-            "USER": "",
-            "PASSWORD": ""
+            "USER": "id",
+            "PASSWORD": "1234"
         },
         "GATLING": {
             "HOSTS": ["127.0.0.1"],
-            "USER": "",
-            "PASSWORD": ""
+            "USER": "id",
+            "PASSWORD": "1234"
         },
         "EER": {
             "HOSTS": ["127.0.0.1"],
-            "USER": "",
-            "PASSWORD": ""
+            "USER": "id",
+            "PASSWORD": "1234"
         },
         "DB": {
             "HOSTS": ["127.0.0.1"],
-            "USER": "",
-            "PASSWORD": ""
+            "USER": "id",
+            "PASSWORD": "1234"
         }
     },
     "TEST": {
+        "RESOURCE": [
+            {
+                "CPU": 2,
+                "MEMORY": [4, 8, 16]
+            },
+            {
+                "CPU": 4,
+                "MEMORY": [4, 8, 16]
+            },
+            {
+                "CPU": 8,
+                "MEMORY": [4, 8, 16]
+            }
+        ],
         "INIT": [
             {
                 "TEST_ID": "INIT",
-                "SIMULATION_CLASS": "",
+                "SIMULATION_CLASS": "com.spectra.testSimulation",
                 "JVM": []
             }
         ],
         "TALK": [
             {
                 "TEST_ID": "WARM",
-                "SIMULATION_CLASS": "",
+                "SIMULATION_CLASS": "com.spectra.testSimulation",
                 "JVM": []
             },
             {
-                "TEST_ID": "A50C120",
-                "SIMULATION_CLASS": "",
-                "JVM": []
+                "TEST_ID": "testid",
+                "SIMULATION_CLASS": "com.spectra.testSimulation",
+                "JVM": [
+                    "agent.count=5",
+                    "agent.time=30",
+                    "customer.count=10",
+                    "customer.time=30",
+                    "total.time=120"
+                ]
             }
         ],
         "SCENARIO_TALK": [
-
+            {
+                "TEST_ID": "WARM",
+                "SIMULATION_CLASS": "com.spectra.testSimulation",
+                "JVM": []
+            },
+            {
+                "TEST_ID": "T5C1",
+                "SIMULATION_CLASS": "com.spectra.testSimulation",
+                "JVM": [
+                    "customer.count=10",
+                    "customer.once.count=1",
+                    "customer.separate.time=5",
+                    "total.time=120"
+                ]
+            }
         ],
         "CHATBOT": [
 
         ]
     },
     "WEB": {
-        "PORT": 8080
+        "PORT": 5001
     }
 }
