@@ -40,77 +40,84 @@ function reportList(date)
         var report = result.data
         var html = [], h = -1;
         var testArray = []
+        var resourceArray = []
         var loadArray = []
         for(var i = 0; i < report.length; i++)
         {
-            var values = report[i].split("-");
-            var test = values[0].split("_");
-            var date = values[1]
+            var values = report[i].split("_");
+            var testId = values[0]
+            var testInfo = values[1].split("-");
+            var date = testInfo[2]
             var linkUrl = url + '/' + report[i] + '/index.html'
-            testArray.push(test[0])
-            loadArray.push(test[1])
+            testArray.push(testId)
+            resourceArray.push(testInfo[0])
+            loadArray.push(testInfo[1])
 
-            html[++h] = '<tr class="' + test[0] +' ' + test[1] + '">';
-            html[++h] = '    <td>' + test[0] + '</td>';
-            html[++h] = '    <td>' + test[1] + '</td>';
+            html[++h] = '<tr class="' + testId + ' ' + testInfo[0] + ' ' + testInfo[1] + '">';
+            html[++h] = '    <td>' + testId + '</td>';
+            html[++h] = '    <td>' + testInfo[0] + '</td>';
+            html[++h] = '    <td>' + testInfo[1] + '</td>';
             html[++h] = '    <td>' + dateFormat(date) + '</td>';
             html[++h] = '    <td>' + linkButton(linkUrl) + '</td>';
             html[++h] = '</tr>';
         }
         $('#gatlingList').html(html.join(''))
 
-        testList(testArray)
-        loadList(loadArray)
+        selectList('#testList', testArray)
+        selectList('#resourceList', resourceArray)
+        selectList('#loadList', loadArray)
         filterList()
     })
 }
 
-function testList(array)
+function selectList(target, array)
 {
     var html = [], h = -1;
-    var testList = removeDupleArray(array)
+    var optionList = removeDupleArray(array)
     html[++h] = '<option value="All">All</option>';
-    for(var i = 0; i < testList.length; i++)
+    for(var i = 0; i < optionList.length; i++)
     {
-        html[++h] = '<option value="' + testList[i] + '">' + testList[i] + '</option>';
+        html[++h] = '<option value="' + optionList[i] + '">' + optionList[i] + '</option>';
     }
-    $('#testList').html(html.join(''))
-}
-
-function loadList(array)
-{
-    var html = [], h = -1;
-    var loadList = removeDupleArray(array)
-    html[++h] = '<option value="All">All</option>';
-    for(var i = 0; i < loadList.length; i++)
-    {
-        html[++h] = '<option value="' + loadList[i] + '">' + loadList[i] + '</option>';
-    }
-    $('#loadList').html(html.join(''))
+    $(target).html(html.join(''))
 }
 
 function filterList()
 {
-    $('#gatlingList > tr').removeClass("d-none")
-    var test = $("#testList").val()
-    var load = $("#loadList").val()
-    if(test != 'All')
+    var targetFilter = ".gatling-filter";
+    var targetList = '#gatlingList > tr';
+    var dNone = "d-none";
+    var filters = []
+
+    $(targetFilter).each(function(){
+        filters.push({
+            key: $(this).val(),
+            className: $(this).attr("id")
+        })
+    })
+
+    $(targetList).removeClass(dNone)
+    for(var i = 0; i < filters.length; i++)
     {
-        $('#gatlingList > tr').addClass("d-none")
-        $('.' + test).removeClass("d-none")
-    }
-    if(load != 'All')
-    {
-        if(test == 'All')
+        var key = filters[i].key;
+        var className = filters[i].className;
+        $(targetList).addClass(className)
+
+        if(key == 'All')
         {
-            $('#gatlingList > tr').addClass("d-none")
-            $('.' + load).removeClass("d-none")
+            $(targetList).removeClass(className)
         }
-        $('.' + test).each(function(){
-            $(this).addClass("d-none")
-            if($(this).hasClass(load))
+        else
+        {
+            $('.' + key).each(function(){
+                $(this).removeClass(className)
+            })
+        }
+
+        $('.' + className).each(function(){
+            if(!$(this).hasClass(dNone))
             {
-                $(this).removeClass("d-none")
+                $(this).addClass(dNone)
             }
         })
     }
@@ -164,10 +171,7 @@ $(document).ready(function() {
     $('#gatlingDate').change(function(){
         reportList(this.value)
     })
-    $('#testList').change(function(){
-        filterList()
-    })
-    $('#loadList').change(function(){
+    $('#testList').add('#resourceList').add('#loadList').change(function(){
         filterList()
     })
 });
