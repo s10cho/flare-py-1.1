@@ -86,13 +86,14 @@ function filterList()
 {
     var targetFilter = ".gatling-filter";
     var targetList = '#gatlingList > tr';
+    var classNamePrefix = 'gatling-filter-';
     var dNone = "d-none";
     var filters = []
 
-    $(targetFilter).each(function(){
+    $(targetFilter).each(function(idx){
         filters.push({
             key: $(this).val(),
-            className: $(this).attr("id")
+            className: classNamePrefix + idx
         })
     })
 
@@ -119,6 +120,7 @@ function filterList()
             {
                 $(this).addClass(dNone)
             }
+            $(this).removeClass(className)
         })
     }
 }
