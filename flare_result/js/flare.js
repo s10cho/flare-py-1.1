@@ -9,7 +9,14 @@ var httpUtil = {
             dataType: 'json',
             success: function(result)
             {
-                callback(result)
+                if(result.data.length > 0)
+                {
+                    callback(result)
+                }
+                else
+                {
+                    console.log('No Data')
+                }
             },
             error: function(xhr, ajaxOptions, thrownError)
             {
