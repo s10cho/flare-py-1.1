@@ -8,6 +8,8 @@ class TestService():
     # [core, memory(G)]
     RESOURCE = FlareEnv.TEST['RESOURCE']
 
+    TEST_SERVICE = ['ready', 'talk', 'scenario', 'chatbot']
+
     def __init__(self):
         self.gatling = GatlingServer()
         self.eer = EERServer()
@@ -16,13 +18,19 @@ class TestService():
     def run(self, param):
         print(param)
         if len(param) == 0:
-            self.gatling.talk_test()
-            pass
+            self.all_run()
         else:
             # command run
             command = param[0]
             print(command)
-            if command == 'ready':
+            if command == self.TEST_SERVICE[0]:
+                self.gatling.init_data()
+            else:
+                self.loop_resource_test(command)
+
+    def all_run(self):
+        for command in self.TEST_SERVICE:
+            if command == self.TEST_SERVICE[0]:
                 self.gatling.init_data()
             else:
                 self.loop_resource_test(command)
@@ -38,9 +46,9 @@ class TestService():
                 self.execute_test(command, resourceId)
 
     def execute_test(self, command, resourceId):
-        if command == 'talk':
+        if command == self.TEST_SERVICE[1]:
             self.gatling.talk_test(resourceId)
-        elif command == 'scenario':
+        elif command == self.TEST_SERVICE[2]:
             self.gatling.scenario_talk_test(resourceId)
-        elif command == 'chatbot':
+        elif command == self.TEST_SERVICE[3]:
             self.gatling.chatbot_talk_test(resourceId)
