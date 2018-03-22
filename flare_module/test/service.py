@@ -48,7 +48,7 @@ class TestService():
 
     def execute_test(self, command, resourceId):
         if command == self.TEST_SERVICE[0]:
-            self.gatling.init_data()
+            self.gatling.init_data(resourceId)
         elif command == self.TEST_SERVICE[1]:
             self.gatling.talk_test(resourceId)
         elif command == self.TEST_SERVICE[2]:
