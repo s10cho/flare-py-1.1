@@ -40,11 +40,9 @@ class TestService():
         for resource in self.RESOURCE:
             cpu = resource['CPU']
             for memory in resource['MEMORY']:
-                # docker restart
-                self.eer.docker_restart(cpu, memory)
-                # start test
-                resourceId = '{0}C{1}G'.format(cpu, memory)
-                self.execute_test(command, resourceId)
+                self.eer.docker_restart(cpu, memory)            # docker restart
+                resourceId = '{0}C{1}G'.format(cpu, memory)     # resource Id
+                self.execute_test(command, resourceId)          # start test
 
     def execute_test(self, command, resourceId):
         if command == self.TEST_SERVICE[0]:
