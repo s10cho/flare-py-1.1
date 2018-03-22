@@ -20,20 +20,21 @@ class TestService():
         if len(param) == 0:
             self.all_run()
         else:
-            # command run
-            command = param[0]
-            print(command)
-            if command == self.TEST_SERVICE[0]:
-                self.gatling.init_data()
-            else:
-                self.loop_resource_test(command)
+            self.command_run(param[0])
 
     def all_run(self):
         for command in self.TEST_SERVICE:
             if command == self.TEST_SERVICE[0]:
-                self.gatling.init_data()
+                self.execute_test(command, '{0}C{1}G'.format(4, 8))
             else:
                 self.loop_resource_test(command)
+
+    def command_run(self, command):
+        print(command)
+        if command == self.TEST_SERVICE[0]:
+            self.execute_test(command, '{0}C{1}G'.format(4, 8))
+        else:
+            self.loop_resource_test(command)
 
     def loop_resource_test(self, command):
         for resource in self.RESOURCE:
@@ -46,7 +47,9 @@ class TestService():
                 self.execute_test(command, resourceId)
 
     def execute_test(self, command, resourceId):
-        if command == self.TEST_SERVICE[1]:
+        if command == self.TEST_SERVICE[0]:
+            self.gatling.init_data()
+        elif command == self.TEST_SERVICE[1]:
             self.gatling.talk_test(resourceId)
         elif command == self.TEST_SERVICE[2]:
             self.gatling.scenario_talk_test(resourceId)
