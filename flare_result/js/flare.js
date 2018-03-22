@@ -130,6 +130,21 @@ function filterList()
             $(this).removeClass(className)
         })
     }
+
+    filterOption(targetList, dNone)
+}
+
+function filterOption(targetList, dNone)
+{
+    if($("#removePreWork").is( ":checked" ))
+    {
+        $(targetList).each(function(idx){
+            if($(this).hasClass("INIT") || $(this).hasClass("WARM"))
+            {
+                $(this).addClass(dNone)
+            }
+        })
+    }
 }
 
 function dateFormat(date)
@@ -183,4 +198,9 @@ $(document).ready(function() {
     $('#testList').add('#resourceList').add('#loadList').change(function(){
         filterList()
     })
+    $("#removePreWork").change(function(){
+        filterList()
+    })
+
+    $('[data-toggle="tooltip"]').tooltip();
 });
