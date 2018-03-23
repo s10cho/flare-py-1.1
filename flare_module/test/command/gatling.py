@@ -30,8 +30,12 @@ class GatlingServer():
     def execute(self, command):
         if type(command) == list:
             command = " ".join(command)
-        with settings(warn_only=True):
-            run(command)
+
+        try:
+            with settings(warn_only=True):
+                run(command)
+        except Exception:
+            print('[Exception] ' + command)
 
 
     def init_data(self, resourceId):
