@@ -24,18 +24,6 @@ class Scouter():
         FlarePath.FLARE_TEMP + '/scouter/ecc_{0}.sh'
     ]
 
-    JVM_OPTION = [
-        ['gateway', 256, 256],
-        ['router', 256, 256],
-        ['engine', 1024, 1024],
-        ['rtis', 256, 256],
-        ['webapps', 1024, 1024],
-        ['restapi', 1024, 1024],
-        ['webroot', 128, 128],
-        ['thirdparty', 256, 256],
-        ['legw', 256, 256],
-    ]
-
     JVM_OPTIONS = {
         "4G": [
             ['gateway', 256, 256],
