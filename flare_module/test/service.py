@@ -38,7 +38,6 @@ class TestService():
                 resource_id = '{0}C{1}G'.format(cpu, memory)            # resource Id
                 for test in test_list:
                     load_id = self.make_load_id(test["JVM"])
-
                     self.gatling.test_run(test, resource_id, load_id)   # test start
                     self.gatling.result_download()                      # download result
 
