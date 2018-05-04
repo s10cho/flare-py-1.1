@@ -24,7 +24,7 @@ class TestService():
         elif command == 'UNIT':
             self.execute_test(FlareTest.UNIT_TEST)
         elif command == 'INTEGRATION':
-            self.execute_test(FlareTest.INTEGRATION_TEST)
+            self.execute_test(FlareTest.SPRINT_TEST)
 
 
     def execute_test(self, test_info):

@@ -6,7 +6,7 @@
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unitscenario.eer_2_1.simulation.InitDataSimulation",
+                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_2_1.simulation.InitDataSimulation",
                 "JVM": []
             }
         ]
@@ -18,23 +18,23 @@
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unitscenario.eer_2_1.simulation.TalkStart",
+                "SIMULATION_CLASS": "com.spectra.flare.unit.eer_2_1.simulation.TalkStartSimulation",
                 "JVM": []
             }
         ]
     },
-    "INTEGRATION_TEST": {
+    "SPRINT_TEST": {
         "RESOURCE" : {
             "CPU": [2],
             "MEMORY": [4, 8]
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unitscenario.eer_2_1.simulation.TalkSimulation",
+                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_2_1.simulation.TalkSimulation",
                 "JVM": ["agent.count=5", "agent.time=10", "customer.count=10", "customer.time=50", "total.time=720"]
             },
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unitscenario.eer_2_1.simulation.ScnSimulation",
+                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_2_1.simulation.ScnSimulation",
                 "JVM": ["customer.total.count=10000", "customer.once.count=1", "customer.separate.time=5", "total.time=720"]
             }
         ]
