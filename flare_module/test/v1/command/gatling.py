@@ -9,6 +9,14 @@ class GatlingServer():
 
     MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} {2} test'
 
+    INIT_SIMULATION = FlareEnv.TEST['INIT']
+
+    TALK_SIMULATION = FlareEnv.TEST['TALK']
+
+    SCENARIO_TALK_SIMULATION = FlareEnv.TEST['SCENARIO_TALK']
+
+    CHATBOT_TALK_SIMULATION = FlareEnv.TEST['CHATBOT']
+
     def __init__(self):
         resultDir = ['/report', '/report/gatling']
         # create result directory
@@ -26,17 +34,39 @@ class GatlingServer():
             run(command)
 
 
-    def test_run(self, test, resourceId, testId):
-        if test["JVM"].length > 0:
-            jvm = ' '.join(['-D' + jvm for jvm in test["JVM"]])
-        else:
-            jvm = ''
+    def init_data(self, resourceId):
+        self.simulation(self.INIT_SIMULATION, resourceId)
 
-        simulationClass = test["SIMULATION_CLASS"]
+
+    def talk_test(self, resourceId):
+        self.simulation(self.TALK_SIMULATION, resourceId)
+
+
+    def scenario_talk_test(self, resourceId):
+        self.simulation(self.SCENARIO_TALK_SIMULATION, resourceId)
+
+
+    def chatbot_talk_test(self, resourceId):
+        self.simulation(self.CHATBOT_TALK_SIMULATION, resourceId)
+
+
+    def simulation(self, simulationList, resourceId):
+        if len(simulationList) < 0:
+            print('No Simulation')
+            return
+
+        with cd(FlareResult.REMOTE_GATLING_HOME):               # cd gatling home
+            for simulation in simulationList:                   # loop simulation run
+                self.simulation_run(simulation, resourceId)     # maven test
+                self.result_download()                          # download gatling report
+
+
+    def simulation_run(self, simulation, resourceId):
+        testId = simulation["TEST_ID"]
+        jvm = " ".join(['-D' + jvm for jvm in simulation["JVM"]])
+        simulationClass = simulation["SIMULATION_CLASS"]
         outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resourceId + '-' + testId
-
-        with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
-            self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
+        self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
 
 
     def result_download(self):

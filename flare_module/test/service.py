@@ -1,55 +1,64 @@
 from flare_module.test.command.gatling import GatlingServer
 from flare_module.test.command.eer import EERServer
-from config import FlareEnv
+from config import FlareTest
 
 class TestService():
-
-    # Test Docker Resource Limit
-    # [core, memory(G)]
-    RESOURCE = FlareEnv.TEST['RESOURCE']
-
-    TEST_SERVICE = ['ready', 'talk', 'scenario', 'chatbot']
 
     def __init__(self):
         self.gatling = GatlingServer()
         self.eer = EERServer()
-        pass
 
     def run(self, param):
         print(param)
         if len(param) == 0:
-            self.all_run()
+            for test_info in ['SETUP', 'INTEGRATION']:
+                self.run_command(test_info)
         else:
-            self.command_run(param[0])
+            command = param[0].upper()
+            self.run_command(command)
 
-    def all_run(self):
-        for command in self.TEST_SERVICE:
-            if command == self.TEST_SERVICE[0]:
-                self.execute_test(command, '{0}C{1}G'.format(4, 8))
-            else:
-                self.loop_resource_test(command)
 
-    def command_run(self, command):
-        print(command)
-        if command == self.TEST_SERVICE[0]:
-            self.execute_test(command, '{0}C{1}G'.format(4, 8))
-        else:
-            self.loop_resource_test(command)
+    def run_command(self, command):
+        if command == 'SETUP':
+            self.execute_test(FlareTest.SETUP)
+        elif command == 'UNIT':
+            self.execute_test(FlareTest.UNIT_TEST)
+        elif command == 'INTEGRATION':
+            self.execute_test(FlareTest.INTEGRATION_TEST)
 
-    def loop_resource_test(self, command):
-        for resource in self.RESOURCE:
-            cpu = resource['CPU']
-            for memory in resource['MEMORY']:
-                self.eer.docker_restart(cpu, memory)            # docker restart
-                resourceId = '{0}C{1}G'.format(cpu, memory)     # resource Id
-                self.execute_test(command, resourceId)          # start test
 
-    def execute_test(self, command, resourceId):
-        if command == self.TEST_SERVICE[0]:
-            self.gatling.init_data(resourceId)
-        elif command == self.TEST_SERVICE[1]:
-            self.gatling.talk_test(resourceId)
-        elif command == self.TEST_SERVICE[2]:
-            self.gatling.scenario_talk_test(resourceId)
-        elif command == self.TEST_SERVICE[3]:
-            self.gatling.chatbot_talk_test(resourceId)
+    def execute_test(self, test_info):
+        cpu_list = test_info["RESOURCE"]["CPU"]
+        memory_list = test_info["RESOURCE"]["MEMORY"]
+        test_list = test_info["TEST_LIST"]
+
+        for cpu in cpu_list:
+            for memory in memory_list:
+                self.eer.docker_restart(cpu, memory)                    # docker restart
+                resource_id = '{0}C{1}G'.format(cpu, memory)            # resource Id
+                for test in test_list:
+                    test_id = self.make_test_id(test["JVM"])
+                    self.gatling.test_run(test, resource_id, test_id)   # test start
+                    self.gatling.result_download()                      # download result
+
+
+    def make_test_id(self, jvm):
+        ret_id = ''
+        check_key_list = [
+            'agent.count',
+            'customer.count',
+            'customer.separate.time',
+            'customer.once.count'
+        ]
+
+        for option in jvm:
+            ops = option.split('=')
+            key = ops[0]
+            value = ops[1]
+
+            if key in check_key_list:
+                add_key = "".join([k[0] for k in key.split('.')])
+                ret_id = ret_id + add_key + value
+
+        return ret_id
+

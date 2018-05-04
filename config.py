@@ -3,21 +3,28 @@ import json
 
 FLARE_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(FLARE_ROOT_PATH, 'flare_conf/config.json')
-print('load conig = ' + CONFIG_PATH)
+TEST_INFO_PATH = os.path.join(FLARE_ROOT_PATH, 'flare_conf/test_info.json')
+
+print('Load Conig = ' + CONFIG_PATH)
 with open(CONFIG_PATH, 'r') as f:
-    Config = json.load(f)
+    CONFIG = json.load(f)
+
+print('Load Test Info = ' + TEST_INFO_PATH)
+with open(TEST_INFO_PATH, 'r') as f:
+    TEST_INFO = json.load(f)
+
 
 class FlarePath:
     # FLARE HOME
     FLARE_HOME = FLARE_ROOT_PATH
     # FLARE_WORKSPACE
-    FLARE_WORKSPACE = os.path.join(FLARE_HOME, Config['DIR']['FLARE_WORKSPACE'])
+    FLARE_WORKSPACE = os.path.join(FLARE_HOME, CONFIG['DIR']['FLARE_WORKSPACE'])
     # FLARE_RESULT
-    FLARE_RESULT = os.path.join(FLARE_HOME, Config['DIR']['FLARE_RESULT'])
+    FLARE_RESULT = os.path.join(FLARE_HOME, CONFIG['DIR']['FLARE_RESULT'])
     # FLARE_FRAME
-    FLARE_FRAME = os.path.join(FLARE_HOME, Config['DIR']['FLARE_FRAME'])
+    FLARE_FRAME = os.path.join(FLARE_HOME, CONFIG['DIR']['FLARE_FRAME'])
     # TEMP HOME
-    FLARE_TEMP = os.path.join(FLARE_HOME, Config['DIR']['FLARE_TEMP'])
+    FLARE_TEMP = os.path.join(FLARE_HOME, CONFIG['DIR']['FLARE_TEMP'])
     # WORKSPACE
     PROJECT_EER_HOME = os.path.join(FLARE_WORKSPACE, 'home')
     # ORACLE HOME
@@ -27,13 +34,13 @@ class FlarePath:
 
 
 class FlareEnv():
-    SVN = Config['SVN']
-    DB = Config['DB']
-    SOLR_URL = Config['SOLR']
-    SERVER = Config['SERVER']
-    SCOUTER = Config['SCOUTER']
-    GATLING = Config['GATLING']
-    TEST = Config['TEST']
+    SVN = CONFIG['SVN']
+    DB = CONFIG['DB']
+    SOLR_URL = CONFIG['SOLR']
+    SERVER = CONFIG['SERVER']
+    SCOUTER = CONFIG['SCOUTER']
+    GATLING = CONFIG['GATLING']
+    TEST = CONFIG['TEST']
 
 
 class FlareDocker():
@@ -46,6 +53,7 @@ class FlareDocker():
         'SCOUTER': [6100, 6100]
     }
 
+
 class FlareDeploy():
     DEPLOY_TEMP_PATH = FlarePath.FLARE_TEMP + '/deploy'
     DEPLOY_TEMP_EER_PATH = os.path.join(DEPLOY_TEMP_PATH, 'eer')
@@ -56,9 +64,17 @@ class FlareDeploy():
     REMOTE_ENOMIX_ORACLE_HOME = os.path.join(REMOTE_HOME, 'enomix-oracle')
     REMOTE_GATLING_HOME = os.path.join(REMOTE_HOME, 'flare-gatling')
 
+
+class FlareTest():
+    SETUP = TEST_INFO["SETUP"]
+    UNIT_TEST = TEST_INFO["UNIT_TEST"]
+    INTEGRATION_TEST = TEST_INFO["INTEGRATION_TEST"]
+
+
 class FlareResult():
     REMOTE_GATLING_HOME = FlareDeploy.REMOTE_GATLING_HOME
     REMOTE_GATLING_RESULT = os.path.join(REMOTE_GATLING_HOME, 'target/gatling')
 
+
 class FlareWeb():
-    PORT =Config['WEB']["PORT"]
+    PORT =CONFIG['WEB']["PORT"]
