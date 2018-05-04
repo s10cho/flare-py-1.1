@@ -7,6 +7,8 @@ from decorator import before, remote
 @before(remote(FlareEnv.SERVER["GATLING"]))
 class GatlingServer():
 
+    MVN_WARM_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} test'
+
     MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} {2} test'
 
     def __init__(self):
@@ -26,17 +28,23 @@ class GatlingServer():
             run(command)
 
 
-    def test_run(self, test, resourceId, testId):
+    def test_run(self, test, resourceId, load_id):
         if test["JVM"].length > 0:
             jvm = ' '.join(['-D' + jvm for jvm in test["JVM"]])
         else:
             jvm = ''
 
         simulationClass = test["SIMULATION_CLASS"]
-        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resourceId + '-' + testId
 
-        with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
-            self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
+        if load_id == 'WARM':
+            load_ids = [load_id]
+        else:
+            load_ids = ['WARM', load_id]
+
+        for load in load_ids:
+            outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resourceId + '-' + load
+            with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
+                self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
 
 
     def result_download(self):

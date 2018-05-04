@@ -37,13 +37,14 @@ class TestService():
                 self.eer.docker_restart(cpu, memory)                    # docker restart
                 resource_id = '{0}C{1}G'.format(cpu, memory)            # resource Id
                 for test in test_list:
-                    test_id = self.make_test_id(test["JVM"])
-                    self.gatling.test_run(test, resource_id, test_id)   # test start
+                    load_id = self.make_load_id(test["JVM"])
+
+                    self.gatling.test_run(test, resource_id, load_id)   # test start
                     self.gatling.result_download()                      # download result
 
 
-    def make_test_id(self, jvm):
-        ret_id = ''
+    def make_load_id(self, jvm):
+        load_id = 'WARM'
         check_key_list = [
             'agent.count',
             'customer.count',
@@ -58,7 +59,7 @@ class TestService():
 
             if key in check_key_list:
                 add_key = "".join([k[0] for k in key.split('.')])
-                ret_id = ret_id + add_key + value
+                load_id = load_id.replace('WARM', '') + add_key + value
 
-        return ret_id
+        return load_id
 
