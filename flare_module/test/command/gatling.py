@@ -7,8 +7,6 @@ from decorator import before, remote
 @before(remote(FlareEnv.SERVER["GATLING"]))
 class GatlingServer():
 
-    MVN_WARM_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} test'
-
     MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} {2} test'
 
     def __init__(self):
