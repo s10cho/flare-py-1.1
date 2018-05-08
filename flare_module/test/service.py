@@ -1,6 +1,6 @@
 from flare_module.test.command.gatling import GatlingServer
 from flare_module.test.command.eer import EERServer
-from config import FlareTest
+from config import FlareTest, FlareProcess
 
 class TestService():
 
@@ -9,13 +9,14 @@ class TestService():
         self.eer = EERServer()
 
     def run(self, param):
-        print(param)
-        if len(param) == 0:
-            for test_info in ['SETUP', 'INTEGRATION']:
-                self.run_command(test_info)
-        else:
-            command = param[0].upper()
-            self.run_command(command)
+        if FlareProcess.TEST == 'Y':
+            print(param)
+            if len(param) == 0:
+                for test_info in ['SETUP', 'INTEGRATION']:
+                    self.run_command(test_info)
+            else:
+                command = param[0].upper()
+                self.run_command(command)
 
 
     def run_command(self, command):

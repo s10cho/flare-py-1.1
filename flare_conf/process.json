@@ -1,0 +1,6 @@
+{
+    "BUILD":    "Y",
+    "DEPLOY":   "Y",
+    "TEST":     "N",
+    "REPORT":   "N"
+}

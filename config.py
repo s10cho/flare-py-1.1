@@ -4,6 +4,7 @@ import json
 FLARE_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(FLARE_ROOT_PATH, 'flare_conf/config.json')
 TEST_INFO_PATH = os.path.join(FLARE_ROOT_PATH, 'flare_conf/test_info.json')
+PROCESS_PATH = os.path.join(FLARE_ROOT_PATH, 'flare_conf/process.json')
 
 print('Load Conig = ' + CONFIG_PATH)
 with open(CONFIG_PATH, 'r') as f:
@@ -12,6 +13,10 @@ with open(CONFIG_PATH, 'r') as f:
 print('Load Test Info = ' + TEST_INFO_PATH)
 with open(TEST_INFO_PATH, 'r') as f:
     TEST_INFO = json.load(f)
+
+print('Load Test Info = ' + PROCESS_PATH)
+with open(PROCESS_PATH, 'r') as f:
+    PROCESS = json.load(f)
 
 
 class FlarePath:
@@ -40,7 +45,6 @@ class FlareEnv():
     SERVER = CONFIG['SERVER']
     SCOUTER = CONFIG['SCOUTER']
     GATLING = CONFIG['GATLING']
-    TEST = CONFIG['TEST']
 
 
 class FlareDocker():
@@ -52,6 +56,13 @@ class FlareDocker():
         'WEBROOT': [17070, 17070],
         'SCOUTER': [6100, 6100]
     }
+
+
+class FlareProcess():
+    BUILD = PROCESS['BUILD']
+    DEPLOY = PROCESS['DEPLOY']
+    TEST = PROCESS['TEST']
+    REPORT = PROCESS['REPORT']
 
 
 class FlareDeploy():
@@ -66,9 +77,9 @@ class FlareDeploy():
 
 
 class FlareTest():
-    SETUP = TEST_INFO["SETUP"]
-    UNIT_TEST = TEST_INFO["UNIT_TEST"]
-    SPRINT_TEST = TEST_INFO["SPRINT_TEST"]
+    SETUP = TEST_INFO['SETUP']
+    UNIT_TEST = TEST_INFO['UNIT_TEST']
+    SPRINT_TEST = TEST_INFO['SPRINT_TEST']
 
 
 class FlareResult():
