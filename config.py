@@ -77,6 +77,7 @@ class FlareDeploy():
 
 
 class FlareTest():
+    RUN_LIST = ['SETUP']
     SETUP = TEST_INFO['SETUP']
     UNIT_TEST = TEST_INFO['UNIT_TEST']
     SPRINT_TEST = TEST_INFO['SPRINT_TEST']

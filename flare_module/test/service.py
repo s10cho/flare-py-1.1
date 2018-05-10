@@ -12,7 +12,7 @@ class TestService():
         if FlareProcess.TEST == 'Y':
             print(param)
             if len(param) == 0:
-                for test_info in ['SETUP', 'INTEGRATION']:
+                for test_info in FlareTest.RUN_LIST:
                     self.run_command(test_info)
             else:
                 command = param[0].upper()
@@ -24,7 +24,7 @@ class TestService():
             self.execute_test(FlareTest.SETUP)
         elif command == 'UNIT':
             self.execute_test(FlareTest.UNIT_TEST)
-        elif command == 'INTEGRATION':
+        elif command == 'SPRINT':
             self.execute_test(FlareTest.SPRINT_TEST)
 
 

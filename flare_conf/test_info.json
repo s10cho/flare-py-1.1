@@ -6,7 +6,7 @@
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_2_1.simulation.InitDataSimulation",
+                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.InitDataSimulation",
                 "JVM": []
             }
         ]
