@@ -149,6 +149,7 @@ class Scouter():
                                    '-Xms{1}m -Xmx{2}m ' \
                                    '-javaagent:$ENOMIX_HOME/scouter/agent.java/scouter.agent.jar ' \
                                    '-Dscouter.config=$ENOMIX_HOME/scouter/agent.java/conf/scouter_{0}.conf' \
+                                   '-Dproxy.pool.maxTotal=500' \
                                    '"\n'.format(jvmOpts[0], jvmOpts[1], jvmOpts[2])
                     tempFile.write(scouter_opts)
 

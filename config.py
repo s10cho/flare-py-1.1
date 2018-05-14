@@ -77,7 +77,12 @@ class FlareDeploy():
 
 
 class FlareTest():
-    RUN_LIST = ['SETUP']
+    TEST_MODULE = {
+        'SETUP': 'N',
+        'UNIT': 'N',
+        'SPRINT': 'Y'
+    }
+    RUN_LIST = [key for key in TEST_MODULE.keys() if TEST_MODULE[key] == 'Y']
     SETUP = TEST_INFO['SETUP']
     UNIT_TEST = TEST_INFO['UNIT_TEST']
     SPRINT_TEST = TEST_INFO['SPRINT_TEST']
