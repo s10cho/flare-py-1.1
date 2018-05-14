@@ -31,15 +31,7 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=10000", "customer.once.count=1", "customer.separate.time=5", "total.time=600"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=10000", "customer.once.count=1", "customer.separate.time=3", "total.time=600"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=10000", "customer.once.count=1", "customer.separate.time=1", "total.time=600"]
+                "JVM": ["customer.total.count=10000", "customer.once.count=20", "customer.separate.time=3", "total.time=720"]
             }
         ]
     }
