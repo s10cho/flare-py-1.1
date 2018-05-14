@@ -12,7 +12,8 @@ class TestService():
         if FlareProcess.TEST == 'Y':
             print(param)
             if len(param) == 0:
-                for test_info in FlareTest.RUN_LIST:
+                testModuleList = [key for key in FlareTest.TEST_MODULE.keys() if FlareTest.TEST_MODULE[key] == 'Y']
+                for test_info in testModuleList:
                     self.run_command(test_info)
             else:
                 command = param[0].upper()
