@@ -7,6 +7,8 @@ from decorator import before, remote
 @before(remote(FlareEnv.SERVER["GATLING"]))
 class GatlingServer():
 
+    SVN_CHECKOUT = 'svn update'
+
     MVN_TEST = 'mvn -Dtest=FlareParam -DsimulationClass={0} -DoutputDirectoryBaseName={1} {2} test'
 
     def __init__(self):
@@ -18,6 +20,12 @@ class GatlingServer():
                 os.makedirs(path)
         self.FLARE_RESILT_GATLING = FlarePath.FLARE_RESULT + resultDir[1]
 
+
+    def svn_update(self):
+        # cd remote home
+        with cd(FlareResult.REMOTE_GATLING_HOME):
+            # svn update
+            self.execute(self.SVN_CHECKOUT)
 
     def execute(self, command):
         if type(command) == list:

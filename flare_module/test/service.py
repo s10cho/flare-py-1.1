@@ -7,6 +7,7 @@ class TestService():
     def __init__(self):
         self.gatling = GatlingServer()
         self.eer = EERServer()
+        self.gatling.svn_update()
 
     def run(self, param):
         if FlareProcess.TEST == 'Y':
