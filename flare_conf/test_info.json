@@ -31,7 +31,7 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=10000", "customer.once.count=12", "customer.separate.time=1", "total.time=1200"]
+                "JVM": ["customer.total.count=10000", "customer.once.count=15", "customer.separate.time=1", "total.time=1200"]
             }
         ]
     }
