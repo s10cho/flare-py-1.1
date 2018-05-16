@@ -53,7 +53,9 @@ class TestService():
             'agent.count',
             'customer.count',
             'customer.separate.time',
-            'customer.once.count'
+            'customer.once.count',
+            'talk.customer.count',
+            'scenario.customer.count'
         ]
 
         for option in jvm:
