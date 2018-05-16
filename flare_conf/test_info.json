@@ -31,7 +31,19 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=10000", "customer.once.count=15", "customer.separate.time=1", "total.time=1200"]
+                "JVM": ["customer.total.count=10000", "customer.once.count=12", "customer.separate.time=1", "total.time=1200"]
+            }
+        ]
+    },
+    "PRODUCT_TEST": {
+        "RESOURCE" : {
+            "CPU": [2],
+            "MEMORY": [8]
+        },
+        "TEST_LIST": [
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=180", "scenario.customer.count=200", "customer.ramp.time=1440", "total.time=1800"]
             }
         ]
     }

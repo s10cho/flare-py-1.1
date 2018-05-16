@@ -28,6 +28,8 @@ class TestService():
             self.execute_test(FlareTest.UNIT_TEST)
         elif command == 'SPRINT':
             self.execute_test(FlareTest.SPRINT_TEST)
+        elif command == 'PRODUCT':
+            self.execute_test(FlareTest.PRODUCT_TEST)
 
 
     def execute_test(self, test_info):
