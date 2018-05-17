@@ -43,11 +43,11 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=540", "scenario.customer.count=1620", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=360", "scenario.customer.count=1080", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=1080", "scenario.customer.count=3240", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=540", "scenario.customer.count=1620", "customer.ramp.time=1440", "total.time=1800"]
             }
         ]
     }
