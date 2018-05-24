@@ -38,12 +38,12 @@
     "PRODUCT_TEST": {
         "RESOURCE" : {
             "CPU": [2],
-            "MEMORY": [8]
+            "MEMORY": [4, 8]
         },
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=540", "scenario.customer.count=2160", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=720", "scenario.customer.count=2160", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
