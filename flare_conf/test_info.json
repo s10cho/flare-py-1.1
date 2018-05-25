@@ -38,7 +38,7 @@
     "PRODUCT_TEST": {
         "RESOURCE" : {
             "CPU": [2],
-            "MEMORY": [4, 8]
+            "MEMORY": [8]
         },
         "TEST_LIST": [
             {
