@@ -38,16 +38,20 @@
     "PRODUCT_TEST": {
         "RESOURCE" : {
             "CPU": [2],
-            "MEMORY": [8]
+            "MEMORY": [4]
         },
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=180", "scenario.customer.count=900", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=10", "agent.ramp.time=120", "talk.customer.count=60", "scenario.customer.count=300", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=90", "agent.ramp.time=120", "talk.customer.count=540", "scenario.customer.count=2700", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=20", "agent.ramp.time=120", "talk.customer.count=120", "scenario.customer.count=600", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=180", "scenario.customer.count=900", "customer.ramp.time=1440", "total.time=1800"]
             }
         ]
     }
