@@ -51,8 +51,8 @@ class TestService():
 
                         self.eer.docker_monitoring_run(outputBaseName)                 # docker monitoring start
                         self.gatling.test_run(simulationClass, outputBaseName, jvm)    # test start
-                        self.eer.docker_monitoring_stop()                                       # docker monitoring stop
-                        self.gatling.result_download()                                          # download result
+                        self.eer.docker_monitoring_stop()                              # docker monitoring stop
+                        self.gatling.result_download()                                 # download result
 
 
     def make_load_ids(self, test_jvm):
