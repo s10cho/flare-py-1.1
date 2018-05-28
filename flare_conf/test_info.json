@@ -43,15 +43,15 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=180", "scenario.customer.count=900", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=360", "scenario.customer.count=1800", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=250", "scenario.customer.count=1250", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=540", "scenario.customer.count=2700", "customer.ramp.time=1440", "total.time=1800"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=300", "scenario.customer.count=1500", "customer.ramp.time=1440", "total.time=1800"]
             }
         ]
     }
