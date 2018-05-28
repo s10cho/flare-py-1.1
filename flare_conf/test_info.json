@@ -42,16 +42,40 @@
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=10", "scenario.customer.count=50", "customer.ramp.time=120", "total.time=300"]
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.TalkSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=20", "scenario.customer.count=60", "customer.ramp.time=120", "total.time=300"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.TalkSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
-                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=30", "scenario.customer.count=70", "customer.ramp.time=120", "total.time=300"]
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.TalkSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
+            },
+            {
+                "SIMULATION_CLASS": "com.spectra.flare.product.eer_3_0.simulation.ScnAndTalkSimulation",
+                "JVM": ["agent.count=30", "agent.ramp.time=120", "talk.customer.count=200", "scenario.customer.count=1000", "customer.ramp.time=1440", "total.time=1800"]
             }
         ]
     }
