@@ -34,23 +34,9 @@ class GatlingServer():
             run(command)
 
 
-    def test_run(self, test, resourceId, load_id):
-        simulationClass = test["SIMULATION_CLASS"]
-
-        if load_id == 'WARM':
-            load_ids = [load_id]
-        else:
-            load_ids = ['WARM', load_id]
-
-        for load in load_ids:
-            if load == 'WARM':
-                jvm = ''
-            else:
-                jvm = ' '.join(['-D' + jvm for jvm in test["JVM"]])
-
-            outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resourceId + '-' + load
-            with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
-                self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
+    def test_run(self, simulationClass, outputDirectoryBaseName, jvm):
+        with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
+            self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
 
 
     def result_download(self):

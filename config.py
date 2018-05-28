@@ -74,6 +74,7 @@ class FlareDeploy():
     REMOTE_HOME = '/home/enomix/flare'
     REMOTE_ENOMIX_ORACLE_HOME = os.path.join(REMOTE_HOME, 'enomix-oracle')
     REMOTE_GATLING_HOME = os.path.join(REMOTE_HOME, 'flare-gatling')
+    REMOTE_DOCKER_MONITORING_HOME = '/home/enomix/docker-monitor'
 
 
 class FlareTest():

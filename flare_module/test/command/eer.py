@@ -9,6 +9,10 @@ class EERServer():
 
     DOCKER_EER = 'docker exec -it {0} bash -c /home/enomix/bin/flare_eer_{1}.sh'
 
+    DOCKER_MONITORING_RUN = FlareDeploy.REMOTE_DOCKER_MONITORING_HOME + '/bin/docker_monitoring_run.sh {0}'
+
+    DOCKER_MONITORING_STOP = FlareDeploy.REMOTE_DOCKER_MONITORING_HOME + '/bin/docker_monitoring_stop.sh'
+
     def __init__(self): pass
 
     def execute(self, command):
@@ -65,4 +69,12 @@ class EERServer():
 
         # docker eer run
         command = self.DOCKER_EER.format(FlareDocker.ENOMIX_NAME, 'run')
+        self.execute(command)
+
+    def docker_monitoring_run(self, logName):
+        command = self.DOCKER_MONITORING_RUN.format(logName)
+        self.execute(command)
+
+    def docker_monitoring_stop(self):
+        command = self.DOCKER_MONITORING_STOP
         self.execute(command)

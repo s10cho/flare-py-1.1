@@ -42,13 +42,21 @@ class TestService():
                 self.eer.docker_restart(cpu, memory)                    # docker restart
                 resource_id = '{0}C{1}G'.format(cpu, memory)            # resource Id
                 for test in test_list:
-                    load_id = self.make_load_id(test["JVM"])
-                    self.gatling.test_run(test, resource_id, load_id)   # test start
-                    self.gatling.result_download()                      # download result
+                    simulationClass = test["SIMULATION_CLASS"]
+                    test_jvm = test["JVM"]
+                    load_ids = self.make_load_ids(test_jvm)
+                    for load in load_ids:
+                        jvm = self.get_jvm(load, test_jvm)
+                        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resource_id + '-' + load
+
+                        self.eer.docker_monitoring_run(outputDirectoryBaseName)
+                        self.gatling.test_run(simulationClass, outputDirectoryBaseName, jvm)   # test start
+                        self.eer.docker_monitoring_stop()
+                        self.gatling.result_download()                      # download result
 
 
-    def make_load_id(self, jvm):
-        load_id = 'WARM'
+    def make_load_ids(self, test_jvm):
+        load_ids = ['WARM']
         check_key_list = [
             'agent.count',
             'customer.count',
@@ -58,7 +66,8 @@ class TestService():
             'scenario.customer.count'
         ]
 
-        for option in jvm:
+        load_id = ''
+        for option in test_jvm:
             ops = option.split('=')
             key = ops[0]
             value = ops[1]
@@ -67,5 +76,15 @@ class TestService():
                 add_key = "".join([k[0] for k in key.split('.')])
                 load_id = load_id.replace('WARM', '') + add_key + value
 
-        return load_id
+        if len(load_id) > 0:
+            load_ids.append(load_id)
 
+        return load_ids
+
+    def get_jvm(self, load, test_jvm):
+        if load == 'WARM':
+            jvm = ''
+        else:
+            jvm = ' '.join(['-D' + jvm for jvm in test_jvm])
+
+        return jvm
