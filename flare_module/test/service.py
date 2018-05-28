@@ -47,12 +47,12 @@ class TestService():
                     load_ids = self.make_load_ids(test_jvm)
                     for load in load_ids:
                         jvm = self.get_jvm(load, test_jvm)
-                        outputDirectoryBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resource_id + '-' + load
+                        outputBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resource_id + '-' + load
 
-                        self.eer.docker_monitoring_run(outputDirectoryBaseName)
-                        self.gatling.test_run(simulationClass, outputDirectoryBaseName, jvm)   # test start
-                        self.eer.docker_monitoring_stop()
-                        self.gatling.result_download()                      # download result
+                        self.eer.docker_monitoring_run(outputBaseName)                 # docker monitoring start
+                        self.gatling.test_run(simulationClass, outputBaseName, jvm)    # test start
+                        self.eer.docker_monitoring_stop()                                       # docker monitoring stop
+                        self.gatling.result_download()                                          # download result
 
 
     def make_load_ids(self, test_jvm):

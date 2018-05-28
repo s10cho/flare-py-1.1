@@ -34,9 +34,9 @@ class GatlingServer():
             run(command)
 
 
-    def test_run(self, simulationClass, outputDirectoryBaseName, jvm):
+    def test_run(self, simulationClass, outputBaseName, jvm):
         with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
-            self.execute(self.MVN_TEST.format(simulationClass, outputDirectoryBaseName, jvm))
+            self.execute(self.MVN_TEST.format(simulationClass, outputBaseName, jvm))
 
 
     def result_download(self):
