@@ -24,6 +24,9 @@ class EERServer():
         with settings(warn_only=True):
             run(command)
 
+    def execute_background(cmd, sockname="dtach"):
+        return run('dtach -n `mktemp -u /tmp/%s.XXXX` %s' % (sockname, cmd))
+
     def change_ecc_shell(self, docker_memory):
         command = [
             'cp'
@@ -73,8 +76,8 @@ class EERServer():
 
     def docker_monitoring_run(self, logName):
         command = self.DOCKER_MONITORING_RUN.format(logName)
-        self.execute(command)
+        self.execute_background(command)
 
     def docker_monitoring_stop(self):
         command = self.DOCKER_MONITORING_STOP
-        self.execute(command)
+        self.execute_background(command)
