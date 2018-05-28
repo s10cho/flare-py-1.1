@@ -24,13 +24,17 @@ class EERServer():
         with settings(warn_only=True):
             run(command)
 
-    def execute_background(self, command, sockname="dtach"):
+    def background_run(self, command):
+        command = 'nohup %s &> /dev/null &' % command
+        run(command, pty=False)
+
+    def execute_background(self, command):
         if type(command) == list:
             command = " ".join(command)
 
         print(command)
-        with settings(warn_only=True):
-            run('dtach -n `mktemp -u /tmp/%s.XXXX` %s' % (sockname, command))
+
+        execute(self.background_run, command)
 
     def change_ecc_shell(self, docker_memory):
         command = [
