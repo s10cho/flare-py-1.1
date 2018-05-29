@@ -81,8 +81,8 @@ class FlareTest():
     TEST_MODULE = {
         'SETUP': 'N',
         'UNIT': 'N',
-        'SPRINT': 'N',
-        'PRODUCT': 'Y'
+        'SPRINT': 'Y',
+        'PRODUCT': 'N'
     }
     SETUP = TEST_INFO['SETUP']
     UNIT_TEST = TEST_INFO['UNIT_TEST']

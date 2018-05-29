@@ -51,15 +51,15 @@ class GatlingServer():
                 downloadPath = self.FLARE_RESILT_GATLING + '/' + date
                 changeFilename = file[0] + '-' + file[1] + '-' + timestamp
 
-                run('tar -cf {0}.tar {0}'.format(fileName))             # tar gatling report
-                local('mkdir -p {0}'.format(downloadPath))              # mkdir download path
-                get('{0}.tar'.format(fileName), downloadPath)           # download gatling.tar
-                run('rm -rf {0}*'.format(fileName))                     # remove gatling report
+                run('tar -cf {0}.tar {0}'.format(fileName))                 # tar gatling report
+                local('mkdir -p {0}'.format(downloadPath))                  # mkdir download path
+                get('{0}.tar'.format(fileName), downloadPath)               # download gatling.tar
+                run('rm -rf {0}*'.format(fileName))                         # remove gatling report
 
-            with lcd(downloadPath):
-                local('tar -xf {0}.tar'.format(fileName))               # tar gatling report
-                local('rm -rf {0}.tar'.format(fileName))                # remove tar file
-                local('mv {0} {1}'.format(fileName, changeFilename))    # change name
+                with lcd(downloadPath):
+                    local('tar -xf {0}.tar'.format(fileName))               # tar gatling report
+                    local('rm -rf {0}.tar'.format(fileName))                # remove tar file
+                    local('mv {0} {1}'.format(fileName, changeFilename))    # change name
 
 
 
