@@ -12,3 +12,8 @@ if [ -f docker_monitoring.pid ]; then
 	rm -f docker_monitoring.pid
 	echo "docker monitoring stop"
 fi
+
+##########################
+# option kill
+##########################
+ps -ef | grep 'docker stats eer' | awk '{print $2}' | while read line; do kill $line; done
