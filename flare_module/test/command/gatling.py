@@ -43,8 +43,8 @@ class GatlingServer():
 
 
     def result_download(self):
+        retPath = ''
         with cd(FlareResult.REMOTE_GATLING_RESULT):
-            retPath = ''
             lsOutput = run('ls')
             fileNames = lsOutput.split()
             for fileName in fileNames:
