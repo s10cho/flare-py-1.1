@@ -44,6 +44,7 @@ class GatlingServer():
 
     def result_download(self):
         with cd(FlareResult.REMOTE_GATLING_RESULT):
+            retPath = ''
             lsOutput = run('ls')
             fileNames = lsOutput.split()
             for fileName in fileNames:
@@ -63,8 +64,8 @@ class GatlingServer():
                     local('tar -xf {0}.tar'.format(fileName))               # tar gatling report
                     local('rm -rf {0}.tar'.format(fileName))                # remove tar file
                     local('mv {0} {1}'.format(fileName, changeFilename))    # change name
+                    retPath = downloadPath + '/' + changeFilename
 
-        retPath = downloadPath + '/' + changeFilename
         return retPath
 
 
