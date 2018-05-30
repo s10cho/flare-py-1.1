@@ -66,7 +66,7 @@ function reportList(date)
             html[++h] = '    <td>' + testInfo[0] + '</td>';
             html[++h] = '    <td>' + testInfo[1] + '</td>';
             html[++h] = '    <td>' + dateFormat(timestamp) + '</td>';
-            html[++h] = '    <td>' + linkButton(gatlingUrl) +  linkButton(dockerUrl) + '</td>';
+            html[++h] = '    <td>' + linkButton(gatlingUrl) + ' ' + linkButton(dockerUrl) + '</td>';
             html[++h] = '</tr>';
         }
         $('#gatlingList').html(html.join(''))
