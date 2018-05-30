@@ -68,7 +68,7 @@ function loadData(url, callback)
     }
     else
     {
-        document.getElementsByClassName("container")[0].innerHTML += '<div class="alert alert-dark" role="alert">No Data</div>'
+        document.getElementsByClassName("container")[0].innerHTML += '<div class="alert alert-dark text-center" role="alert">No Data</div>'
     }
 }
 
