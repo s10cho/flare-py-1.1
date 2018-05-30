@@ -56,13 +56,40 @@ function getParam(name)
 
 function loadData(url, callback)
 {
-    var head = document.getElementsByTagName('head')[0];
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
-    script.onreadystatechange = callback;
-    script.onload = callback;
-    head.appendChild(script);
+    if(checkUrl(url))
+    {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        script.onreadystatechange = callback;
+        script.onload = callback;
+        head.appendChild(script);
+    }
+    else
+    {
+        document.getElementsByClassName("container")[0].innerHTML += '<div class="alert alert-dark" role="alert">No Data</div>'
+    }
+}
+
+function checkUrl(url)
+{
+    var request = false;
+    if (window.XMLHttpRequest)
+    {
+        request = new XMLHttpRequest;
+    }
+    else if (window.ActiveXObject)
+    {
+        request = new ActiveXObject("Microsoft.XMLHttp");
+    }
+
+    if (request)
+    {
+        request.open("GET", url);
+        if (request.status == 200) { return true; }
+    }
+    return false;
 }
 
 window.onload = function() {
