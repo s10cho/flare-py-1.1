@@ -65,6 +65,7 @@ class GatlingServer():
                     local('rm -rf {0}.tar'.format(fileName))                # remove tar file
                     local('mv {0} {1}'.format(fileName, changeFilename))    # change name
                     retPath = downloadPath + '/' + changeFilename
+                    print('#1 '+ retPath)
 
         return retPath
 

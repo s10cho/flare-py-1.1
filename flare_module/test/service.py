@@ -56,7 +56,9 @@ class TestService():
                         self.gatling.test_run(simulationClass, outputBaseName, jvm)                         # test start
                         self.eer.docker_monitoring_stop()                                                   # docker monitoring stop
                         result_path = self.gatling.result_download()                                        # download result
+                        print('#2 - ' + result_path)
                         log_file_name = self.eer.monitoring_data_download(outputBaseName, result_path)      # docker monitoring data
+                        print('#3 - ' + log_file_name)
                         self.flare.convert_docker_monitoring_data(log_file_name, result_path)
 
 
