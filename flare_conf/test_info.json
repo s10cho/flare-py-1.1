@@ -44,22 +44,6 @@
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
                 "JVM": ["customer.total.count=9000", "customer.once.count=10", "customer.separate.time=1", "total.time=1200"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=6000", "customer.once.count=10", "customer.separate.time=1", "total.time=1200"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=7000", "customer.once.count=10", "customer.separate.time=1", "total.time=1200"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=8000", "customer.once.count=10", "customer.separate.time=1", "total.time=1200"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=9000", "customer.once.count=10", "customer.separate.time=1", "total.time=1200"]
             }
         ]
     },
