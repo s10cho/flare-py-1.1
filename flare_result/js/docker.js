@@ -88,8 +88,11 @@ function checkUrl(url)
     {
         request.open("HEAD", url, false);
         request.send();
-        console.log(request.status)
-        if (request.status == 0) { return true; }
+
+        if(request.status == 200)
+        {
+            return true;
+        }
     }
     return false;
 }
