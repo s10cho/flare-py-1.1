@@ -18,7 +18,7 @@ class GatlingServer():
             path = FlarePath.FLARE_RESULT + dir
             if not os.path.exists(path):
                 os.makedirs(path)
-        self.FLARE_RESILT_GATLING = FlarePath.FLARE_RESULT + resultDir[1]
+        self.FLARE_RESULT_GATLING = FlarePath.FLARE_RESULT + resultDir[1]
 
 
     def svn_update(self):
@@ -35,7 +35,10 @@ class GatlingServer():
 
 
     def test_run(self, simulationClass, outputBaseName, jvm):
-        with cd(FlareResult.REMOTE_GATLING_HOME):  # cd gatling home
+        with cd(FlareResult.REMOTE_GATLING_RESULT):     # cd gatling result path
+            run('rm -rf *')                             # remove old report
+
+        with cd(FlareResult.REMOTE_GATLING_HOME):       # cd gatling home
             self.execute(self.MVN_TEST.format(simulationClass, outputBaseName, jvm))
 
 
@@ -48,7 +51,7 @@ class GatlingServer():
                 timestamp = file[2]
                 timestamp = datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
                 date = timestamp[:8]
-                downloadPath = self.FLARE_RESILT_GATLING + '/' + date
+                downloadPath = self.FLARE_RESULT_GATLING + '/' + date
                 changeFilename = file[0] + '-' + file[1] + '-' + timestamp
 
                 run('tar -cf {0}.tar {0}'.format(fileName))                 # tar gatling report
@@ -60,6 +63,9 @@ class GatlingServer():
                     local('tar -xf {0}.tar'.format(fileName))               # tar gatling report
                     local('rm -rf {0}.tar'.format(fileName))                # remove tar file
                     local('mv {0} {1}'.format(fileName, changeFilename))    # change name
+
+        retPath = downloadPath + '/' + changeFilename
+        return retPath
 
 
 

@@ -2,6 +2,7 @@
 
 MONITORING_HOME=$(cd "$(dirname "$0")" && cd ../;pwd)
 LOG_DIRECTORY_NAME=logs
+LOGBACK_DIRECTORY_NAME=logs_back
 LOG_DATE=$(date "+%Y%m%d%H%M%S")
 
 ##########################
@@ -31,8 +32,23 @@ fi
 cd $MONITORING_HOME
 if [ ! -d "$LOG_DIRECTORY_NAME" ]; then
   mkdir $LOG_DIRECTORY_NAME
-  echo "make log directory"
+  echo "make logs directory"
 fi
+if [ ! -d "$LOGBACK_DIRECTORY_NAME" ]; then
+  mkdir $LOGBACK_DIRECTORY_NAME
+  echo "make logs_back directory"
+fi
+
+##########################
+# backup logs
+##########################
+cd $MONITORING_HOME
+mv ./$LOG_DIRECTORY_NAME/*.log ./$LOGBACK_DIRECTORY_NAME/
+
+##########################
+# old process kill
+##########################
+ps -ef | grep 'docker stats eer' | awk '{print $2}' | while read line; do kill $line; done
 
 ##########################
 # monitoring start

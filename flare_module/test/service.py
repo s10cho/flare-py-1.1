@@ -1,3 +1,5 @@
+import uuid
+from flare_module.test.command.flare import FlareServer
 from flare_module.test.command.gatling import GatlingServer
 from flare_module.test.command.eer import EERServer
 from config import FlareTest, FlareProcess
@@ -5,6 +7,7 @@ from config import FlareTest, FlareProcess
 class TestService():
 
     def __init__(self):
+        self.flare = FlareServer()
         self.gatling = GatlingServer()
         self.eer = EERServer()
         self.gatling.svn_update()
@@ -49,10 +52,12 @@ class TestService():
                         jvm = self.get_jvm(load, test_jvm)
                         outputBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resource_id + '-' + load
 
-                        self.eer.docker_monitoring_run(outputBaseName)                 # docker monitoring start
-                        self.gatling.test_run(simulationClass, outputBaseName, jvm)    # test start
-                        self.eer.docker_monitoring_stop()                              # docker monitoring stop
-                        self.gatling.result_download()                                 # download result
+                        self.eer.docker_monitoring_run(outputBaseName)                                      # docker monitoring start
+                        self.gatling.test_run(simulationClass, outputBaseName, jvm)                         # test start
+                        self.eer.docker_monitoring_stop()                                                   # docker monitoring stop
+                        result_path = self.gatling.result_download()                                        # download result
+                        log_file_name = self.eer.monitoring_data_download(outputBaseName, result_path)      # docker monitoring data
+                        self.flare.convert_docker_monitoring_data(log_file_name, result_path)
 
 
     def make_load_ids(self, test_jvm):
@@ -80,6 +85,7 @@ class TestService():
             load_ids.append(load_id)
 
         return load_ids
+
 
     def get_jvm(self, load, test_jvm):
         if load == 'WARM':

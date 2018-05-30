@@ -54,8 +54,9 @@ function reportList(date)
             var values = report[i].split("_");
             var testId = values[0]
             var testInfo = values[1].split("-");
-            var date = testInfo[2]
-            var linkUrl = url + '/' + report[i] + '/index.html'
+            var timestamp = testInfo[2]
+            var gatlingUrl = url + '/' + report[i] + '/index.html'
+            var dockerUrl = '/docker.html?date=' + date '&testId=' + testId;
             testArray.push(testId)
             resourceArray.push(testInfo[0])
             loadArray.push(testInfo[1])
@@ -64,8 +65,8 @@ function reportList(date)
             html[++h] = '    <td>' + testId + '</td>';
             html[++h] = '    <td>' + testInfo[0] + '</td>';
             html[++h] = '    <td>' + testInfo[1] + '</td>';
-            html[++h] = '    <td>' + dateFormat(date) + '</td>';
-            html[++h] = '    <td>' + linkButton(linkUrl) + '</td>';
+            html[++h] = '    <td>' + dateFormat(timestamp) + '</td>';
+            html[++h] = '    <td>' + linkButton(gatlingUrl) +  linkButton(dockerUrl) + '</td>';
             html[++h] = '</tr>';
         }
         $('#gatlingList').html(html.join(''))
@@ -165,13 +166,18 @@ function dateFormat(date)
 
 function linkButton(url)
 {
-    var addClass = '';
-    var name = '';
+    var addClass = 'btn-light';
+    var name = 'default';
 
     if(url.indexOf('gatling') > -1)
     {
         name = 'Gatling';
         addClass = 'btn-warning'
+    }
+    if(url.indexOf('docker') > -1)
+    {
+        name = 'Docker';
+        addClass = 'btn-primary'
     }
 
     return '<a href="' + url + '" target="_blank" class="btn btn-sm ' + addClass + '" role="button">' + name +'</a>'
