@@ -105,7 +105,7 @@ class EERServer():
                 if fileName.find(outputBaseName) > -1:
                     get(fileName, log_file_path)
 
-                    last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+                    last_log_info = FlarePath.FLARE_RESULT + '/last_log_info'
                     f = open(last_log_info, 'w', encoding='UTF8')
                     f.write(log_file_path + '/' + fileName)
                     f.close()
