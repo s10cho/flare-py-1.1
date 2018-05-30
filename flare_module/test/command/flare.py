@@ -15,18 +15,17 @@ class FlareServer():
         pass
 
     def convert_docker_monitoring_data(self):
-        last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+        last_log_info = FlarePath.FLARE_RESULT + '/last_log_info'
         f = open(last_log_info, 'r', encoding='UTF8')
         log_file_path = f.read()
         f.close()
 
-        fileName = log_file_path[:log_file_path.rfind('/')]
-        downloadPath = log_file_path[log_file_path.rfind('/') + 1:]
+        downloadPath = log_file_path[:log_file_path.rfind('/')]
+        fileName = log_file_path[log_file_path.rfind('/') + 1:]
 
         cpu = []
         mem = []
         time = []
-        log_path = downloadPath + '/' + fileName
         datafile_path = downloadPath + '/dockerData.js'
 
         log_info = fileName.replace('.log', '').replace('_', '-').split('-')
@@ -36,7 +35,7 @@ class FlareServer():
 
         label_time = datetime.datetime.strptime(start_time, '%Y%m%d%H%M%S')
 
-        log_file = open(log_path, 'r', encoding='UTF8')
+        log_file = open(log_file_path, 'r', encoding='UTF8')
         for line in log_file:
             label_time = label_time + datetime.timedelta(seconds=0.5)
             values = line.split()

@@ -64,7 +64,7 @@ class GatlingServer():
                     local('rm -rf {0}.tar'.format(fileName))                # remove tar file
                     local('mv {0} {1}'.format(fileName, changeFilename))    # change name
 
-                    last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+                    last_log_info = FlarePath.FLARE_RESULT + '/last_log_info'
                     f = open(last_log_info, 'w', encoding='UTF8')
                     f.write(downloadPath + '/' + changeFilename)
                     f.close()

@@ -93,7 +93,7 @@ class EERServer():
         self.execute_background(command)
 
     def monitoring_data_download(self, outputBaseName):
-        last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+        last_log_info = FlarePath.FLARE_RESULT + '/last_log_info'
         f = open(last_log_info, 'r', encoding='UTF8')
         log_file_path = f.read()
         f.close()
