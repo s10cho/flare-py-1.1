@@ -14,7 +14,15 @@ class FlareServer():
     def __init__(self):
         pass
 
-    def convert_docker_monitoring_data(self, fileName, downloadPath):
+    def convert_docker_monitoring_data(self):
+        last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+        f = open(last_log_info, 'r', encoding='UTF8')
+        log_file_path = f.read()
+        f.close()
+
+        fileName = log_file_path[:log_file_path.rfind('/')]
+        downloadPath = log_file_path[log_file_path.rfind('/') + 1:]
+
         cpu = []
         mem = []
         time = []

@@ -1,5 +1,5 @@
 from fabric.api import *
-from config import FlareEnv, FlareDeploy, FlareDocker
+from config import FlareEnv, FlareDeploy, FlareDocker, FlarePath
 from decorator import before, remote
 import datetime
 
@@ -92,16 +92,23 @@ class EERServer():
         command = self.DOCKER_MONITORING_STOP
         self.execute_background(command)
 
-    def monitoring_data_download(self, outputBaseName, downloadPath):
-        retFileName = ''
+    def monitoring_data_download(self, outputBaseName):
+        last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+        f = open(last_log_info, 'r', encoding='UTF8')
+        log_file_path = f.read()
+        f.close()
+
         with cd(FlareDeploy.REMOTE_DOCKER_MONITORING_HOME + '/logs'):
             lsOutput = run('ls')
             fileNames = lsOutput.split()
             for fileName in fileNames:
                 if fileName.find(outputBaseName) > -1:
-                    retFileName = fileName
-                    get(fileName, downloadPath)
+                    get(fileName, log_file_path)
 
-        return retFileName
+                    last_log_info = FlarePath.FLARE_RESULT + 'last_log_info'
+                    f = open(last_log_info, 'w', encoding='UTF8')
+                    f.write(log_file_path + '/' + fileName)
+                    f.close()
+
 
 
