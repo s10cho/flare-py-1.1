@@ -35,6 +35,7 @@ class FlareServer():
 
         label_time = datetime.datetime.strptime(start_time, '%Y%m%d%H%M%S')
 
+        print('log_file_path = ' + log_file_path)
         log_file = open(log_file_path, 'r', encoding='UTF8')
         for line in log_file:
             label_time = label_time + datetime.timedelta(seconds=0.5)
