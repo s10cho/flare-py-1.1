@@ -56,7 +56,7 @@ function reportList(date)
             var testInfo = values[1].split("-");
             var timestamp = testInfo[2]
             var gatlingUrl = url + '/' + report[i] + '/index.html'
-            var dockerUrl = '/docker.html?date=' + date '&testId=' + testId;
+            var dockerUrl = '/docker.html?date=' + date + '&testId=' + testId;
             testArray.push(testId)
             resourceArray.push(testInfo[0])
             loadArray.push(testInfo[1])
