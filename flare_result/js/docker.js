@@ -86,8 +86,10 @@ function checkUrl(url)
 
     if (request)
     {
-        request.open("GET", url);
-        if (request.status == 200) { return true; }
+        request.open("HEAD", url, false);
+        request.send();
+        console.log(request.status)
+        if (request.status == 0) { return true; }
     }
     return false;
 }
