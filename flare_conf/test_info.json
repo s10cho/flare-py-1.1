@@ -31,35 +31,35 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=2000"]
+                "JVM": ["customer.total.count=2000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=3000"]
+                "JVM": ["customer.total.count=3000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=4000"]
+                "JVM": ["customer.total.count=4000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=5000"]
+                "JVM": ["customer.total.count=5000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=6000"]
+                "JVM": ["customer.total.count=6000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=7000"]
+                "JVM": ["customer.total.count=7000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=8000"]
+                "JVM": ["customer.total.count=8000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=9000"]
+                "JVM": ["customer.total.count=9000", "total.time=600"]
             }
         ]
     },

@@ -42,9 +42,9 @@ class TestService():
 
         for cpu in cpu_list:
             for memory in memory_list:
-                self.eer.docker_restart(cpu, memory)                    # docker restart
-                resource_id = '{0}C{1}G'.format(cpu, memory)            # resource Id
+                resource_id = '{0}C{1}G'.format(cpu, memory)                # resource Id
                 for test in test_list:
+                    self.eer.docker_restart(cpu, memory)                    # docker restart
                     simulationClass = test["SIMULATION_CLASS"]
                     test_jvm = test["JVM"]
                     load_ids = self.make_load_ids(test_jvm)
@@ -52,11 +52,11 @@ class TestService():
                         jvm = self.get_jvm(load, test_jvm)
                         outputBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resource_id + '-' + load
 
-                        self.eer.docker_monitoring_run(outputBaseName)                                      # docker monitoring start
-                        self.gatling.test_run(simulationClass, outputBaseName, jvm)                         # test start
-                        self.eer.docker_monitoring_stop()                                                   # docker monitoring stop
-                        self.gatling.result_download()                                        # download result
-                        self.eer.monitoring_data_download(outputBaseName)      # docker monitoring data
+                        self.eer.docker_monitoring_run(outputBaseName)                  # docker monitoring start
+                        self.gatling.test_run(simulationClass, outputBaseName, jvm)     # test start
+                        self.eer.docker_monitoring_stop()                               # docker monitoring stop
+                        self.gatling.result_download()                                  # download result
+                        self.eer.monitoring_data_download(outputBaseName)               # docker monitoring data
                         self.flare.convert_docker_monitoring_data()
 
 
