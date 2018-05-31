@@ -68,7 +68,8 @@ class TestService():
             'customer.separate.time',
             'customer.once.count',
             'talk.customer.count',
-            'scenario.customer.count'
+            'scenario.customer.count',
+            'customer.total.count'
         ]
 
         load_id = ''
