@@ -1,4 +1,10 @@
 {
+    "TEST_MODULE": {
+        "SETUP": "Y",
+        "UNIT": "N",
+        "SPRINT": "N",
+        "PRODUCT": "N"
+    },
     "SETUP": {
         "RESOURCE" : {
             "CPU": [4],
@@ -52,14 +58,6 @@
             {
                 "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
                 "JVM": ["customer.total.count=7000", "total.time=600"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=8000", "total.time=600"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=9000", "total.time=600"]
             }
         ]
     },

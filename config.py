@@ -78,12 +78,7 @@ class FlareDeploy():
 
 
 class FlareTest():
-    TEST_MODULE = {
-        'SETUP': 'N',
-        'UNIT': 'N',
-        'SPRINT': 'Y',
-        'PRODUCT': 'N'
-    }
+    TEST_MODULE = TEST_INFO['TEST_MODULE']
     SETUP = TEST_INFO['SETUP']
     UNIT_TEST = TEST_INFO['UNIT_TEST']
     SPRINT_TEST = TEST_INFO['SPRINT_TEST']
