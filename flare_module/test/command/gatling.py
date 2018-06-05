@@ -35,11 +35,10 @@ class GatlingServer():
 
 
     def test_run(self, simulationClass, outputBaseName, jvm):
-        with cd(FlareResult.REMOTE_GATLING_RESULT):     # cd gatling result path
-            run('rm -rf *')                             # remove old report
+        run('rm -rf {0}/*'.format(FlareResult.REMOTE_GATLING_RESULT))                   # remove old report
 
-        with cd(FlareResult.REMOTE_GATLING_HOME):       # cd gatling home
-            self.execute(self.MVN_TEST.format(simulationClass, outputBaseName, jvm))
+        with cd(FlareResult.REMOTE_GATLING_HOME):                                       # cd gatling home
+            self.execute(self.MVN_TEST.format(simulationClass, outputBaseName, jvm))    # run gatling
 
 
     def result_download(self):
