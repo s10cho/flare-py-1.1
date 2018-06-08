@@ -151,7 +151,7 @@ class Scouter():
                                    '-Dscouter.config=$ENOMIX_HOME/scouter/agent.java/conf/scouter_{0}.conf' \
                                    '"\n'.format(jvmOpts[0], jvmOpts[1], jvmOpts[2])
 
-                    if jvmOpts[0] == 'restapi':
+                    if jvmOpts[0] == 'webroot':
                         scouter_opts = scouter_opts + ' -Dproxy.pool.maxTotal=500'
 
                     tempFile.write(scouter_opts)
