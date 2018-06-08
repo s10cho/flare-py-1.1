@@ -145,15 +145,14 @@ class Scouter():
             for jvmOpts in self.JVM_OPTIONS[memory]:
                 checkLine = 'BASE_RESOURCE=webapps/{0}'.format(jvmOpts[0])
                 if checkLine in line:
-                    scouter_opts = '        SCT_OPTS="' \
-                                   '-Xms{1}m -Xmx{2}m ' \
-                                   '-javaagent:$ENOMIX_HOME/scouter/agent.java/scouter.agent.jar ' \
-                                   '-Dscouter.config=$ENOMIX_HOME/scouter/agent.java/conf/scouter_{0}.conf' \
-                                   '"\n'.format(jvmOpts[0], jvmOpts[1], jvmOpts[2])
+                    module_jvm = '-Xms{1}m -Xmx{2}m ' \
+                       '-javaagent:$ENOMIX_HOME/scouter/agent.java/scouter.agent.jar ' \
+                       '-Dscouter.config=$ENOMIX_HOME/scouter/agent.java/conf/scouter_{0}.conf'.format(jvmOpts[0], jvmOpts[1], jvmOpts[2])
 
                     if jvmOpts[0] == 'webroot':
-                        scouter_opts = scouter_opts + ' -Dproxy.pool.maxTotal=500'
+                        module_jvm = module_jvm + ' -Dproxy.pool.maxTotal=500'
 
+                    scouter_opts = '        SCT_OPTS="{0}"\n'.format(module_jvm)
                     tempFile.write(scouter_opts)
 
         sourceFile.close()
