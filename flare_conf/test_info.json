@@ -37,27 +37,27 @@
         "TEST_LIST": [
             {
                 "SIMULATION_CLASS": "com.spectra.flare.site.sample.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=2000", "total.time=600"]
+                "JVM": ["scenario.customer.count=2000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.site.sample.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=3000", "total.time=600"]
+                "JVM": ["scenario.customer.count=3000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.site.sample.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=4000", "total.time=600"]
+                "JVM": ["scenario.customer.count=4000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.site.sample.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=5000", "total.time=600"]
+                "JVM": ["scenario.customer.count=5000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.site.sample.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=6000", "total.time=600"]
+                "JVM": ["scenario.customer.count=6000", "total.time=600"]
             },
             {
                 "SIMULATION_CLASS": "com.spectra.flare.site.sample.simulation.ScnSimulation",
-                "JVM": ["customer.total.count=7000", "total.time=600"]
+                "JVM": ["scenario.customer.count=7000", "total.time=600"]
             }
         ]
     },
