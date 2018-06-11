@@ -2,7 +2,7 @@
     "TEST_MODULE": {
         "SETUP": "Y",
         "UNIT": "N",
-        "SPRINT": "Y",
+        "SPRINT": "N",
         "PRODUCT": "N"
     },
     "SETUP": {
