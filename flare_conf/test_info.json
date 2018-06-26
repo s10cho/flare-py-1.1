@@ -1,6 +1,6 @@
 {
     "TEST_MODULE": {
-        "SETUP": "Y",
+        "SETUP": "N",
         "UNIT": "N",
         "SPRINT": "N",
         "PRODUCT": "N"
