@@ -12,7 +12,7 @@
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.sprint.eer_3_0.simulation.InitDataSimulation",
+                "SIMULATION_CLASS": "com.spectra.flare.setup.simulation.SetupDataSimulation",
                 "JVM": []
             }
         ]
