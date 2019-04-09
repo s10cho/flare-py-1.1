@@ -27,6 +27,8 @@ class Shell():
                         './all_run.sh\n'
                         'cd /home/enomix/apps/solr\n'
                         './run.sh > /dev/null\n'
+                        'cd /home/enomix/apps/bin\n'
+                        './dummy_chatbot_run.sh > /dev/null\n'
         },
         {
             'name': SHELL_FILE_FORMAT.format('4G_run'),
@@ -36,6 +38,8 @@ class Shell():
                         './all_run.sh\n'
                         'cd /home/enomix/apps/solr\n'
                         './run.sh > /dev/null\n'
+                        'cd /home/enomix/apps/bin\n'
+                        './dummy_chatbot_run.sh > /dev/null\n'
         },
         {
             'name': SHELL_FILE_FORMAT.format('8G_run'),
@@ -45,6 +49,8 @@ class Shell():
                         './all_run.sh\n'
                         'cd /home/enomix/apps/solr\n'
                         './run.sh > /dev/null\n'
+                        'cd /home/enomix/apps/bin\n'
+                        './dummy_chatbot_run.sh > /dev/null\n'
         },
         {
             'name': SHELL_FILE_FORMAT.format('16G_run'),
@@ -54,6 +60,8 @@ class Shell():
                         './all_run.sh\n'
                         'cd /home/enomix/apps/solr\n'
                         './run.sh > /dev/null\n'
+                        'cd /home/enomix/apps/bin\n'
+                        './dummy_chatbot_run.sh > /dev/null\n'
         },
         {
             'name': SHELL_FILE_FORMAT.format('scouter'),
