@@ -1,6 +1,6 @@
 {
-    "BUILD":    "Y",
-    "DEPLOY":   "Y",
+    "BUILD":    "N",
+    "DEPLOY":   "N",
     "TEST":     "Y",
     "REPORT":   "N"
 }
