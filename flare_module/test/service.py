@@ -71,7 +71,8 @@ class TestService():
             'customer.once.count',
             'talk.customer.count',
             'scenario.customer.count',
-            'customer.total.count'
+            'customer.total.count',
+            'chatbot.customer.count'
         ]
 
         load_id = ''

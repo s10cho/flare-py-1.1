@@ -1,14 +1,14 @@
 {
     "TEST_MODULE": {
-        "SETUP": "Y",
-        "UNIT": "N",
+        "SETUP": "N",
+        "UNIT": "Y",
         "SPRINT": "N",
         "PRODUCT": "N"
     },
     "SETUP": {
         "RESOURCE" : {
-            "CPU": [4, 8],
-            "MEMORY": [4, 8]
+            "CPU": [4],
+            "MEMORY": [8]
         },
         "TEST_LIST": [
             {
@@ -24,24 +24,16 @@
         },
         "TEST_LIST": [
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unit.eer_3_0.simulation.KakaoThirdpartySimulation",
-                "JVM": ["customer.total.count=300", "total.time=600"]
+                "SIMULATION_CLASS": "com.spectra.flare.product.simulation.ChatbotSimulation",
+                "JVM": ["chatbot.customer.count=1000", "total.time=600"]
             },
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unit.eer_3_0.simulation.KakaoThirdpartySimulation",
-                "JVM": ["customer.total.count=600", "total.time=600"]
+                "SIMULATION_CLASS": "com.spectra.flare.product.simulation.ChatbotSimulation",
+                "JVM": ["chatbot.customer.count=2000", "total.time=600"]
             },
             {
-                "SIMULATION_CLASS": "com.spectra.flare.unit.eer_3_0.simulation.KakaoThirdpartySimulation",
-                "JVM": ["customer.total.count=1200", "total.time=600"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.unit.eer_3_0.simulation.KakaoThirdpartySimulation",
-                "JVM": ["customer.total.count=2400", "total.time=600"]
-            },
-            {
-                "SIMULATION_CLASS": "com.spectra.flare.unit.eer_3_0.simulation.KakaoThirdpartySimulation",
-                "JVM": ["customer.total.count=4800", "total.time=600"]
+                "SIMULATION_CLASS": "com.spectra.flare.product.simulation.ChatbotSimulation",
+                "JVM": ["chatbot.customer.count=3000", "total.time=600"]
             }
         ]
     },
