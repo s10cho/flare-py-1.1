@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 from fabric.api import *
+from fabric.contrib.files import exists
 from config import FlareEnv, FlareResult, FlarePath
 from decorator import before, remote
 
@@ -41,6 +42,9 @@ class GatlingServer():
             self.execute(self.MVN_TEST.format(simulationClass, outputBaseName, jvm))    # run gatling
 
     def remove_old_report(self):
+        if not exists(FlareResult.REMOTE_GATLING_RESULT):
+            return
+
         with cd(FlareResult.REMOTE_GATLING_RESULT):
             lsOutput = run('ls')
             fileNames = lsOutput.split()
