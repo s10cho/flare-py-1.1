@@ -51,33 +51,32 @@ class GatlingServer():
             for fileName in fileNames:
                 run('rm -rf {0}*'.format(fileName))
 
-    def result_download(self, simulationClassName, outputBaseName):
+    def result_download(self, outputBaseName):
         with cd(FlareResult.REMOTE_GATLING_RESULT):
             lsOutput = run('ls')
             fileNames = lsOutput.split()
             for fileName in fileNames:
-                if fileName in simulationClassName:
-                    file = fileName.split('-')
-                    timestamp = file[1]
-                    timestamp = datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
-                    date = timestamp[:8]
-                    downloadPath = self.FLARE_RESULT_GATLING + '/' + date
-                    changeFilename = outputBaseName + '-' + timestamp
+                file = fileName.split('-')
+                timestamp = file[1]
+                timestamp = datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
+                date = timestamp[:8]
+                downloadPath = self.FLARE_RESULT_GATLING + '/' + date
+                changeFilename = outputBaseName + '-' + timestamp
 
-                    run('tar -cf {0}.tar {0}'.format(fileName))                 # tar gatling report
-                    local('mkdir -p {0}'.format(downloadPath))                  # mkdir download path
-                    get('{0}.tar'.format(fileName), downloadPath)               # download gatling.tar
-                    run('rm -rf {0}*'.format(fileName))                         # remove gatling report
+                run('tar -cf {0}.tar {0}'.format(fileName))                 # tar gatling report
+                local('mkdir -p {0}'.format(downloadPath))                  # mkdir download path
+                get('{0}.tar'.format(fileName), downloadPath)               # download gatling.tar
+                run('rm -rf {0}*'.format(fileName))                         # remove gatling report
 
-                    with lcd(downloadPath):
-                        local('tar -xf {0}.tar'.format(fileName))               # tar gatling report
-                        local('rm -rf {0}.tar'.format(fileName))                # remove tar file
-                        local('mv {0} {1}'.format(fileName, changeFilename))    # change name
+                with lcd(downloadPath):
+                    local('tar -xf {0}.tar'.format(fileName))               # tar gatling report
+                    local('rm -rf {0}.tar'.format(fileName))                # remove tar file
+                    local('mv {0} {1}'.format(fileName, changeFilename))    # change name
 
-                        last_log_info = FlarePath.FLARE_RESULT + '/last_log_info'
-                        f = open(last_log_info, 'w', encoding='UTF8')
-                        f.write(downloadPath + '/' + changeFilename)
-                        f.close()
+                    last_log_info = FlarePath.FLARE_RESULT + '/last_log_info'
+                    f = open(last_log_info, 'w', encoding='UTF8')
+                    f.write(downloadPath + '/' + changeFilename)
+                    f.close()
 
 
 

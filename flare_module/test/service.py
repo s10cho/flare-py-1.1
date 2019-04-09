@@ -57,7 +57,7 @@ class TestService():
                         self.eer.docker_monitoring_run(outputBaseName)                          # docker monitoring start
                         self.gatling.test_run(simulationClass, outputBaseName, jvm)             # test start
                         self.eer.docker_monitoring_stop()                                       # docker monitoring stop
-                        self.gatling.result_download(simulationClassName, outputBaseName)       # download result
+                        self.gatling.result_download(outputBaseName)       # download result
                         self.eer.monitoring_data_download(outputBaseName)                       # docker monitoring data
                         self.flare.convert_docker_monitoring_data()
 
