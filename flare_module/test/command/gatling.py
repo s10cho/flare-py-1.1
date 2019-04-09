@@ -58,10 +58,10 @@ class GatlingServer():
             for fileName in fileNames:
                 file = fileName.split('-')
                 timestamp = file[1]
-                timestamp = datetime.fromtimestamp(int(timestamp) / 1000).strftime('%Y%m%d%H%M%S')
                 date = timestamp[:8]
+                time = datetime.now().strftime('%H%M%S')
                 downloadPath = self.FLARE_RESULT_GATLING + '/' + date
-                changeFilename = outputBaseName + '-' + timestamp
+                changeFilename = outputBaseName + '-' + date + time
 
                 run('tar -cf {0}.tar {0}'.format(fileName))                 # tar gatling report
                 local('mkdir -p {0}'.format(downloadPath))                  # mkdir download path
