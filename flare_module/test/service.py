@@ -50,13 +50,15 @@ class TestService():
                     load_ids = self.make_load_ids(test_jvm)
                     for load in load_ids:
                         jvm = self.get_jvm(load, test_jvm)
-                        outputBaseName = simulationClass[simulationClass.rfind('.') + 1:] + '_' + resource_id + '-' + load
+                        simulationClassName = simulationClass[simulationClass.rfind('.') + 1:]
+                        outputBaseName = simulationClassName + '_' + resource_id + '-' + load
 
-                        self.eer.docker_monitoring_run(outputBaseName)                  # docker monitoring start
-                        self.gatling.test_run(simulationClass, outputBaseName, jvm)     # test start
-                        self.eer.docker_monitoring_stop()                               # docker monitoring stop
-                        self.gatling.result_download()                                  # download result
-                        self.eer.monitoring_data_download(outputBaseName)               # docker monitoring data
+                        self.gatling.remove_old_report()
+                        self.eer.docker_monitoring_run(outputBaseName)                          # docker monitoring start
+                        self.gatling.test_run(simulationClass, outputBaseName, jvm)             # test start
+                        self.eer.docker_monitoring_stop()                                       # docker monitoring stop
+                        self.gatling.result_download(simulationClassName, outputBaseName)       # download result
+                        self.eer.monitoring_data_download(outputBaseName)                       # docker monitoring data
                         self.flare.convert_docker_monitoring_data()
 
 
